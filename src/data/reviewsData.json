@@ -1,0 +1,14 @@
+[
+  {
+    "id": 1,
+    "name": "André L. Gonçalves",
+    "text": "\"Foi tão bom voltar a sentir Portugal... O aroma forte do café, os pastéis de nata quentinhos e aquele atendimento cheio de simpatia. É incrível como algo tão simples pode trazer tanto sentimento.\"",
+    "image": "reviews/andre.webp"
+  },
+  {
+    "id": 2,
+    "name": "Inês Frazão",
+    "text": "\"Rever as tradições portuguesas foi uma experiência emocionante. Que saudades de um bom pastel de nata!\"",
+    "image": "reviews/ines.webp"
+  }
+]

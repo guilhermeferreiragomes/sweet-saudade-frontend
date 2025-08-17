@@ -1,0 +1,220 @@
+.reviews-section {
+  padding-top: 50px;
+  background-color: #262724;
+  height: 250px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 40px;
+}
+
+.reviews-section::before {
+  content: '';
+  background-color: #ebb104;
+  height: 5px;
+  position: absolute;
+  width: 100%;
+  top: 0;
+}
+
+.review-item {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 85px;
+  color: white;
+  padding: 0px 60px;
+  height: 100%;
+  width: 100%;
+}
+
+.review-image {
+  width: 145px;
+  height: 145px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #ebb104;
+  flex-shrink: 0;
+}
+
+.review-text-container {
+  flex: 1;
+  max-width: 950px;
+}
+
+.review-text {
+  font-size: 18px;
+  line-height: 1.7;
+  font-weight: 300;
+  margin: 0 0 10px 0;
+  color: #ffffff;
+  text-align: center;
+  white-space: pre-line;
+}
+
+.review-name {
+  font-style: italic;
+  color: #ebb104;
+  font-size: 18px;
+  display: block;
+  text-align: right;
+  margin-top: 30px;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ebb104 !important;
+  border-radius: 50%;
+  width: 150px !important;
+  height: 40px !important;
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 18px !important;
+  font-weight: bold;
+}
+
+/* Estilizando a paginação do Swiper */
+.swiper-pagination-bullet {
+  background-color: #aaa !important;
+  opacity: 0.5;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #ebb104 !important;
+  opacity: 1;
+}
+
+
+@media (max-width: 1024px) {
+  .review-item {
+    padding: 0px 40px;
+    gap: 30px;
+  }
+  
+  .review-image {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .review-text {
+    font-size: 16px;
+  }
+  
+  .review-name {
+    font-size: 16px;
+  }
+}
+
+/* Responsivo - Mobile Landscape */
+@media (max-width: 768px) {
+  .reviews-section {
+    height: 60vh; /* Reduzido de 100vh para 60vh */
+    min-height: 400px; /* Altura mínima para garantir que não fique muito pequeno */
+    padding: 30px 0;
+    margin-top: 0;
+  }
+
+  .review-item {
+    flex-direction: column !important;
+    text-align: center;
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+  }
+
+  .review-text {
+    font-size: 16px;
+    padding: 0 10px;
+    text-align: center;
+    max-width: 100%;
+  }
+
+  .review-name {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 16px;
+  }
+
+  .review-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 16px !important;
+  }
+}
+
+/* Responsivo - Mobile Portrait */
+@media (max-width: 480px) {
+  .reviews-section {
+    height: 40vh; /* Reduzido de 100vh para 50vh */
+    min-height: 400px; /* Altura mínima ajustada */
+    margin-top: 0;
+    padding: 20px 0;
+  }
+
+  .review-item {
+    gap: 15px;
+  }
+
+  .review-text {
+    font-size: 14px;
+    padding: 0 5px;
+  }
+
+  .review-image {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #ebb104;
+  }
+
+  .review-name {
+    font-size: 14px;
+    margin-top: 10px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 14px !important;
+  }
+}
+
+/* Responsivo - Telas muito pequenas */
+@media (max-width: 320px) {
+  .reviews-section {
+    height: 45vh; /* Reduzido de 100vh para 45vh */
+    min-height: 320px; /* Altura mínima para telas muito pequenas */
+  }
+
+  .review-text {
+    font-size: 13px;
+  }
+
+  .review-name {
+    font-size: 13px;
+  }
+
+  .review-image {
+    width: 70px;
+    height: 70px;
+  }
+}

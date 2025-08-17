@@ -1,0 +1,163 @@
+.our-products {
+    margin-top: 80px;
+    margin-bottom: 80px;
+}
+
+
+.our-products-title {
+    margin-top: 60px;
+    margin-left: 100px;
+    margin-bottom: 0;
+    line-height: 0.1;
+    font-weight: bolder;
+    font-size: 2rem;
+    
+}
+
+.linha {
+    width: 430px;
+    margin-left: 88px;
+    margin-top: 0px;
+    height: 40px;
+    border-radius: 2px;
+}
+.produtos {
+    margin-top: 25px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.produtos img {
+    margin: 10px 15px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    background-color: rgb(236, 236, 236);
+    display: inline-block;
+    border-style: solid;
+    border-width: 2px;
+    border-color: #ebb104;
+    transition: transform 0.3s ease;
+
+}
+
+.produtos img:hover {
+    transform: scale(1.05);
+}
+
+.bola-berlim {
+    width: 280px;
+    height: 170px;
+}
+
+.pastel-nata {
+    width: 330px;
+    height: 210px;
+}
+
+.croquetes {
+    width: 280px;
+    height: 170px;
+}   
+
+.mais-produtos {
+    background-color: #ebb104;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    width: 170px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 17px;
+    font-weight: bold;
+    align-items: center;
+    text-align: center;
+    margin: 15px auto;
+    display: block;
+    transition: transform 0.3s ease;
+
+}
+
+.mais-produtos:hover {
+    transform: scale(1.05);
+}
+
+@media screen and (max-width: 768px) {
+    .our-products-title {
+        margin-left: 20px;
+        margin-top: 30px;
+        font-size: 26px;
+    }
+    
+    .linha {
+        width: 310px;
+        margin-left: 10px;
+        height: 40px;
+    }
+    
+    .produtos {
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .produtos img {
+        margin: 5px;
+    }
+    
+    .bola-berlim, .croquetes {
+        width: 280px;
+        height: 150px;
+    }
+    
+    .pastel-nata {
+        width: 350px;
+        height: 200px;
+    }
+    
+    .mais-produtos {
+        width: 150px;
+        height: 45px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .our-products-title {
+        margin-left: 15px;
+        margin-top: 28px;
+        font-size: 22px;
+        line-height: 0;
+    }
+    
+    .linha {
+        width: 260px;
+        margin-left: 10px;
+        height: 35px;
+    }
+    
+    .produtos {
+        flex-direction: row;
+        gap: 5px;
+    }
+    
+    .produtos img {
+        margin: 5px;
+    }
+    
+    .bola-berlim, .croquetes {
+        width: 100px;
+        height: 70px;
+    }
+    
+    .pastel-nata {
+        width: 130px;
+        height: 80px;
+    }
+    
+    .mais-produtos {
+        width: 150px;
+        height: 30px;
+        font-size: 15px;
+    }
+}

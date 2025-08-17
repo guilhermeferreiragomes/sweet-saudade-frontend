@@ -1,0 +1,44 @@
+.wave-separator-container {
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  background-color: #ebb104;
+  width: 100%;
+  overflow: hidden;
+  border: none;
+  position: relative;
+  z-index: 1;
+}
+
+svg.wave-separator {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  top: -1px; /* Corrige a linha visível entre seções */
+  z-index: 2;
+}
+
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+  svg.wave-separator {
+    height: 60px;
+  }
+
+  .wave-separator-container {
+    min-height: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  svg.wave-separator {
+    height: 38px;
+    
+  }
+
+  .wave-separator-container {
+    min-height: 10px;
+  }
+}
