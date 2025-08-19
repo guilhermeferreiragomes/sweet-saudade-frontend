@@ -9,6 +9,7 @@ const Contactos = () => {
     <div>
       <Navbar />
       <Footer />
+      
     </div>
   )
 }
