@@ -6,14 +6,13 @@
 
 
 .our-products-title {
-    margin-top: 60px;
+    margin-top: 40px;
     margin-left: 100px;
-    margin-bottom: 0;
+    margin-bottom: 50px;
     line-height: 0.1;
-    font-style: italic;
-    font-size: 2rem;
-    color: white;
-    
+    font-size: 30px;
+    color: #ebb104;
+    font-weight: 600;    
 }
 
 .linha {
@@ -80,6 +79,20 @@
     transition: transform 0.3s ease;
 
 }
+
+.mais-produtos a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: inherit;
+    display: block;
+    width: 100%;
+    height: 100%;
+    line-height: 40px;
+    border-radius: 50px;
+    transition: color 0.3s ease;
+}
+
 
 .mais-produtos:hover {
     transform: scale(1.05);

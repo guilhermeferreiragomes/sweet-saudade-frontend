@@ -34,11 +34,19 @@ p {
 h1 {
     font-size: 32px;
     margin-bottom: 1rem;
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 h2 {
     font-size: 28px;
     margin-bottom: 0.8rem;
+    font-family: "Lexend Deca", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
 }
 
 h3 {
@@ -54,10 +62,12 @@ h3 {
     
     h1 {
         font-size: 28px;
+        font-family: "Lexend Deca", sans-serif;
     }
     
     h2 {
         font-size: 24px;
+        font-family: "Lexend Deca", sans-serif;
     }
     
     h3 {

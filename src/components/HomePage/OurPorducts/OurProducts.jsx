@@ -3,7 +3,7 @@ import './OurProducts.css'
 import bolaBerlim from '../../../assets/imagens/bola_berlim.png'
 import pastelNata from '../../../assets/imagens/pastel_de_nata.png'
 import croquetes from '../../../assets/imagens/3_croquetes.png'
-
+import { Link } from 'react-router-dom'
 
 const OurProducts = () => {
   return (
@@ -14,7 +14,8 @@ const OurProducts = () => {
         <img src={pastelNata} alt="Pastel de Nata" className='pastel-nata' />
         <img src={croquetes} alt="Croquetes" className='croquetes' />
       </div>
-      <button className='mais-produtos'>MAIS PRODUTOS</button>
+      <button className='mais-produtos'><Link to="/produtos">MAIS PRODUTOS</Link>
+        </button>
     </div>
   )
 }
