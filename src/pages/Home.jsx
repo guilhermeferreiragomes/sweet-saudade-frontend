@@ -6,6 +6,7 @@ import Reviews from '../components/HomePage/Reviews/Reviews'
 import WaveSeparator from '../components/HomePage/WaveSeparator/WaveSeparator'
 import OurMission from '../components/HomePage/OurMission/OurMission'
 import Footer from '../components/Common/Footer/Footer'
+import Trustpilot from '../components/HomePage/Trustpilot/Trustpilot'
 
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
       <InfoBar />
       <OurProducts />
       <Reviews />
+      <Trustpilot />
       <WaveSeparator />
       <OurMission />
       <Footer />
