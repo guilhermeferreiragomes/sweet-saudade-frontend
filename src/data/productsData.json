@@ -1,0 +1,10 @@
+[
+    {
+        "id": 1,
+        "name": "Pastel de Nata",
+        "pack": "Pack 6 unid",
+        "description": "O rei de Portugal, o clássico em todas as ocasiões.",
+        "price": "6.99€",
+        "image": "/products/pastel_de_nata.png"
+    }
+]
