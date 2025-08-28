@@ -214,14 +214,7 @@
 
 /* Estilos da secção de produtos */
 .product-section {
-  margin: 25px 0;
-}
-
-.product-section h3 {
-  color: white;
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 20px;
+  margin: 5px 0;
 }
 
 .product-selector {
@@ -276,12 +269,13 @@
 .product-preview-info h5 {
   margin: 0 0 5px 0;
   color: white;
-  font-weight: 600;
+  font-weight: 500;
   font-size: 16px;
 }
 
 .product-preview-info p {
   margin: 0 0 5px 0;
+  font-weight: normal;
   color: #ccc;
   font-size: 14px;
 }

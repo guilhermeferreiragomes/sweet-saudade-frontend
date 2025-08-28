@@ -6,5 +6,14 @@
         "description": "O rei de Portugal, o clássico em todas as ocasiões.",
         "price": "6.99€",
         "image": "/products/pastel_de_nata.png"
+    },
+
+    {
+        "id": 2,
+        "name": "Bola de Berlim",
+        "pack": "Pack 2 unid",
+        "description": "O segredo está na massa... Ou no recheio?",
+        "price": "4.50€",
+        "image": "/products/bola_berlim.png"
     }
 ]
