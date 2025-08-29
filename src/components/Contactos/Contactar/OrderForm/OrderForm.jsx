@@ -19,6 +19,18 @@ const OrderForm = ({ counter, incrementCounter }) => {
   // Estado para o acordeão do formulário
   const [isFormExpanded, setIsFormExpanded] = useState(false);
 
+  // Configuração customizada do SweetAlert2
+  const swalConfig = {
+    customClass: {
+      popup: 'custom-swal-popup',
+      title: 'custom-swal-title',
+      content: 'custom-swal-content',
+      confirmButton: 'custom-swal-confirm-btn',
+      cancelButton: 'custom-swal-cancel-btn'
+    },
+    buttonsStyling: false
+  };
+
   const toggleForm = () => {
     setIsFormExpanded(!isFormExpanded);
   };
@@ -54,17 +66,27 @@ const OrderForm = ({ counter, incrementCounter }) => {
     e.preventDefault();
 
     if (!recaptchaToken) {
-      alert('Por favor, complete a verificação reCAPTCHA');
+      Swal.fire({
+        ...swalConfig,
+        position: "center",
+        icon: "warning",
+        title: "Verificação necessária",
+        text: "Por favor, complete a verificação reCAPTCHA",
+        confirmButtonText: "OK",
+        showConfirmButton: true
+      });
       return;
     }
 
     if (selectedProducts.length === 0) {
       Swal.fire({
-        position: "top",
+        ...swalConfig,
+        position: "center",
         icon: "warning",
-        title: "Por favor, selecione pelo menos um produto antes de enviar o pedido.",
+        title: "Produtos em falta",
+        text: "Por favor, selecione pelo menos um produto antes de enviar o pedido.",
         showConfirmButton: true,
-        confirmButtonText: "OK",
+        confirmButtonText: "OK"
       });
       return;
     }
@@ -98,17 +120,27 @@ const OrderForm = ({ counter, incrementCounter }) => {
       setRecaptchaToken(null);
       incrementCounter();
       Swal.fire({
+        ...swalConfig,
         icon: "success",
-        title: "Recebemos o seu pedido! Aguarde a nossa resposta.",
+        title: "Pedido enviado!",
+        text: "Recebemos o seu pedido! Aguarde a nossa resposta.",
+        confirmButtonText: "Continuar",
+        timer: 4000,
+        timerProgressBar: true
       });
     })
     .catch(() => {
       Swal.fire({
+        ...swalConfig,
         icon: "error",
-        title: "Ups... Algo correu mal. Tente novamente!",
+        title: "Erro no envio",
+        text: "Ups... Algo correu mal. Tente novamente!",
+        confirmButtonText: "Tentar novamente"
       });
     });
   };
+
+  // ...existing code...
 
   return (
     <div className='formulario'>

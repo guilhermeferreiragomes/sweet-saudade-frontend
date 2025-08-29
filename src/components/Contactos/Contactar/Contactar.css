@@ -979,3 +979,63 @@
         margin-left: 50px;
     }
 }
+
+/* Customização do SweetAlert2 */
+.custom-swal-popup {
+  border-radius: 15px;
+  font-family: inherit;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.custom-swal-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #2d3748; /* Ajuste para a cor principal da sua página */
+  margin-bottom: 1rem;
+}
+
+.custom-swal-content {
+  font-size: 1rem;
+  color: #4a5568; /* Cor do texto secundário */
+  line-height: 1.5;
+}
+
+.custom-swal-confirm-btn {
+  background-color: #e53e3e; /* Cor vermelha que combina com "sweet saudade" */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-swal-confirm-btn:hover {
+  background-color: #c53030;
+  transform: translateY(-1px);
+}
+
+.custom-swal-confirm-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.3);
+}
+
+.custom-swal-cancel-btn {
+  background-color: #718096;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-right: 10px;
+  transition: all 0.3s ease;
+}
+
+.custom-swal-cancel-btn:hover {
+  background-color: #4a5568;
+  transform: translateY(-1px);
+}
