@@ -4,6 +4,7 @@ import emailjs from '@emailjs/browser';
 import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 import Swal from 'sweetalert2';
+import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
 
 const OrderForm = ({ counter, incrementCounter }) => {
   const [firstName, setFirstName] = useState('');
@@ -14,6 +15,13 @@ const OrderForm = ({ counter, incrementCounter }) => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState('');
   const [currentQuantity, setCurrentQuantity] = useState(1);
+  
+  // Estado para o acordeão do formulário
+  const [isFormExpanded, setIsFormExpanded] = useState(false);
+
+  const toggleForm = () => {
+    setIsFormExpanded(!isFormExpanded);
+  };
 
   const addProduct = () => {
     if (currentProduct) {
@@ -50,7 +58,6 @@ const OrderForm = ({ counter, incrementCounter }) => {
       return;
     }
 
-    // Validação para produtos obrigatórios
     if (selectedProducts.length === 0) {
       Swal.fire({
         position: "top",
@@ -58,40 +65,23 @@ const OrderForm = ({ counter, incrementCounter }) => {
         title: "Por favor, selecione pelo menos um produto antes de enviar o pedido.",
         showConfirmButton: true,
         confirmButtonText: "OK",
-        customClass: {
-          popup: 'swal-custom-popup',
-          title: 'swal-custom-title',
-          confirmButton: 'swal-custom-confirm-btn',
-        },
-        background: '#2c2c2c',
-        color: '#ffffff',
-        confirmButtonColor: '#ebb104',
-        fontSize: '14px',
       });
       return;
     }
 
     const nextOrderNumber = counter + 1;
-    
     const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString('pt-PT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
+    const formattedDate = currentDate.toLocaleDateString('pt-PT');
     
     const productsList = selectedProducts.map(item => 
       `${item.name} (${item.pack}) - Quantidade: ${item.quantity} - Preço: ${(item.numericPrice * item.quantity).toFixed(2)}€`
     ).join('\n');
 
     const templateParams = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      message: message,
+      firstName,
+      lastName,
+      email,
+      message,
       products: productsList,
       counter: nextOrderNumber,
       orderNumber: nextOrderNumber,
@@ -99,143 +89,139 @@ const OrderForm = ({ counter, incrementCounter }) => {
     };
 
     emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B')
-    .then((response) => {
+    .then(() => {
       setFirstName('');
       setLastName('');
       setEmail('');
       setMessage('');
       setSelectedProducts([]);
-      setRecaptchaToken(false);
+      setRecaptchaToken(null);
       incrementCounter();
       Swal.fire({
-        position: "top",
         icon: "success",
         title: "Recebemos o seu pedido! Aguarde a nossa resposta.",
-        showConfirmButton: true,
-        confirmButtonText: "Perfeito!",
-        customClass: {
-          popup: 'swal-custom-popup',
-          title: 'swal-custom-title',
-          confirmButton: 'swal-custom-confirm-btn',
-        },
-        background: '#2c2c2c',
-        color: '#ffffff',
-        confirmButtonColor: '#28a745',
-        fontSize: '14px',
       });
     })
-    .catch((error) => {
+    .catch(() => {
       Swal.fire({
-        position: "top",
         icon: "error",
         title: "Ups... Algo correu mal. Tente novamente!",
-        showConfirmButton: true,
-        confirmButtonText: "Tentar novamente",
-        customClass: {
-          popup: 'swal-custom-popup',
-          title: 'swal-custom-title',
-          confirmButton: 'swal-custom-confirm-btn',
-        },
-        background: '#2c2c2c',
-        color: '#ffffff',
-        confirmButtonColor: '#dc3545',
-        fontSize: '14px',
       });
     });
   };
 
   return (
     <div className='formulario'>
-      <p className='duvidasPi'>Formulário para encomendas</p>
-      <form className='form' onSubmit={sendEmail}>
-        <div className='form-row'>
-          <div className='form-group'>
-            <label className='label'>Primeiro Nome <span style={{color: 'red'}}>*</span></label>
-            <input
-              className='input'
-              type='text'
-              onChange={(e) => setFirstName(e.target.value)}
-              value={firstName}
-              required
-            />
+      <div className="form-accordion-container">
+        {/* Mobile Accordion Header */}
+        <button 
+          type="button"
+          className={`form-accordion-header ${isFormExpanded ? 'active' : ''}`}
+          onClick={toggleForm}
+        >
+          <div className="accordion-title">
+            <FaFileInvoice />
+            <span>Formulário para encomendas</span>
           </div>
-          <div className='form-group'>
-            <label className='label'>Último Nome <span style={{color: 'red'}}>*</span></label>
-            <input
-              className='input'
-              type='text'
-              onChange={(e) => setLastName(e.target.value)}
-              value={lastName}
-              required
-            />
-          </div>
-        </div>
-        <div className='form-group'>
-          <label className='label'>Email <span style={{color: 'red'}}>*</span></label>
-          <input
-            className='input'
-            type='email'
-            onChange={(e) => setEmail(e.target.value)}
-            value={email}
-            required
-          />
-        </div>
+          {isFormExpanded ? <FaChevronUp /> : <FaChevronDown />}
+        </button>
 
-        <div className='product-section'>
-          <ProductSelector
-            currentProduct={currentProduct}
-            setCurrentProduct={setCurrentProduct}
-            currentQuantity={currentQuantity}
-            setCurrentQuantity={setCurrentQuantity}
-            onAddProduct={addProduct}
-          />
-
-          {selectedProducts.length > 0 && (
-            <div className='selected-products'>
-              <h4>Produtos selecionados:</h4>
-              {selectedProducts.map(item => (
-                <div key={item.id} className='selected-product-item'>
-                  <img 
-                    src={item.image} 
-                    alt={item.name}
-                    className='selected-product-image'
-                  />
-                  <div className='selected-product-info'>
-                    <span className='product-name'>{item.name}</span>
-                    <span className='product-details'>{item.pack} | Quantidade: {item.quantity}</span>
-                    <span className='product-price'>{(item.numericPrice * item.quantity).toFixed(2)}€</span>
-                  </div>
-                  <button 
-                    type='button' 
-                    onClick={() => removeProduct(item.id)}
-                    className='remove-btn'
-                  >
-                    Remover
-                  </button>
-                </div>
-              ))}
+        {/* Desktop Title (always visible on desktop) */}
+        <p className='duvidasPi desktop-title'>Formulário para encomendas</p>
+        
+        {/* Form Content */}
+        <div className={`form-content ${isFormExpanded ? 'expanded' : ''}`}>
+          <form className='form' onSubmit={sendEmail}>
+            <div className='form-row'>
+              <div className='form-group'>
+                <label className='label'>Primeiro Nome <span style={{color: 'red'}}>*</span></label>
+                <input
+                  className='input'
+                  type='text'
+                  onChange={(e) => setFirstName(e.target.value)}
+                  value={firstName}
+                  required
+                />
+              </div>
+              <div className='form-group'>
+                <label className='label'>Último Nome <span style={{color: 'red'}}>*</span></label>
+                <input
+                  className='input'
+                  type='text'
+                  onChange={(e) => setLastName(e.target.value)}
+                  value={lastName}
+                  required
+                />
+              </div>
             </div>
-          )}
-        </div>
+            
+            <div className='form-group'>
+              <label className='label'>Email <span style={{color: 'red'}}>*</span></label>
+              <input
+                className='input'
+                type='email'
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+              />
+            </div>
 
-        <div className='form-group'>
-          <label className='label'>Mensagem</label>
-          <textarea
-            className='textarea'
-            onChange={(e) => setMessage(e.target.value)}
-            value={message}
-          />
+            <ProductSelector
+              currentProduct={currentProduct}
+              setCurrentProduct={setCurrentProduct}
+              currentQuantity={currentQuantity}
+              setCurrentQuantity={setCurrentQuantity}
+              onAddProduct={addProduct}
+            />
+
+            {selectedProducts.length > 0 && (
+              <div className='selected-products'>
+                <h4>Produtos selecionados:</h4>
+                {selectedProducts.map(item => (
+                  <div key={item.id} className='selected-product-item'>
+                    <img 
+                      src={item.image} 
+                      alt={item.name}
+                      className='selected-product-image'
+                    />
+                    <div className='selected-product-info'>
+                      <span className='product-name'>{item.name}</span>
+                      <span className='product-details'>{item.pack} | Quantidade: {item.quantity}</span>
+                      <span className='product-price'>{(item.numericPrice * item.quantity).toFixed(2)}€</span>
+                    </div>
+                    <button 
+                      type='button' 
+                      onClick={() => removeProduct(item.id)}
+                      className='remove-btn'
+                    >
+                      Remover
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className='form-group'>
+              <label className='label'>Mensagem</label>
+              <textarea
+                className='textarea'
+                onChange={(e) => setMessage(e.target.value)}
+                value={message}
+              />
+            </div>
+            
+            <div className='recaptcha'>
+              <ReCAPTCHA
+                sitekey="6LdOUbIrAAAAAHKGJivU10flGcPhFVMpPDgDu_Hs"
+                onChange={(token) => setRecaptchaToken(token)}
+              />
+              <button disabled={!recaptchaToken} type='submit' className='submit-btn'>
+                Enviar
+              </button>
+            </div>
+          </form>
         </div>
-        <div className='recaptcha'>
-          <ReCAPTCHA
-            sitekey="6LdOUbIrAAAAAHKGJivU10flGcPhFVMpPDgDu_Hs"
-            onChange={(token) => setRecaptchaToken(token)}
-          />
-          <button disabled={!recaptchaToken} type='submit' className='submit-btn'>
-            Enviar
-          </button>
-        </div>
-      </form>
+      </div>
     </div>
   );
 };

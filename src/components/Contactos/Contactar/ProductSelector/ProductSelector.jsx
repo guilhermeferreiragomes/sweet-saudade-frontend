@@ -1,271 +1,91 @@
-import React, { useState } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
-import emailjs from '@emailjs/browser';
-import ProductSelector from '../ProductSelector/ProductSelector';
+import React from 'react';
 import productsData from '../../../../data/productsData.json';
-import Swal from 'sweetalert2';
-import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
 
-const OrderForm = ({ counter, incrementCounter }) => {
-  const [firstName, setFirstName] = useState('');
-  const [lastName, setLastName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [recaptchaToken, setRecaptchaToken] = useState(null);
-  const [selectedProducts, setSelectedProducts] = useState([]);
-  const [currentProduct, setCurrentProduct] = useState('');
-  const [currentQuantity, setCurrentQuantity] = useState(1);
-  
-  // Estado para o acordeão do formulário
-  const [isFormExpanded, setIsFormExpanded] = useState(false);
+const ProductSelector = ({ 
+  currentProduct, 
+  setCurrentProduct, 
+  currentQuantity, 
+  setCurrentQuantity, 
+  onAddProduct 
+}) => {
+  const selectedProductData = currentProduct ? 
+    productsData.find(p => p.id === parseInt(currentProduct)) : null;
 
-  const toggleForm = () => {
-    setIsFormExpanded(!isFormExpanded);
-  };
-
-  const addProduct = () => {
-    if (currentProduct) {
-      const product = productsData.find(p => p.id === parseInt(currentProduct));
-      const numericPrice = parseFloat(product.price.replace('€', '').replace(',', '.'));
-      
-      const newProduct = {
-        id: Date.now(),
-        productId: product.id,
-        name: product.name,
-        pack: product.pack,
-        price: product.price,
-        numericPrice: numericPrice, 
-        image: product.image,
-        quantity: currentQuantity,
-        date: new Date().toISOString()
-      };
-      
-      setSelectedProducts([...selectedProducts, newProduct]);
-      setCurrentProduct('');
-      setCurrentQuantity(1);
+  const handleQuantityChange = (change) => {
+    const newQuantity = currentQuantity + change;
+    if (newQuantity >= 1) {
+      setCurrentQuantity(newQuantity);
     }
-  };
-
-  const removeProduct = (id) => {
-    setSelectedProducts(selectedProducts.filter(item => item.id !== id));
-  };
-
-  const sendEmail = (e) => {
-    e.preventDefault();
-
-    if (!recaptchaToken) {
-      alert('Por favor, complete a verificação reCAPTCHA');
-      return;
-    }
-
-    // Validação para produtos obrigatórios
-    if (selectedProducts.length === 0) {
-      Swal.fire({
-        position: "top",
-        icon: "warning",
-        title: "Por favor, selecione pelo menos um produto antes de enviar o pedido.",
-        showConfirmButton: true,
-        confirmButtonText: "OK",
-        customClass: {
-          popup: 'swal-custom-popup',
-          title: 'swal-custom-title',
-          confirmButton: 'swal-custom-confirm-btn',
-        },
-        background: '#2c2c2c',
-        color: '#ffffff',
-        confirmButtonColor: '#ebb104',
-        fontSize: '14px',
-      });
-      return;
-    }
-
-    const nextOrderNumber = counter + 1;
-    
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString('pt-PT', {
-      year: 'numeric',
-      month: '2-digit',
-      day: '2-digit',
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
-    
-    const productsList = selectedProducts.map(item => 
-      `${item.name} (${item.pack}) - Quantidade: ${item.quantity} - Preço: ${(item.numericPrice * item.quantity).toFixed(2)}€`
-    ).join('\n');
-
-    const templateParams = {
-      firstName: firstName,
-      lastName: lastName,
-      email: email,
-      message: message,
-      products: productsList,
-      counter: nextOrderNumber,
-      orderNumber: nextOrderNumber,
-      date: formattedDate
-    };
-
-    emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B')
-    .then((response) => {
-      setFirstName('');
-      setLastName('');
-      setEmail('');
-      setMessage('');
-      setSelectedProducts([]);
-      setRecaptchaToken(false);
-      incrementCounter();
-      Swal.fire({
-        position: "top",
-        icon: "success",
-        title: "Recebemos o seu pedido! Aguarde a nossa resposta.",
-        showConfirmButton: true,
-        confirmButtonText: "Perfeito!",
-        customClass: {
-          popup: 'swal-custom-popup',
-          title: 'swal-custom-title',
-          confirmButton: 'swal-custom-confirm-btn',
-        },
-        background: '#2c2c2c',
-        color: '#ffffff',
-        confirmButtonColor: '#28a745',
-        fontSize: '14px',
-      });
-    })
-    .catch((error) => {
-      Swal.fire({
-        position: "top",
-        icon: "error",
-        title: "Ups... Algo correu mal. Tente novamente!",
-        showConfirmButton: true,
-        confirmButtonText: "Tentar novamente",
-        customClass: {
-          popup: 'swal-custom-popup',
-          title: 'swal-custom-title',
-          confirmButton: 'swal-custom-confirm-btn',
-        },
-        background: '#2c2c2c',
-        color: '#ffffff',
-        confirmButtonColor: '#dc3545',
-        fontSize: '14px',
-      });
-    });
   };
 
   return (
-    <div className='formulario'>
-      {/* Mobile Accordion Header */}
-      <div className="form-accordion-container">
-        <button 
-          type="button"
-          className={`form-accordion-header ${isFormExpanded ? 'active' : ''}`}
-          onClick={toggleForm}
-        >
-          <div className="accordion-title">
-            <FaFileInvoice />
-            <span>Formulário para encomendas</span>
+    <div className="product-section">
+      <div className="product-selector-container">
+        <div className="form-group">
+          <label className="label">Selecionar Produto</label>
+          <select 
+            className="product-select"
+            value={currentProduct}
+            onChange={(e) => setCurrentProduct(e.target.value)}
+          >
+            <option value="">Escolha um produto...</option>
+            {productsData.map(product => (
+              <option key={product.id} value={product.id}>
+                {product.name} - {product.pack} - {product.price}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {selectedProductData && (
+          <div className="product-preview">
+            <img 
+              src={selectedProductData.image} 
+              alt={selectedProductData.name}
+              className="product-preview-image"
+            />
+            <div className="product-preview-info">
+              <h5>{selectedProductData.name}</h5>
+              <p>{selectedProductData.pack}</p>
+              <p className="product-price">{selectedProductData.price}</p>
+            </div>
           </div>
-          {isFormExpanded ? <FaChevronUp /> : <FaChevronDown />}
-        </button>
+        )}
 
-        {/* Desktop Title (always visible on desktop) */}
-        <p className='duvidasPi desktop-title'>Formulário para encomendas</p>
-        
-        {/* Form Content */}
-        <div className={`form-content ${isFormExpanded ? 'expanded' : ''}`}>
-          <form className='form' onSubmit={sendEmail}>
-            <div className='form-row'>
-              <div className='form-group'>
-                <label className='label'>Primeiro Nome <span style={{color: 'red'}}>*</span></label>
-                <input
-                  className='input'
-                  type='text'
-                  onChange={(e) => setFirstName(e.target.value)}
-                  value={firstName}
-                  required
-                />
-              </div>
-              <div className='form-group'>
-                <label className='label'>Último Nome <span style={{color: 'red'}}>*</span></label>
-                <input
-                  className='input'
-                  type='text'
-                  onChange={(e) => setLastName(e.target.value)}
-                  value={lastName}
-                  required
-                />
-              </div>
-            </div>
-            <div className='form-group'>
-              <label className='label'>Email <span style={{color: 'red'}}>*</span></label>
-              <input
-                className='input'
-                type='email'
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
-              />
-            </div>
-
-            <div className='product-section'>
-              <ProductSelector
-                currentProduct={currentProduct}
-                setCurrentProduct={setCurrentProduct}
-                currentQuantity={currentQuantity}
-                setCurrentQuantity={setCurrentQuantity}
-                onAddProduct={addProduct}
-              />
-
-              {selectedProducts.length > 0 && (
-                <div className='selected-products'>
-                  <h4>Produtos selecionados:</h4>
-                  {selectedProducts.map(item => (
-                    <div key={item.id} className='selected-product-item'>
-                      <img 
-                        src={item.image} 
-                        alt={item.name}
-                        className='selected-product-image'
-                      />
-                      <div className='selected-product-info'>
-                        <span className='product-name'>{item.name}</span>
-                        <span className='product-details'>{item.pack} | Quantidade: {item.quantity}</span>
-                        <span className='product-price'>{(item.numericPrice * item.quantity).toFixed(2)}€</span>
-                      </div>
-                      <button 
-                        type='button' 
-                        onClick={() => removeProduct(item.id)}
-                        className='remove-btn'
-                      >
-                        Remover
-                      </button>
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            <div className='form-group'>
-              <label className='label'>Mensagem</label>
-              <textarea
-                className='textarea'
-                onChange={(e) => setMessage(e.target.value)}
-                value={message}
-              />
-            </div>
-            <div className='recaptcha'>
-              <ReCAPTCHA
-                sitekey="6LdOUbIrAAAAAHKGJivU10flGcPhFVMpPDgDu_Hs"
-                onChange={(token) => setRecaptchaToken(token)}
-              />
-              <button disabled={!recaptchaToken} type='submit' className='submit-btn'>
-                Enviar
+        <div className="quantity-and-add">
+          <div className="quantity-group">
+            <label className="label">Quantidade</label>
+            <div className="quantity-controls">
+              <button 
+                type="button" 
+                className="quantity-btn"
+                onClick={() => handleQuantityChange(-1)}
+              >
+                -
+              </button>
+              <span className="quantity-display">{currentQuantity}</span>
+              <button 
+                type="button" 
+                className="quantity-btn"
+                onClick={() => handleQuantityChange(1)}
+              >
+                +
               </button>
             </div>
-          </form>
+          </div>
+
+          <button 
+            type="button" 
+            className="add-product-btn"
+            onClick={onAddProduct}
+            disabled={!currentProduct}
+          >
+            Adicionar Produto
+          </button>
         </div>
       </div>
     </div>
   );
 };
 
-export default OrderForm;
+export default ProductSelector;

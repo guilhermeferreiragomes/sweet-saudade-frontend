@@ -1,27 +1,114 @@
 .products-marquee {
-    margin-top: 40px;
+    width: 100%;
     background-color: #ebb104;
-    height: 100px;
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    height: 80px;
     display: flex;
     align-items: center;
-    overflow: hidden;
+    margin-top: 40px;
 }
 
 .products-marquee a {
+    text-decoration: none;
+    display: block;
     width: 100%;
-    overflow: hidden;
+    height: 100%;
+    display: flex;
+    align-items: center;
 }
 
 .marquee {
-    overflow: hidden !important;
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
 }
 
-.marquee h1{
+.marquee h1 {
     color: white;
-    font-size: 50px;
     font-weight: bold;
-    text-transform: uppercase;
+    font-size: 36px;
     margin: 0;
-    user-select: none;
+    padding: 0;
     white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: all 0.3s ease;
+    line-height: 1;
+}
+
+/* Tablet Styles */
+@media screen and (max-width: 1024px) {
+    .products-marquee {
+        height: 70px;
+    }
+    
+    .marquee h1 {
+        font-size: 28px;
+        letter-spacing: 1.5px;
+    }
+}
+
+/* Mobile Styles */
+@media screen and (max-width: 768px) {
+    .products-marquee {
+        height: 60px;
+    }
+    
+    .marquee h1 {
+        font-size: 24px;
+        letter-spacing: 1px;
+    }
+    
+    .products-marquee:hover .marquee h1 {
+        transform: scale(1.01);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .products-marquee {
+        height: 50px;
+    }
+    
+    .marquee h1 {
+        font-size: 20px;
+        letter-spacing: 0.5px;
+    }
+}
+
+@media screen and (max-width: 360px) {
+    .products-marquee {
+        height: 45px;
+    }
+    
+    .marquee h1 {
+        font-size: 18px;
+        letter-spacing: 0.2px;
+    }
+}
+
+/* Large Screens */
+@media screen and (min-width: 1440px) {
+    .products-marquee {
+        height: 90px;
+    }
+    
+    .marquee h1 {
+        font-size: 36px;
+        letter-spacing: 3px;
+    }
+}
+
+/* Ultra Wide Screens */
+@media screen and (min-width: 1920px) {
+    .products-marquee {
+        height: 100px;
+    }
+    
+    .marquee h1 {
+        font-size: 40px;
+        letter-spacing: 4px;
+    }
 }

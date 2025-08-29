@@ -79,13 +79,61 @@
 @media (max-width: 768px) {
     .Product {
         grid-template-columns: repeat(2, 1fr);
-        gap: 20px;
+        gap: 15px;
+        padding: 15px;
+    }
+    
+    .Product-card {
+        width: 180px;
+    }
+    
+    .Product-image {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .Product-name {
+        font-size: 16px;
+    }
+    
+    .Product-price {
+        font-size: 18px;
+    }
+    
+    .Add-to-cart-button {
+        width: 120px;
+        height: 32px;
+        font-size: 14px;
     }
 }
 
 @media (max-width: 480px) {
     .Product {
-        grid-template-columns: 1fr;
-        gap: 15px;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        padding: 10px;
+    }
+    
+    .Product-card {
+        width: 150px;
+    }
+    
+    .Product-image {
+        width: 80px;
+        height: 80px;
+    }
+    
+    .Product-name {
+        font-size: 14px;
+    }
+    
+    .Product-price {
+        font-size: 16px;
+    }
+    
+    .Add-to-cart-button {
+        width: 100px;
+        height: 30px;
+        font-size: 12px;
     }
 }

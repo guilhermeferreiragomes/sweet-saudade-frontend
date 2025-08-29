@@ -1,10 +1,10 @@
 .contactar-container {
     background-color: #383934;
-    min-height: 100vh;
+    min-height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     padding: 40px 60px;
     position: relative;
 }
@@ -23,7 +23,7 @@
     font-weight: 600;
     font-size: 36px;
     justify-content: center;
-    margin: 20px;
+    margin: 5px;
 }
 
 .duvidas {
@@ -430,65 +430,552 @@
   background-color: #c82333;
 }
 
-/* Responsividade */
+/* Form Accordion Styles */
+.form-accordion-container {
+    width: 100%;
+}
+
+.form-accordion-header {
+    display: none;
+    width: 100%;
+    background-color: #383934;
+    color: white;
+    border: none;
+    border-radius: 15px 15px 0 0;
+    padding: 15px 20px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+}
+
+.form-accordion-header:hover {
+    background-color: #4a4a45;
+}
+
+.form-accordion-header.active {
+    background-color: #f4c430;
+    color: #383934;
+}
+
+.accordion-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.desktop-title {
+    display: block;
+}
+
+.form-content {
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+/* Info Accordion Styles */
+.info-accordion-container {
+    width: 100%;
+}
+
+.info-accordion-header {
+    display: none;
+    width: 100%;
+    background-color: #f4c430;
+    color: #383934;
+    border: none;
+    border-radius: 15px 15px 0 0;
+    padding: 15px 20px;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 0;
+}
+
+.info-accordion-header:hover {
+    background-color: #d4a004;
+}
+
+.info-accordion-header.active {
+    background-color: #383934;
+    color: #f4c430;
+}
+
+.info-content {
+    transition: all 0.5s ease;
+    overflow: hidden;
+}
+
+.mobile-title {
+    display: none;
+}
+
+/* Mobile Styles */
 @media screen and (max-width: 768px) {
     .contactar-container {
-        padding: 20px 15px;
+        padding: 105px 20px;
+        justify-content: flex-start;
+        min-height: auto;
+    }
+    
+    .titulo {
+        font-size: 28px;
+        margin: 30px 0 40px 0;
+        text-align: center;
     }
     
     .contactar-content {
         flex-direction: column;
-        gap: 40px;
-        margin-top: 120px;
-    }
-    
-    .contactar-content h1 {
-        font-size: 28px;
-        top: 40px;
+        gap: 45px;
+        align-items: stretch;
+        width: 100%;
+        margin-top: 0;
     }
     
     .duvidas {
-        text-align: center;
+        max-width: 100%;
+        margin-left: 0;
+        order: 1;
+        width: 100%;
     }
     
     .formulario {
         max-width: 100%;
+        width: 100%;
+        margin-right: 0;
+        order: 2;
     }
     
+    /* Form Accordion */
+    .form-accordion-header {
+        display: flex;
+        width: 100%;
+        background-color: #f4c430;
+        color: #383934;
+        border: none;
+        border-radius: 15px 15px 0 0;
+        padding: 15px 20px;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-bottom: 0;
+        text-align: left;
+        box-sizing: border-box;
+    }
+    
+    .form-accordion-header .accordion-title {
+        justify-content: flex-start;
+        text-align: left;
+        width: 100%;
+    }
+    
+    .form-accordion-header svg:last-child {
+        margin-left: auto;
+    }
+    
+    .form-accordion-header:hover {
+        background-color: #d4a004;
+    }
+    
+    .form-accordion-header.active {
+        background-color: #383934;
+        color: #f4c430;
+    }
+    
+    .desktop-title {
+        display: none;
+    }
+    
+    .form-content {
+        max-height: 0;
+        opacity: 0;
+        background-color: transparent;
+        border-radius: 0 0 15px 15px;
+        width: 100%;
+        overflow-y: auto;
+    }
+    
+    .form-content.expanded {
+        max-height: none;
+        height: auto;
+        opacity: 1;
+        padding: 0;
+        background-color: #f4c430;
+    }
+    
+    .form-content.expanded .form {
+        padding: 20px;
+        background-color: transparent;
+    }
+    
+    .formulario {
+        padding: 0;
+        background-color: transparent;
+        border-radius: 0;
+        width: 100%;
+    }
+    
+    /* Info Accordion */
+    .info-accordion-header {
+        display: flex;
+        width: 100%;
+        background-color: #f4c430;
+        color: #383934;
+        border: none;
+        border-radius: 15px 15px 0 0;
+        padding: 15px 20px;
+        justify-content: flex-start;
+        align-items: center;
+        cursor: pointer;
+        font-size: 18px;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        margin-bottom: 0;
+        text-align: left;
+        box-sizing: border-box;
+    }
+    
+    .info-accordion-header .accordion-title {
+        justify-content: flex-start;
+        text-align: left;
+        width: 100%;
+    }
+    
+    .info-accordion-header svg:last-child {
+        margin-left: auto;
+    }
+    
+    .info-accordion-header:hover {
+        background-color: #d4a004;
+    }
+    
+    .info-accordion-header.active {
+        background-color: #383934;
+        color: #f4c430;
+    }
+    
+    .duvidas .desktop-title {
+        display: none;
+    }
+    
+    .mobile-title {
+        display: block !important;
+        text-align: left;
+    }
+    
+    .info-content {
+        max-height: 0;
+        opacity: 0;
+        background-color: #383934;
+        border-radius: 0 0 15px 15px;
+        padding: 0;
+        width: 100%;
+        overflow-y: auto;
+    }
+    
+    .info-content.expanded {
+        max-height: none;
+        height: auto;
+        opacity: 1;
+        padding: 20px;
+        text-align: left;
+    }
+    
+    .duvidas {
+        background-color: transparent;
+        padding: 0;
+        margin-left: 0;
+        width: 100%;
+    }
+    
+    .info-content.expanded .sweet-saudade,
+    .info-content.expanded .mobile-title {
+        color: white;
+        text-align: left;
+    }
+    
+    .info-content.expanded ul li a {
+        color: #f5f5f5;
+    }
+    
+    .info-content.expanded ul li a:hover {
+        color: #f4c430;
+    }
+    
+    /* Garantir que ambos os acordeões tenham o mesmo tamanho */
+    .form-accordion-container,
+    .info-accordion-container {
+        width: 100%;
+        margin-bottom: 0;
+        box-sizing: border-box;
+    }
+    
+    .form-accordion-header,
+    .info-accordion-header {
+        min-height: 60px;
+        box-sizing: border-box;
+        width: 100%;
+    }
+    
+    /* Social media and logo alignment */
+    .social-mediaContactar {
+        justify-content: flex-start;
+        margin-bottom: 30px;
+    }
+    
+    .footer-logo {
+        width: 120px;
+        margin: 0;
+        display: block;
+    }
+    
+    /* Form responsive adjustments */
     .form-row {
         grid-template-columns: 1fr;
-    }
-    
-    .quantity-and-add {
-        flex-direction: column;
-        align-items: stretch;
         gap: 15px;
     }
     
-    .add-product-btn {
-        width: 100%;
+    .quantity-and-add {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 15px;
+        justify-content: space-between;
     }
     
-    .selected-product-item {
+    .quantity-group {
+        flex: 0 0 auto;
+        min-width: 120px;
+        display: flex;
         flex-direction: column;
-        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .quantity-controls {
+        padding: 6px 12px;
         gap: 10px;
+        height: 42px;
+        display: flex;
+        align-items: center;
     }
     
-    .selected-product-info {
-        width: 100%;
+    .quantity-btn {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
     }
     
-    .remove-btn {
-        align-self: flex-end;
+    .quantity-display {
+        font-size: 16px;
+        min-width: 25px;
+    }
+    
+    .add-product-btn {
+        flex: 1 !important;
+        padding: 10px 15px !important;
+        font-size: 12px;
+        height: 42px !important;
+        max-width: 150px;
+        width: auto !important;
+        margin-top: 38px;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    
+    .recaptcha {
+        flex-direction: column !important;
+        gap: 15px;
+        align-items: stretch;
+    }
+    
+    .submit-btn {
+        width: 100% !important;
+        padding: 15px 25px;
+        font-size: 16px;
     }
     
     .product-preview {
-        flex-direction: column;
-        text-align: center;
+        flex-direction: row;
+        text-align: left;
+        padding: 15px;
+        align-items: center;
+        gap: 15px;
     }
     
     .product-preview-image {
-        align-self: center;
+        align-self: flex-start;
+        width: 60px;
+        height: 60px;
+        flex-shrink: 0;
+    }
+    
+    .product-preview-info {
+        flex: 1;
+        text-align: left;
+    }
+    
+    .product-preview-info h5 {
+        font-size: 14px;
+        margin: 0 0 3px 0;
+    }
+    
+    .product-preview-info p {
+        font-size: 12px;
+        margin: 0 0 3px 0;
+    }
+    
+    .product-price {
+        font-size: 14px;
+    }
+    
+    .selected-product-item {
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        padding: 12px;
+    }
+    
+    .selected-product-image {
+        width: 40px;
+        height: 40px;
+        flex-shrink: 0;
+    }
+    
+    .selected-product-info {
+        flex: 1;
+        min-width: 0;
+        text-align: left;
+    }
+    
+    .product-name {
+        font-size: 13px;
+        margin-bottom: 2px;
+    }
+    
+    .product-details {
+        font-size: 11px;
+        margin-bottom: 2px;
+    }
+    
+    .remove-btn {
+        flex-shrink: 0;
+        padding: 6px 10px;
+        font-size: 10px;
+        margin-top: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .contactar-container {
+        padding: 95px 20px;
+        min-height: auto;
+    }
+    
+    .form-accordion-header,
+    .info-accordion-header {
+        font-size: 16px;
+        padding: 12px 15px;
+        border-radius: 12px 12px 0 0;
+        min-height: 50px;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .form-content.expanded {
+        max-height: none;
+        height: auto;
+    }
+    
+    .info-content.expanded {
+        max-height: none;
+        height: auto;
+        padding: 15px;
+    }
+    
+    .form-content.expanded .form {
+        padding: 15px;
+    }
+    
+    .accordion-title {
+        gap: 10px;
+        justify-content: flex-start;
+        width: 100%;
+    }
+    
+    .accordion-title svg {
+        width: 18px;
+        height: 18px;
+    }
+    
+    .quantity-and-add {
+        gap: 10px;
+    }
+    
+    .quantity-group {
+        min-width: 100px;
+    }
+    
+    .add-product-btn {
+        font-size: 11px;
+        height: 36px !important;
+        max-width: 120px;
+    }
+    
+    .quantity-controls {
+        height: 36px;
+    }
+    
+    .quantity-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 14px;
+    }
+    
+    .titulo {
+        font-size: 24px;
+        margin: 25px 0 35px 0;
+    }
+    
+    .contactar-content {
+        margin-top: 0;
+        gap: 40px;
+    }
+}
+
+/* Desktop - keep original styles */
+@media screen and (min-width: 769px) {
+    .form-content {
+        max-height: none;
+        opacity: 1;
+    }
+    
+    .info-content {
+        max-height: none;
+        opacity: 1;
+    }
+    
+    .formulario {
+        background-color: #f4c430;
+        padding: 30px;
+        border-radius: 15px;
+    }
+    
+    .duvidas {
+        flex: 1;
+        max-width: 450px;
+        margin-left: 50px;
     }
 }
