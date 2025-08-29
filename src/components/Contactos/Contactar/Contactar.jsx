@@ -1,4 +1,3 @@
-import React from 'react';
 import './Contactar.css';
 import ContactInfo from './ContactInfo/ContactInfo';
 import OrderForm from './OrderForm/OrderForm';

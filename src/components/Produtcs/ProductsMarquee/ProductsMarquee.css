@@ -1,0 +1,27 @@
+.products-marquee {
+    margin-top: 40px;
+    background-color: #ebb104;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.products-marquee a {
+    width: 100%;
+    overflow: hidden;
+}
+
+.marquee {
+    overflow: hidden !important;
+}
+
+.marquee h1{
+    color: white;
+    font-size: 50px;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin: 0;
+    user-select: none;
+    white-space: nowrap;
+}

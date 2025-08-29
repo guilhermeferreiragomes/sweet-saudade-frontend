@@ -7,7 +7,6 @@
         "price": "6.99€",
         "image": "/products/pastel_de_nata.png"
     },
-
     {
         "id": 2,
         "name": "Bola de Berlim",
@@ -15,5 +14,37 @@
         "description": "O segredo está na massa... Ou no recheio?",
         "price": "4.50€",
         "image": "/products/bola_berlim.png"
+    },
+    {
+        "id": 3,
+        "name": "Croquetes de Carne",
+        "pack": "Pack 4 unid",
+        "description": "Vai um rally croquetes? Nem precisas de sair de casa.",
+        "price": "5.00€",
+        "image": "/products/3_croquetes.png"
+    },
+    {
+        "id": 4,
+        "name": "Bolinhas de Alheira",
+        "pack": "Pack 6 unidades",
+        "description": "Tradição portuguesa em formato de bolinhas crocantes.",
+        "price": "9.99€",
+        "image": "/products/bolinhas_alheira.png"
+    },
+    {
+        "id": 5,
+        "name": "Bolo da Mãe",
+        "pack": "Pack 1 unidade",
+        "description": "O carinho da mãe em cada fatia, sabor caseiro único.",
+        "price": "12.00€",
+        "image": "/products/bolo_mae.png"
+    },
+    {
+        "id": 6,
+        "name": "Pastel de Bacalhau",
+        "pack": "Pack 6 unidades",
+        "description": "O sabor do mar português em cada mordida.",
+        "price": "7.99€",
+        "image": "/products/pastel_bacalhau.png"
     }
 ]
