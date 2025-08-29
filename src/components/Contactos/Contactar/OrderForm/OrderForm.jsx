@@ -3,6 +3,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from '@emailjs/browser';
 import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
+import Swal from 'sweetalert2';
 
 const OrderForm = ({ counter, incrementCounter }) => {
   const [firstName, setFirstName] = useState('');
@@ -49,6 +50,27 @@ const OrderForm = ({ counter, incrementCounter }) => {
       return;
     }
 
+    // Validação para produtos obrigatórios
+    if (selectedProducts.length === 0) {
+      Swal.fire({
+        position: "top",
+        icon: "warning",
+        title: "Por favor, selecione pelo menos um produto antes de enviar o pedido.",
+        showConfirmButton: true,
+        confirmButtonText: "OK",
+        customClass: {
+          popup: 'swal-custom-popup',
+          title: 'swal-custom-title',
+          confirmButton: 'swal-custom-confirm-btn',
+        },
+        background: '#2c2c2c',
+        color: '#ffffff',
+        confirmButtonColor: '#ebb104',
+        fontSize: '14px',
+      });
+      return;
+    }
+
     const nextOrderNumber = counter + 1;
     
     const currentDate = new Date();
@@ -83,13 +105,42 @@ const OrderForm = ({ counter, incrementCounter }) => {
       setEmail('');
       setMessage('');
       setSelectedProducts([]);
-      setRecaptchaToken(null);
+      setRecaptchaToken(false);
       incrementCounter();
-      alert(`Encomenda #${nextOrderNumber} enviada com sucesso!`);
+      Swal.fire({
+        position: "top",
+        icon: "success",
+        title: "Recebemos o seu pedido! Aguarde a nossa resposta.",
+        showConfirmButton: true,
+        confirmButtonText: "Perfeito!",
+        customClass: {
+          popup: 'swal-custom-popup',
+          title: 'swal-custom-title',
+          confirmButton: 'swal-custom-confirm-btn',
+        },
+        background: '#2c2c2c',
+        color: '#ffffff',
+        confirmButtonColor: '#28a745',
+        fontSize: '14px',
+      });
     })
     .catch((error) => {
-      console.error('Erro ao enviar email:', error);
-      alert('Erro ao enviar mensagem. Tente novamente.');
+      Swal.fire({
+        position: "top",
+        icon: "error",
+        title: "Ups... Algo correu mal. Tente novamente!",
+        showConfirmButton: true,
+        confirmButtonText: "Tentar novamente",
+        customClass: {
+          popup: 'swal-custom-popup',
+          title: 'swal-custom-title',
+          confirmButton: 'swal-custom-confirm-btn',
+        },
+        background: '#2c2c2c',
+        color: '#ffffff',
+        confirmButtonColor: '#dc3545',
+        fontSize: '14px',
+      });
     });
   };
 
@@ -99,7 +150,7 @@ const OrderForm = ({ counter, incrementCounter }) => {
       <form className='form' onSubmit={sendEmail}>
         <div className='form-row'>
           <div className='form-group'>
-            <label className='label'>Primeiro Nome</label>
+            <label className='label'>Primeiro Nome <span style={{color: 'red'}}>*</span></label>
             <input
               className='input'
               type='text'
@@ -109,7 +160,7 @@ const OrderForm = ({ counter, incrementCounter }) => {
             />
           </div>
           <div className='form-group'>
-            <label className='label'>Último Nome</label>
+            <label className='label'>Último Nome <span style={{color: 'red'}}>*</span></label>
             <input
               className='input'
               type='text'
@@ -120,7 +171,7 @@ const OrderForm = ({ counter, incrementCounter }) => {
           </div>
         </div>
         <div className='form-group'>
-          <label className='label'>Email</label>
+          <label className='label'>Email <span style={{color: 'red'}}>*</span></label>
           <input
             className='input'
             type='email'
@@ -173,7 +224,6 @@ const OrderForm = ({ counter, incrementCounter }) => {
             className='textarea'
             onChange={(e) => setMessage(e.target.value)}
             value={message}
-            required
           />
         </div>
         <div className='recaptcha'>

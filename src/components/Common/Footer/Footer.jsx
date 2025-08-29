@@ -32,8 +32,8 @@ const Footer = () => {
             <h3>Ligações</h3>
             <ul>
               <li><a href="/">Home</a></li>
-              <li><a href="/sobre">Sobre Nós</a></li>
               <li><a href="/produtos">Produtos</a></li>
+              <li><a href="/sobre">Sobre Nós</a></li>
             </ul>
           </div>
           <div className='politicas'>
@@ -47,7 +47,7 @@ const Footer = () => {
           <div className='contactos'>
             <h3>Contactos</h3>
             <ul>
-              <li><a href='/contactos'>Contacta-nos</a></li>
+              <li><a href='/contactos'>Encomendas</a></li>
               <li><a href='mailto:sweetsaudade@gmail.com'><MdOutlineEmail size={22} /> sweetsaudade@gmail.com</a></li>
               <li><a href='tel:+351912345678'><MdLocalPhone size={20} /> +351 912 345 678</a></li>
             </ul>
