@@ -1,4 +1,3 @@
-import React from 'react'
 import './Footer.css'
 import logo from '../../../assets/sweetsauade_logotipos/logo_transparente.png'
 import { FiInstagram } from "react-icons/fi";

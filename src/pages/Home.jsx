@@ -7,6 +7,7 @@ import WaveSeparator from '../components/HomePage/WaveSeparator/WaveSeparator'
 import OurMission from '../components/HomePage/OurMission/OurMission'
 import Footer from '../components/Common/Footer/Footer'
 import Trustpilot from '../components/HomePage/Trustpilot/Trustpilot'
+import ScrollToTopButton from '../components/Common/ScrollToTopButton/ScrollToTopButton'
 
 
 const Home = () => {
@@ -21,6 +22,8 @@ const Home = () => {
       <WaveSeparator />
       <OurMission />
       <Footer />
+      <ScrollToTopButton />
+
     </div>
   )
 }
