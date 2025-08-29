@@ -103,25 +103,82 @@
 /* Responsivo - Mobile Landscape */
 @media (max-width: 768px) {
   .reviews-section {
-    height: 60vh; /* Reduzido de 100vh para 60vh */
-    min-height: 400px; /* Altura mínima para garantir que não fique muito pequeno */
-    padding: 30px 0;
+    height: auto;
+    min-height: 300px; /* Aumentar de 280px para 300px */
     margin-top: 0;
+    padding: 30px 0; /* Aumentar de 25px para 30px */
+  }
+
+  .review-item {
+    flex-direction: column !important;
+    text-align: center;
+    gap: 20px; /* Aumentar de 18px para 20px */
+    padding: 25px 40px; /* Aumentar de 20px para 25px */
+    justify-content: center;
+  }
+
+  .review-text-container {
+    max-width: 95%; /* Aumentar de 90% para 95% */
+  }
+
+  .review-text {
+    font-size: 19px; /* Aumentar de 18px para 19px */
+    padding: 0 10px;
+    text-align: center;
+    max-width: 100%;
+    line-height: 1.5;
+  }
+
+  .review-name {
+    text-align: center;
+    margin-top: 15px; /* Aumentar de 12px para 15px */
+    font-size: 19px; /* Aumentar de 18px para 19px */
+  }
+
+  .review-image {
+    width: 110px; /* Aumentar de 100px para 110px */
+    height: 110px;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 16px !important;
+  }
+}
+
+/* Responsivo - Mobile Landscape */
+@media (max-width: 768px) {
+  .reviews-section {
+    height: auto;
+    min-height: 300px;
+    margin-top: 0;
+    padding: 30px 0;
   }
 
   .review-item {
     flex-direction: column !important;
     text-align: center;
     gap: 20px;
-    padding: 20px;
+    padding: 25px 30px;
     justify-content: center;
+  }
+
+  .review-text-container {
+    max-width: 85%; /* Reduzir de 100% para 85% */
   }
 
   .review-text {
     font-size: 16px;
-    padding: 0 10px;
+    padding: 0 5px;
     text-align: center;
     max-width: 100%;
+    line-height: 1.5;
   }
 
   .review-name {
@@ -131,8 +188,8 @@
   }
 
   .review-image {
-    width: 100px;
-    height: 100px;
+    width: 110px;
+    height: 110px;
   }
 
   .swiper-button-next,
@@ -150,30 +207,35 @@
 /* Responsivo - Mobile Portrait */
 @media (max-width: 480px) {
   .reviews-section {
-    height: 40vh; /* Reduzido de 100vh para 50vh */
-    min-height: 400px; /* Altura mínima ajustada */
     margin-top: 0;
-    padding: 20px 0;
+    min-height: 250px;
+    padding: 25px 0;
   }
 
   .review-item {
     gap: 15px;
+    padding: 20px 25px;
+  }
+
+  .review-text-container {
+    max-width: 80%; /* Reduzir de 100% para 80% */
   }
 
   .review-text {
     font-size: 14px;
-    padding: 0 5px;
+    padding: 0 3px;
+    line-height: 1.4;
   }
 
   .review-image {
-    width: 80px;
-    height: 80px;
+    width: 90px;
+    height: 90px;
     border: 3px solid #ebb104;
   }
 
   .review-name {
     font-size: 14px;
-    margin-top: 10px;
+    margin-top: 12px;
   }
 
   .swiper-button-next,
@@ -185,26 +247,5 @@
   .swiper-button-next::after,
   .swiper-button-prev::after {
     font-size: 14px !important;
-  }
-}
-
-/* Responsivo - Telas muito pequenas */
-@media (max-width: 320px) {
-  .reviews-section {
-    height: 45vh; /* Reduzido de 100vh para 45vh */
-    min-height: 320px; /* Altura mínima para telas muito pequenas */
-  }
-
-  .review-text {
-    font-size: 13px;
-  }
-
-  .review-name {
-    font-size: 13px;
-  }
-
-  .review-image {
-    width: 70px;
-    height: 70px;
   }
 }

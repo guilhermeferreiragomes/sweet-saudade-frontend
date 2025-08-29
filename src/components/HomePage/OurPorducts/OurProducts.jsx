@@ -1,15 +1,28 @@
 import React from 'react'
 import './OurProducts.css'
+import '../../Produtcs/ProductsList/ProductsList.css'
 import { Link } from 'react-router-dom'
+import productsData from '../../../data/productsData.json'
 
 const OurProducts = () => {
+  const firstThreeProducts = productsData.slice(0, 3);
+
   return (
     <div className='our-products'>
       <h2 className='our-products-title'>OS NOSSOS DESTAQUES</h2>
-      <div className='produtos'>
-        <img src="/products/bola_berlim.png" alt="Bola de Berlim" className='bola-berlim' />
-        <img src="/products/pastel_de_nata.png" alt="Pastel de Nata" className='pastel-nata' />
-        <img src="/products/3_croquetes.png" alt="Croquetes" className='croquetes' />
+      <div className='Product'>
+        {firstThreeProducts.map(product => (
+          <div key={product.id} className='Product-card'>
+            <img 
+              src={product.image} 
+              alt={product.name} 
+              className='Product-image'
+            />
+            <h3 className='Product-name'>{product.name}</h3>
+            <p className='Product-pack'>{product.pack}</p>
+            <p className='Product-price'>{product.price}</p>
+          </div>
+        ))}
       </div>
       <button className='mais-produtos'>
         <Link to="/produtos">MAIS PRODUTOS</Link>
