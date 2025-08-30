@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import Contactos from './pages/Contactos'
 import Products from './pages/Products'
 import ScrollToTop from './components/Hooks/ScrollToTop'
+import ProductDetail from './components/Produtcs/ProductDetail/ProductDetail'
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
           <Route path="/home" element={<Home />} />
           <Route path="/contactos" element={<Contactos />} />
           <Route path="/produtos" element={<Products />} />
+          <Route path="/produtos/:slug" element={<ProductDetail />} />
         </Routes>
       </Router>
       

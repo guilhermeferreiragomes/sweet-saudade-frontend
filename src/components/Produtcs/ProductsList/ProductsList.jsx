@@ -12,9 +12,9 @@ const ProductsList = () => {
                 {productsData.map((product) => (
                     <div key={product.id} className='Product-card'>
                         <img src={product.image} alt={product.name} className='Product-image' />
-                        <h4 className='Product-name'>{product.name}</h4>
+                        <h3 className='Product-name'>{product.name}</h3>
                         <p2 className='Product-pack'>{product.pack}</p2>
-                        <h3 className='Product-price'>{product.price}</h3>
+                        <h4 className='Product-price'>{product.price}</h4>
                         <Link to={`/contactos`}>
                             <button className='Add-to-cart-button'>ENCOMENDAR</button>
                         </Link>

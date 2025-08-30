@@ -5,7 +5,8 @@
         "pack": "Pack 6 unid",
         "description": "O rei de Portugal, o clássico em todas as ocasiões.",
         "price": "6.99€",
-        "image": "/products/pastel_de_nata.png"
+        "image": "/products/pastel_de_nata.png",
+        "slug": "pastel-de-nata"
     },
     {
         "id": 2,
@@ -13,7 +14,8 @@
         "pack": "Pack 2 unid",
         "description": "O segredo está na massa... Ou no recheio?",
         "price": "4.50€",
-        "image": "/products/bola_berlim.png"
+        "image": "/products/bola_berlim.png",
+        "slug": "bola-de-berlim"
     },
     {
         "id": 3,
@@ -21,7 +23,8 @@
         "pack": "Pack 4 unid",
         "description": "Vai um rally croquetes? Nem precisas de sair de casa.",
         "price": "5.00€",
-        "image": "/products/3_croquetes.png"
+        "image": "/products/3_croquetes.png",
+        "slug": "croquete"
     },
     {
         "id": 4,
@@ -29,7 +32,8 @@
         "pack": "Pack 6 unidades",
         "description": "Tradição portuguesa em formato de bolinhas crocantes.",
         "price": "9.99€",
-        "image": "/products/bolinhas_alheira.png"
+        "image": "/products/bolinhas_alheira.png",
+        "slug": "bolinhas-de-alheira"
     },
     {
         "id": 5,
@@ -37,7 +41,8 @@
         "pack": "Pack 1 unidade",
         "description": "O carinho da mãe em cada fatia, sabor caseiro único.",
         "price": "12.00€",
-        "image": "/products/bolo_mae.png"
+        "image": "/products/bolo_mae.png",
+        "slug": "bolo-da-mae"
     },
     {
         "id": 6,
@@ -45,6 +50,7 @@
         "pack": "Pack 6 unidades",
         "description": "O sabor do mar português em cada mordida.",
         "price": "7.99€",
-        "image": "/products/pastel_bacalhau.png"
+        "image": "/products/pastel_bacalhau.png",
+        "slug": "pastel-de-bacalhau"
     }
 ]
