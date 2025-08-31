@@ -12,16 +12,18 @@ const OurProducts = () => {
       <h2 className='our-products-title'>OS NOSSOS DESTAQUES</h2>
       <div className='Product'>
         {firstThreeProducts.map(product => (
-          <div key={product.id} className='Product-card'>
-            <img 
-              src={product.image} 
-              alt={product.name} 
-              className='Product-image'
+          <Link to={`/produtos/${product.slug}`} key={product.id}>
+            <div className='Product-card'>
+              <img 
+                src={product.image} 
+                alt={product.name} 
+                className='Product-image'
             />
             <h3 className='Product-name'>{product.name}</h3>
             <p className='Product-pack'>{product.pack}</p>
             <p className='Product-price'>{product.price}</p>
           </div>
+        </Link>
         ))}
       </div>
       <button className='mais-produtos'>

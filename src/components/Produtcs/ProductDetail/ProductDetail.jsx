@@ -5,6 +5,7 @@ import productsData from '../../../data/productsData.json'
 import Navbar from '../../Common/NavBar/Navbar'
 import Footer from '../../Common/Footer/Footer'
 import { Link } from 'react-router-dom'
+import { MdOutlineKeyboardArrowLeft } from "react-icons/md";
 
 
 const ProductDetail = () => {
@@ -19,6 +20,12 @@ const ProductDetail = () => {
 
     <div className='product-detail-container'>
       <Navbar />
+      <div className='go-back-btn'>
+        <Link to="/produtos">
+          <MdOutlineKeyboardArrowLeft className='go-back-icon' color='#606060' size={24} />
+          <p className='go-back-text'>Todos os Produtos</p>
+        </Link>
+      </div>
       <div className='product-detail'>
         <img src={product.image} alt={product.name} className='product-image' />
           <div className='product-information'>

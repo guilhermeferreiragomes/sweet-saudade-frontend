@@ -10,6 +10,7 @@ const ProductsList = () => {
         <div className='ProductsList'>
             <div className='Product'>
                 {productsData.map((product) => (
+                    <Link to={`/produtos/${product.slug}`}>
                     <div key={product.id} className='Product-card'>
                         <img src={product.image} alt={product.name} className='Product-image' />
                         <h3 className='Product-name'>{product.name}</h3>
@@ -19,6 +20,7 @@ const ProductsList = () => {
                             <button className='Add-to-cart-button'>ENCOMENDAR</button>
                         </Link>
                     </div>
+                    </Link>
                 ))}   
 
             </div>
