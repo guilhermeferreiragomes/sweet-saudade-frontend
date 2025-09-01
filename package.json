@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
-    "bootstrap": "^5.3.7",
+    "bootstrap": "^5.3.8",
     "hamburger-react": "^2.5.2",
     "react": "^19.1.0",
     "react-bootstrap": "^2.10.10",
