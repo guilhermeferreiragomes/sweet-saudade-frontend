@@ -140,7 +140,6 @@ const OrderForm = ({ counter, incrementCounter }) => {
     });
   };
 
-  // ...existing code...
 
   return (
     <div className='formulario'>
@@ -217,9 +216,9 @@ const OrderForm = ({ counter, incrementCounter }) => {
                       className='selected-product-image'
                     />
                     <div className='selected-product-info'>
-                      <span className='product-name'>{item.name}</span>
-                      <span className='product-details'>{item.pack} | Quantidade: {item.quantity}</span>
-                      <span className='product-price'>{(item.numericPrice * item.quantity).toFixed(2)}€</span>
+                      <span className='selected-product-name'>{item.name}</span>
+                      <span className='selected-product-details'>{item.pack} | Quantidade: {item.quantity}</span>
+                      <span className='selected-product-price'>{(item.numericPrice * item.quantity).toFixed(2)}€</span>
                     </div>
                     <button 
                       type='button' 
