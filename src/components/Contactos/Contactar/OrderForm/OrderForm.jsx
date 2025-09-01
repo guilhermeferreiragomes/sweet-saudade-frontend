@@ -5,8 +5,9 @@ import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 import Swal from 'sweetalert2';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
+import { useOrderCounter } from '../../hooks/userOrderCounter';
 
-const OrderForm = ({ counter, incrementCounter }) => {
+const OrderForm = () => { // Remova as props counter e incrementCounter
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -18,6 +19,9 @@ const OrderForm = ({ counter, incrementCounter }) => {
   
   // Estado para o acordeão do formulário
   const [isFormExpanded, setIsFormExpanded] = useState(false);
+
+  // Use o hook do contador
+  const { counter, incrementCounter, isLoaded } = useOrderCounter();
 
   // Configuração customizada do SweetAlert2
   const swalConfig = {
@@ -118,7 +122,7 @@ const OrderForm = ({ counter, incrementCounter }) => {
       setMessage('');
       setSelectedProducts([]);
       setRecaptchaToken(null);
-      incrementCounter();
+      incrementCounter(); // Agora usa a função do hook
       Swal.fire({
         ...swalConfig,
         icon: "success",
@@ -140,6 +144,10 @@ const OrderForm = ({ counter, incrementCounter }) => {
     });
   };
 
+  // Adicione uma verificação de carregamento
+  if (!isLoaded) {
+    return <div>Carregando...</div>;
+  }
 
   return (
     <div className='formulario'>

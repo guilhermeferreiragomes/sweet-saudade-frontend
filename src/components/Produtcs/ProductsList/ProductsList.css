@@ -45,7 +45,7 @@
     color: #ebb104;
     font-size: 22px;
     font-weight: 600;
-    padding-top: 10px;
+    padding-top: 20px;
 }
 
 .Add-to-cart-button {
@@ -58,7 +58,7 @@
     height: 35px;
     width: 150px;
     margin-bottom: 20px;
-    margin-top: 5px;
+    margin-top: 20px;
     cursor: pointer;
     transition: all 0.3s ease;
     transform: translateY(0);
