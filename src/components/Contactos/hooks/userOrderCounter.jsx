@@ -4,8 +4,8 @@ export const useOrderCounter = () => {
   const [counter, setCounter] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // URL do backend no Render
-  const API_BASE_URL = 'https://tua-url-render.onrender.com'; // Alterar para a tua URL
+  // URL do backend no Render (substitui pela tua URL real)
+  const API_BASE_URL = 'https://sweet-saudade-full.onrender.com'; // ← ALTERAR AQUI
 
   useEffect(() => {
     const fetchCounter = async () => {
