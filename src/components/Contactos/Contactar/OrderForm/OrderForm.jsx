@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
 import { useOrderCounter } from '../../hooks/userOrderCounter';
 
-const OrderForm = () => { // Remova as props counter e incrementCounter
+const OrderForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -21,7 +21,7 @@ const OrderForm = () => { // Remova as props counter e incrementCounter
   const [isFormExpanded, setIsFormExpanded] = useState(false);
 
   // Use o hook do contador
-  const { counter, incrementCounter, isLoaded } = useOrderCounter();
+  const { counter, getNextOrder, isLoaded } = useOrderCounter(); // removeu incrementCounter
 
   // Configuração customizada do SweetAlert2
   const swalConfig = {
@@ -66,7 +66,7 @@ const OrderForm = () => { // Remova as props counter e incrementCounter
     setSelectedProducts(selectedProducts.filter(item => item.id !== id));
   };
 
-  const sendEmail = (e) => {
+  const sendEmail = async (e) => { // fazer async
     e.preventDefault();
 
     if (!recaptchaToken) {
@@ -95,7 +95,24 @@ const OrderForm = () => { // Remova as props counter e incrementCounter
       return;
     }
 
-    const nextOrderNumber = counter + 1;
+    // NOVA LÓGICA: Pedir número ao backend
+    let nextOrderNumber = null;
+    let orderId = null;
+    try {
+      const res = await getNextOrder(); // { orderNumber, orderId }
+      nextOrderNumber = res.orderNumber;
+      orderId = res.orderId;
+    } catch {
+      Swal.fire({
+        ...swalConfig,
+        icon: "error",
+        title: "Erro no contador",
+        text: "Não foi possível obter o número de encomenda. Tenta novamente.",
+        confirmButtonText: "OK"
+      });
+      return;
+    }
+
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleDateString('pt-PT');
     
@@ -111,6 +128,7 @@ const OrderForm = () => { // Remova as props counter e incrementCounter
       products: productsList,
       counter: nextOrderNumber,
       orderNumber: nextOrderNumber,
+      orderId, // novo: ID formatado com data
       date: formattedDate
     };
 
@@ -122,12 +140,12 @@ const OrderForm = () => { // Remova as props counter e incrementCounter
       setMessage('');
       setSelectedProducts([]);
       setRecaptchaToken(null);
-      incrementCounter(); // Agora usa a função do hook
+      // REMOVER: incrementCounter(); // já não existe
       Swal.fire({
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        text: "Recebemos o seu pedido! Aguarde a nossa resposta.",
+        text: `Encomenda ${orderId} criada com sucesso! Aguarde a nossa resposta.`,
         confirmButtonText: "Continuar",
         timer: 4000,
         timerProgressBar: true
