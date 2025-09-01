@@ -4,61 +4,52 @@ export const useOrderCounter = () => {
   const [counter, setCounter] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // URL do backend no Render (substitui pela tua URL real)
-  const API_BASE_URL = 'https://sweet-saudade-full.onrender.com'; // ← ALTERAR AQUI
-
+  // Ler valor do localStorage ao carregar
   useEffect(() => {
-    const fetchCounter = async () => {
-      try {
-        console.log('Tentando buscar contador...');
-        const response = await fetch(`${API_BASE_URL}/api/counter`);
-        
-        if (!response.ok) {
-          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-        }
-        
-        const data = await response.json();
-        console.log('Contador recebido:', data);
-        
-        setCounter(data?.lastOrder ?? 0);
-        setIsLoaded(true);
-      } catch (error) {
-        console.error('Erro ao buscar contador:', error);
-        setIsLoaded(true);
-        setCounter(0);
+    try {
+      const saved = localStorage.getItem('sweet-saudade-counter');
+      if (saved) {
+        const parsed = parseInt(saved, 10);
+        setCounter(isNaN(parsed) ? 0 : parsed);
       }
-    };
-
-    fetchCounter();
+      setIsLoaded(true);
+    } catch (error) {
+      console.warn('Erro ao ler localStorage:', error);
+      setCounter(0);
+      setIsLoaded(true);
+    }
   }, []);
 
-  const getNextOrder = async () => {
-    try {
-      console.log('Pedindo próxima encomenda...');
-      const response = await fetch(`${API_BASE_URL}/api/next-order`, { 
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      });
-      
-      if (!response.ok) {
-        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-      }
-      
-      const data = await response.json();
-      console.log('Próxima encomenda:', data);
-      
-      setCounter(data.orderNumber);
-      return data;
-    } catch (error) {
-      console.error('Erro ao obter próxima encomenda:', error);
-      throw error;
+  // Salvar no localStorage sempre que counter muda
+  useEffect(() => {
+    if (isLoaded) {
+      localStorage.setItem('sweet-saudade-counter', counter.toString());
     }
+  }, [counter, isLoaded]);
+
+  // Gerar próximo número de encomenda
+  const getNextOrder = () => {
+    const nextNumber = counter + 1;
+    setCounter(nextNumber);
+    
+    // Gerar ID com data
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const paddedNumber = String(nextNumber).padStart(6, '0');
+    
+    const orderId = `SS-${year}${month}${day}-${paddedNumber}`;
+    
+    return {
+      orderNumber: nextNumber,
+      orderId: orderId
+    };
   };
 
   const resetCounter = () => {
     setCounter(0);
+    localStorage.removeItem('sweet-saudade-counter');
   };
 
   return {

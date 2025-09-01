@@ -66,7 +66,7 @@ const OrderForm = () => {
     setSelectedProducts(selectedProducts.filter(item => item.id !== id));
   };
 
-  const sendEmail = async (e) => { // fazer async
+  const sendEmail = async (e) => {
     e.preventDefault();
 
     if (!recaptchaToken) {
@@ -95,23 +95,8 @@ const OrderForm = () => {
       return;
     }
 
-    // NOVA LÓGICA: Pedir número ao backend
-    let nextOrderNumber = null;
-    let orderId = null;
-    try {
-      const res = await getNextOrder(); // { orderNumber, orderId }
-      nextOrderNumber = res.orderNumber;
-      orderId = res.orderId;
-    } catch {
-      Swal.fire({
-        ...swalConfig,
-        icon: "error",
-        title: "Erro no contador",
-        text: "Não foi possível obter o número de encomenda. Tenta novamente.",
-        confirmButtonText: "OK"
-      });
-      return;
-    }
+    // Gerar número da encomenda LOCALMENTE (sem backend)
+    const { orderNumber, orderId } = getNextOrder();
 
     const currentDate = new Date();
     const formattedDate = currentDate.toLocaleDateString('pt-PT');
@@ -126,21 +111,22 @@ const OrderForm = () => {
       email,
       message,
       products: productsList,
-      counter: nextOrderNumber,
-      orderNumber: nextOrderNumber,
-      orderId, // novo: ID formatado com data
+      counter: orderNumber,
+      orderNumber: orderNumber,
+      orderId,
       date: formattedDate
     };
 
     emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B')
     .then(() => {
+      // Limpar formulário
       setFirstName('');
       setLastName('');
       setEmail('');
       setMessage('');
       setSelectedProducts([]);
       setRecaptchaToken(null);
-      // REMOVER: incrementCounter(); // já não existe
+
       Swal.fire({
         ...swalConfig,
         icon: "success",
