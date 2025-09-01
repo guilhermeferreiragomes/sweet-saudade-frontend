@@ -4,37 +4,66 @@ export const useOrderCounter = () => {
   const [counter, setCounter] = useState(0);
   const [isLoaded, setIsLoaded] = useState(false);
 
-  // Ler valor atual do servidor (opcional, útil para mostrar no UI)
+  // URL do backend no Render
+  const API_BASE_URL = 'https://tua-url-render.onrender.com'; // Alterar para a tua URL
+
   useEffect(() => {
-    fetch('/api/counter')
-      .then(r => r.json())
-      .then(d => {
-        setCounter(d?.lastOrder ?? 0);
+    const fetchCounter = async () => {
+      try {
+        console.log('Tentando buscar contador...');
+        const response = await fetch(`${API_BASE_URL}/api/counter`);
+        
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        console.log('Contador recebido:', data);
+        
+        setCounter(data?.lastOrder ?? 0);
         setIsLoaded(true);
-      })
-      .catch(() => {
-        // Se falhar, ainda assim marcamos como carregado para não bloquear o UI
+      } catch (error) {
+        console.error('Erro ao buscar contador:', error);
         setIsLoaded(true);
-      });
+        setCounter(0);
+      }
+    };
+
+    fetchCounter();
   }, []);
 
-  // Pede ao backend o próximo número (incrementa lá)
   const getNextOrder = async () => {
-    const r = await fetch('/api/next-order', { method: 'POST' });
-    if (!r.ok) throw new Error('Falha a obter próximo número');
-    const data = await r.json(); // { orderNumber, orderId }
-    setCounter(data.orderNumber);
-    return data; // devolve também o orderId
+    try {
+      console.log('Pedindo próxima encomenda...');
+      const response = await fetch(`${API_BASE_URL}/api/next-order`, { 
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+      }
+      
+      const data = await response.json();
+      console.log('Próxima encomenda:', data);
+      
+      setCounter(data.orderNumber);
+      return data;
+    } catch (error) {
+      console.error('Erro ao obter próxima encomenda:', error);
+      throw error;
+    }
   };
 
-  // Mantemos reset como utilitário (só local)
   const resetCounter = () => {
     setCounter(0);
   };
 
   return {
     counter,
-    getNextOrder, // <--- usar isto em vez de incrementCounter
+    getNextOrder,
     resetCounter,
     isLoaded
   };
