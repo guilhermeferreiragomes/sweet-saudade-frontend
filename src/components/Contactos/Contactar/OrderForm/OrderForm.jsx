@@ -5,7 +5,6 @@ import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 import Swal from 'sweetalert2';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
-import { useOrderCounter } from '../../hooks/userOrderCounter';
 
 const OrderForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -19,9 +18,6 @@ const OrderForm = () => {
   
   // Estado para o acordeão do formulário
   const [isFormExpanded, setIsFormExpanded] = useState(false);
-
-  // Use o hook do contador
-  const { counter, getNextOrder, isLoaded } = useOrderCounter(); // removeu incrementCounter
 
   // Configuração customizada do SweetAlert2
   const swalConfig = {
@@ -95,30 +91,45 @@ const OrderForm = () => {
       return;
     }
 
-    // Gerar número da encomenda LOCALMENTE (sem backend)
-    const { orderNumber, orderId } = getNextOrder();
+    try {
+      // 1. Criar encomenda no backend Django para obter ID único
+      const response = await fetch('http://127.0.0.1:8000/encomendas/api/encomendas/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({}) // Body vazio, só queremos o ID
+      });
 
-    const currentDate = new Date();
-    const formattedDate = currentDate.toLocaleDateString('pt-PT');
-    
-    const productsList = selectedProducts.map(item => 
-      `${item.name} (${item.pack}) - Quantidade: ${item.quantity} - Preço: ${(item.numericPrice * item.quantity).toFixed(2)}€`
-    ).join('\n');
+      if (!response.ok) {
+        throw new Error('Erro ao criar encomenda no servidor');
+      }
 
-    const templateParams = {
-      firstName,
-      lastName,
-      email,
-      message,
-      products: productsList,
-      counter: orderNumber,
-      orderNumber: orderNumber,
-      orderId,
-      date: formattedDate
-    };
+      const encomendaResult = await response.json();
+      
+      // 2. Usar o ID retornado do backend
+      const currentDate = new Date();
+      const formattedDate = currentDate.toLocaleDateString('pt-PT');
+      
+      const productsList = selectedProducts.map(item => 
+        `${item.name} (${item.pack}) - Quantidade: ${item.quantity} - Preço: ${(item.numericPrice * item.quantity).toFixed(2)}€`
+      ).join('\n');
 
-    emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B')
-    .then(() => {
+      const templateParams = {
+        firstName,
+        lastName,
+        email,
+        message,
+        products: productsList,
+        counter: encomendaResult.orderNumber,
+        orderNumber: encomendaResult.orderNumber,
+        orderId: encomendaResult.orderNumber,
+        date: formattedDate
+      };
+
+      // 3. Enviar email com o ID correto
+      await emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
+      
       // Limpar formulário
       setFirstName('');
       setLastName('');
@@ -131,13 +142,14 @@ const OrderForm = () => {
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        text: `Encomenda ${orderId} criada com sucesso! Aguarde a nossa resposta.`,
+        text: `Recebemos a sua encomenda! Aguarde a nossa resposta.`,
         confirmButtonText: "Continuar",
         timer: 4000,
         timerProgressBar: true
       });
-    })
-    .catch(() => {
+
+    } catch (error) {
+      console.error('Erro:', error);
       Swal.fire({
         ...swalConfig,
         icon: "error",
@@ -145,13 +157,8 @@ const OrderForm = () => {
         text: "Ups... Algo correu mal. Tente novamente!",
         confirmButtonText: "Tentar novamente"
       });
-    });
+    }
   };
-
-  // Adicione uma verificação de carregamento
-  if (!isLoaded) {
-    return <div>Carregando...</div>;
-  }
 
   return (
     <div className='formulario'>
