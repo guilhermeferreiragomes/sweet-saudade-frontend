@@ -28,12 +28,14 @@
     font-weight: bold;
     margin: 0;
     color: white;
+    align-self: flex-start;
 }
 
 .ourMission-text p {
     line-height: 1.7;
     margin: 0;
     color: white;
+    align-self: flex-start;
 }
 
 .about-us-btn {
@@ -41,10 +43,9 @@
     color: white;
     border: none;
     padding: 15px 30px;
-    margin-top: 45px;
+    margin: 45px auto 0 auto;
     border-radius: 25px;
     cursor: pointer;
-    align-self: center;
     font-size: 1rem;
     display: flex;
     align-items: center;
@@ -70,6 +71,18 @@
 }
 
 /* Media Queries para Responsividade */
+@media (max-width: 1024px) {
+    .ourMission-section img {
+        width: 300px;
+        height: 370px;
+        margin: 20px 30px 20px 60px;
+    }
+    
+    .ourMission-text {
+        padding: 40px 40px 40px 20px;
+    }
+}
+
 @media (max-width: 768px) {
     .ourMission-section {
         flex-direction: column;
@@ -85,12 +98,17 @@
     .ourMission-text {
         width: 100%;
         padding: 0 20px;
-        text-align: center;
+        text-align: center; /* Manter center no mobile */
         gap: 20px;
     }
     
+    .ourMission-text h2,
+    .ourMission-text p {
+        align-self: center; /* Centralizar no mobile */
+    }
+    
     .about-us-btn {
-        margin-top: 30px;
+        margin: 30px auto 0 auto; /* Manter centralizado */
         width: 180px;
     }
 }
@@ -101,8 +119,9 @@
     }
     
     .ourMission-section img {
-        width: 250px;
-        height: 300px;
+        width: 90%; /* Responsivo por largura */
+        max-width: 280px;
+        height: auto; /* Manter proporção */
     }
     
     .ourMission-text {
@@ -120,10 +139,22 @@
     }
     
     .about-us-btn {
-        width: 190px;
+        width: 170px; /* Menor em telas muito pequenas */
         height: 35px;
-        font-size: 0.9rem;
-        padding: 12px 25px;
-        margin-top: 10px;
+        font-size: 0.85rem;
+        padding: 10px 20px;
+    }
+}
+
+/* Extra small screens */
+@media (max-width: 320px) {
+    .ourMission-section img {
+        width: 95%;
+        max-width: 250px;
+    }
+    
+    .about-us-btn {
+        width: 160px;
+        font-size: 0.8rem;
     }
 }

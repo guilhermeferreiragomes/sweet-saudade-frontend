@@ -37,6 +37,7 @@ nav ul {
     font-size: 18px;
 }
 
+nav ul h3,
 nav ul li {
     display: inline-block;
     list-style: none;
@@ -44,8 +45,10 @@ nav ul li {
     white-space: nowrap;
     cursor: pointer;
     font-weight: bold;
+    font-size: 20px;
 }
 
+nav ul h3 a,
 nav ul li a {
     color: #ebb104;
     text-decoration: none;
@@ -54,6 +57,8 @@ nav ul li a {
     transition: color 0.3s ease;
 }
 
+nav ul h3:hover,
+nav ul h3 a:hover,
 nav ul li:hover,
 nav ul li a:hover {
     color: #fff;
@@ -168,6 +173,11 @@ nav ul li a:hover {
         font-size: 16px;
     }
     
+    nav ul h3 {
+        margin: 5px 0;
+        font-size: 16px;
+    }
+    
     .language-switcher {
         gap: 0;
         font-size: 14px;
@@ -189,6 +199,11 @@ nav ul li a:hover {
     }
     
     nav ul li {
+        margin: 23px 0;
+        font-size: 15px;
+    }
+    
+    nav ul h3 {
         margin: 23px 0;
         font-size: 15px;
     }

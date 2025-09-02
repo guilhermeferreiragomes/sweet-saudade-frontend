@@ -6,6 +6,7 @@ import Contactos from './pages/Contactos'
 import Products from './pages/Products'
 import ScrollToTop from './components/Hooks/ScrollToTop'
 import ProductDetail from './components/Produtcs/ProductDetail/ProductDetail'
+import SobreNos from './pages/SobreNos'
 
 const App = () => {
   return (
@@ -19,6 +20,7 @@ const App = () => {
           <Route path="/contactos" element={<Contactos />} />
           <Route path="/produtos" element={<Products />} />
           <Route path="/produtos/:slug" element={<ProductDetail />} />
+          <Route path="/sobre-nos" element={<SobreNos />} />
         </Routes>
       </Router>
       
