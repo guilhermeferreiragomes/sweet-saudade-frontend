@@ -7,6 +7,7 @@ import Products from './pages/Products'
 import ScrollToTop from './components/Hooks/ScrollToTop'
 import ProductDetail from './components/Produtcs/ProductDetail/ProductDetail'
 import SobreNos from './pages/SobreNos'
+import Cookies from './components/Common/Cookies/Cookies'
 
 const App = () => {
   return (
@@ -22,6 +23,7 @@ const App = () => {
           <Route path="/produtos/:slug" element={<ProductDetail />} />
           <Route path="/sobre-nos" element={<SobreNos />} />
         </Routes>
+        <Cookies />
       </Router>
       
     </div>
