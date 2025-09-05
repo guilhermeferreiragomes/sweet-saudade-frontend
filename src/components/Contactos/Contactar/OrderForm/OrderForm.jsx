@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ReCAPTCHA from "react-google-recaptcha";
 import emailjs from '@emailjs/browser';
 import ProductSelector from '../ProductSelector/ProductSelector';
@@ -18,6 +18,7 @@ const OrderForm = () => {
   
   // Estado para o acordeão do formulário
   const [isFormExpanded, setIsFormExpanded] = useState(false);
+  const [cookiesAccepted, setCookiesAccepted] = useState(false);
 
   // Configuração customizada do SweetAlert2
   const swalConfig = {
@@ -30,6 +31,12 @@ const OrderForm = () => {
     },
     buttonsStyling: false
   };
+
+  // Verificar cookies no mount
+  useEffect(() => {
+    const accepted = localStorage.getItem('cookies-accepted') === 'true';
+    setCookiesAccepted(accepted);
+  }, []);
 
   const toggleForm = () => {
     setIsFormExpanded(!isFormExpanded);
@@ -64,6 +71,20 @@ const OrderForm = () => {
 
   const sendEmail = async (e) => {
     e.preventDefault();
+
+    // 🚫 BLOQUEIO REALISTA - Sem cookies = não funciona
+    if (!cookiesAccepted) {
+      Swal.fire({
+        ...swalConfig,
+        position: "center",
+        icon: "error",
+        title: "Cookies necessários",
+        text: "Para sua segurança, é necessário aceitar cookies para usar este formulário.",
+        confirmButtonText: "Entendi",
+        showConfirmButton: true
+      });
+      return;
+    }
 
     if (!recaptchaToken) {
       Swal.fire({
@@ -160,6 +181,12 @@ const OrderForm = () => {
     }
   };
 
+  const acceptCookies = () => {
+    localStorage.setItem('cookies-accepted', 'true');
+    localStorage.setItem('CookieConsent', 'true'); // Para o react-cookie-consent
+    setCookiesAccepted(true);
+  };
+
   return (
     <div className='formulario'>
       <div className="form-accordion-container">
@@ -181,6 +208,42 @@ const OrderForm = () => {
         
         {/* Form Content */}
         <div className={`form-content ${isFormExpanded ? 'expanded' : ''}`}>
+          
+          {/* ⚠️ AVISO SE COOKIES REJEITADOS - VERSÃO SIMPLIFICADA */}
+          {!cookiesAccepted && (
+            <div style={{
+              backgroundColor: '#ffebee',
+              border: '1px solid #f44336',
+              borderRadius: '5px',
+              padding: '20px',
+              margin: '20px 0',
+              color: '#d32f2f',
+              textAlign: 'center'
+            }}>
+              <strong>Aceite as cookies para utilizar o formulário</strong>
+              <button
+                type="button"
+                onClick={acceptCookies}
+                style={{
+                  backgroundColor: '#EBB104',
+                  color: '#262724',
+                  border: 'none',
+                  padding: '12px 24px',
+                  borderRadius: '5px',
+                  fontWeight: '600',
+                  cursor: 'pointer',
+                  fontSize: '0.9rem',
+                  transition: 'background-color 0.3s',
+                  marginTop: '10px'
+                }}
+                onMouseOver={(e) => e.target.style.backgroundColor = '#d4a004'}
+                onMouseOut={(e) => e.target.style.backgroundColor = '#EBB104'}
+              >
+                🍪 Aceitar Cookies
+              </button>
+            </div>
+          )}
+
           <form className='form' onSubmit={sendEmail}>
             <div className='form-row'>
               <div className='form-group'>
@@ -191,6 +254,7 @@ const OrderForm = () => {
                   onChange={(e) => setFirstName(e.target.value)}
                   value={firstName}
                   required
+                  disabled={!cookiesAccepted} // 🚫 DESATIVAR SE NÃO ACEITAR
                 />
               </div>
               <div className='form-group'>
@@ -201,6 +265,7 @@ const OrderForm = () => {
                   onChange={(e) => setLastName(e.target.value)}
                   value={lastName}
                   required
+                  disabled={!cookiesAccepted} // 🚫 DESATIVAR SE NÃO ACEITAR
                 />
               </div>
             </div>
@@ -213,16 +278,21 @@ const OrderForm = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 required
+                disabled={!cookiesAccepted} // 🚫 DESATIVAR SE NÃO ACEITAR
               />
             </div>
 
-            <ProductSelector
-              currentProduct={currentProduct}
-              setCurrentProduct={setCurrentProduct}
-              currentQuantity={currentQuantity}
-              setCurrentQuantity={setCurrentQuantity}
-              onAddProduct={addProduct}
-            />
+            {/* ProductSelector também desativado */}
+            <div style={{ opacity: cookiesAccepted ? 1 : 0.5 }}>
+              <ProductSelector
+                currentProduct={currentProduct}
+                setCurrentProduct={setCurrentProduct}
+                currentQuantity={currentQuantity}
+                setCurrentQuantity={setCurrentQuantity}
+                onAddProduct={addProduct}
+                disabled={!cookiesAccepted} // Passar prop disabled
+              />
+            </div>
 
             {selectedProducts.length > 0 && (
               <div className='selected-products'>
@@ -257,15 +327,27 @@ const OrderForm = () => {
                 className='textarea'
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
+                disabled={!cookiesAccepted} // 🚫 DESATIVAR SE NÃO ACEITAR
               />
             </div>
             
             <div className='recaptcha'>
-              <ReCAPTCHA
-                sitekey="6LdOUbIrAAAAAHKGJivU10flGcPhFVMpPDgDu_Hs"
-                onChange={(token) => setRecaptchaToken(token)}
-              />
-              <button disabled={!recaptchaToken} type='submit' className='submit-btn'>
+              {cookiesAccepted && (
+                <ReCAPTCHA
+                  sitekey="6LdOUbIrAAAAAHKGJivU10flGcPhFVMpPDgDu_Hs"
+                  onChange={(token) => setRecaptchaToken(token)}
+                />
+              )}
+              
+              <button 
+                disabled={!cookiesAccepted || !recaptchaToken} 
+                type='submit' 
+                className='submit-btn'
+                style={{ 
+                  opacity: (!cookiesAccepted || !recaptchaToken) ? 0.5 : 1,
+                  cursor: (!cookiesAccepted || !recaptchaToken) ? 'not-allowed' : 'pointer'
+                }}
+              >
                 Enviar
               </button>
             </div>

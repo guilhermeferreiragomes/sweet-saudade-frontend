@@ -39,8 +39,8 @@ const Footer = () => {
             <h3>Políticas</h3>
             <ul>
               <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
-              <li><a href="/politica-de-cookies">Política de Cookies</a></li>
               <li><a href="/termos-e-condicoes">Termos e Condições</a></li>
+              <br />
             </ul>
           </div>
           <div className='contactos'>
