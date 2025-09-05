@@ -5,6 +5,7 @@ import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 import Swal from 'sweetalert2';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
+import { apiRequest } from '../../../../config/api'; // ✅ ADICIONAR ESTA LINHA
 
 const OrderForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -114,20 +115,11 @@ const OrderForm = () => {
 
     try {
       // 1. Criar encomenda no backend Django para obter ID único
-      const response = await fetch('http://127.0.0.1:8000/encomendas/api/encomendas/', {
+      const encomendaResult = await apiRequest('/encomendas/api/encomendas/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify({}) // Body vazio, só queremos o ID
       });
 
-      if (!response.ok) {
-        throw new Error('Erro ao criar encomenda no servidor');
-      }
-
-      const encomendaResult = await response.json();
-      
       // 2. Usar o ID retornado do backend
       const currentDate = new Date();
       const formattedDate = currentDate.toLocaleDateString('pt-PT');
@@ -142,9 +134,9 @@ const OrderForm = () => {
         email,
         message,
         products: productsList,
-        counter: encomendaResult.orderNumber,
-        orderNumber: encomendaResult.orderNumber,
-        orderId: encomendaResult.orderNumber,
+        counter: encomendaResult.orderNumber || Math.floor(Math.random() * 10000),
+        orderNumber: encomendaResult.orderNumber || Math.floor(Math.random() * 10000),
+        orderId: encomendaResult.orderNumber || Math.floor(Math.random() * 10000),
         date: formattedDate
       };
 
