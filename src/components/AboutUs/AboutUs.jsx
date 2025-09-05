@@ -39,7 +39,7 @@ const AboutUs = () => {
             <p>Hoje, essa paixão transforma-se em cada prato que criamos, trazendo um pedaço de Portugal para a sua mesa.</p>
           </div>
           <div className='content-image'>
-            <img src={andreines} alt='André e Inês' />
+            <img className='andreines-image' src={andreines} alt='André e Inês' />
           </div>
         </div>
       </div>
@@ -47,7 +47,7 @@ const AboutUs = () => {
       <div className='aboutus-section alternate'>
         <div className='section-content'>
           <div className='content-image'>
-            <img src={cliente} alt='Cliente' />
+            <img src={cliente} alt='Cliente' className='cliente-image' />
           </div>
           <div className='content-text'>
             <h2 className='section-title'>

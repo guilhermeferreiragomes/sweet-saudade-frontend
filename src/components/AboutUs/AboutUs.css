@@ -18,6 +18,7 @@
 
 .content-text {
   padding: 20px;
+  text-align: justify;
 }
 
 .section-title {
@@ -50,13 +51,23 @@
   margin-bottom: 20px;
 }
 
-.content-image img {
+.andreines-image {
   width: 100%;
   max-width: 450px;
   height: 450px;
   object-fit: cover;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.cliente-image {
+  width: 100%;
+  max-width: 450px;
+  height: 550px;
+  object-fit: cover;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  object-position: center 90%;
 }
 
 .aboutus-btn {
@@ -83,6 +94,25 @@
     height: 78px;
     width: 290px;
 }
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translatey(-100px)
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+  .section-content {
+    animation: appear linear;
+    animation-timeline: view();
+    animation-range: entry 0% cover 40%;
+  }
+
+
 
 @media (max-width: 768px) {
   .aboutus-section {
@@ -116,6 +146,14 @@
     max-width: 350px;
     height: 250px;
   }
+
+  .andreines-image {
+    object-position: center 25%;
+  }
+
+  .cliente-image {
+    object-position: center 35%;
+  }
 }
 
 @media (max-width: 480px) {
@@ -138,5 +176,13 @@
 
   .aboutus-section p {
     font-size: 1rem;
+  }
+  
+  .andreines-image {
+    object-position: center 30%;
+  }
+
+  .cliente-image {
+    object-position: center 40%;
   }
 }
