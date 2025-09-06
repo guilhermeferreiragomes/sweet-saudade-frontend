@@ -5,7 +5,7 @@ import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 import Swal from 'sweetalert2';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
-import { apiRequest } from '../../../../config/api'; // ✅ ADICIONAR ESTA LINHA
+import { apiRequest } from '../../../../config/api';
 
 const OrderForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -114,13 +114,13 @@ const OrderForm = () => {
     }
 
     try {
-      // 1. Criar encomenda no backend Django para obter ID único
+      // 1. Criar encomenda no backend Django para obter counter
       const encomendaResult = await apiRequest('/encomendas/api/encomendas/', {
         method: 'POST',
-        body: JSON.stringify({}) // Body vazio, só queremos o ID
+        body: JSON.stringify({})
       });
 
-      // 2. Usar o ID retornado do backend
+      // 2. Usar o counter retornado do backend
       const currentDate = new Date();
       const formattedDate = currentDate.toLocaleDateString('pt-PT');
       
@@ -134,13 +134,11 @@ const OrderForm = () => {
         email,
         message,
         products: productsList,
-        counter: encomendaResult.orderNumber || Math.floor(Math.random() * 10000),
-        orderNumber: encomendaResult.orderNumber || Math.floor(Math.random() * 10000),
-        orderId: encomendaResult.orderNumber || Math.floor(Math.random() * 10000),
+        counter: encomendaResult.counter || Math.floor(Math.random() * 10000), // ✅ SÓ COUNTER
         date: formattedDate
       };
 
-      // 3. Enviar email com o ID correto
+      // 3. Enviar email com o counter correto
       await emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
       
       // Limpar formulário
@@ -155,7 +153,7 @@ const OrderForm = () => {
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        text: `Recebemos a sua encomenda! Aguarde a nossa resposta.`,
+        text: `Recebemos a sua encomenda #${encomendaResult.counter || 'N/A'}! Aguarde a nossa resposta.`,
         confirmButtonText: "Continuar",
         timer: 4000,
         timerProgressBar: true
@@ -175,7 +173,7 @@ const OrderForm = () => {
 
   const acceptCookies = () => {
     localStorage.setItem('cookies-accepted', 'true');
-    localStorage.setItem('CookieConsent', 'true'); // Para o react-cookie-consent
+    localStorage.setItem('CookieConsent', 'true');
     setCookiesAccepted(true);
   };
 
@@ -201,7 +199,7 @@ const OrderForm = () => {
         {/* Form Content */}
         <div className={`form-content ${isFormExpanded ? 'expanded' : ''}`}>
           
-          {/* ⚠️ AVISO SE COOKIES REJEITADOS - VERSÃO SIMPLIFICADA */}
+          {/* ⚠️ AVISO SE COOKIES REJEITADOS */}
           {!cookiesAccepted && (
             <div style={{
               backgroundColor: '#ffebee',
@@ -246,7 +244,7 @@ const OrderForm = () => {
                   onChange={(e) => setFirstName(e.target.value)}
                   value={firstName}
                   required
-                  disabled={!cookiesAccepted} // 🚫 DESATIVAR SE NÃO ACEITAR
+                  disabled={!cookiesAccepted}
                 />
               </div>
               <div className='form-group'>
@@ -257,7 +255,7 @@ const OrderForm = () => {
                   onChange={(e) => setLastName(e.target.value)}
                   value={lastName}
                   required
-                  disabled={!cookiesAccepted} // 🚫 DESATIVAR SE NÃO ACEITAR
+                  disabled={!cookiesAccepted}
                 />
               </div>
             </div>
@@ -270,11 +268,10 @@ const OrderForm = () => {
                 onChange={(e) => setEmail(e.target.value)}
                 value={email}
                 required
-                disabled={!cookiesAccepted} // 🚫 DESATIVAR SE NÃO ACEITAR
+                disabled={!cookiesAccepted}
               />
             </div>
 
-            {/* ProductSelector também desativado */}
             <div style={{ opacity: cookiesAccepted ? 1 : 0.5 }}>
               <ProductSelector
                 currentProduct={currentProduct}
@@ -282,7 +279,7 @@ const OrderForm = () => {
                 currentQuantity={currentQuantity}
                 setCurrentQuantity={setCurrentQuantity}
                 onAddProduct={addProduct}
-                disabled={!cookiesAccepted} // Passar prop disabled
+                disabled={!cookiesAccepted}
               />
             </div>
 
@@ -319,7 +316,7 @@ const OrderForm = () => {
                 className='textarea'
                 onChange={(e) => setMessage(e.target.value)}
                 value={message}
-                disabled={!cookiesAccepted} // 🚫 DESATIVAR SE NÃO ACEITAR
+                disabled={!cookiesAccepted}
               />
             </div>
             
