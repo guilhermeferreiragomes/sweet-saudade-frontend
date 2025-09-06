@@ -5,7 +5,6 @@ import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 import Swal from 'sweetalert2';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
-import { apiRequest } from '../../../../config/api';
 
 const OrderForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -114,13 +113,6 @@ const OrderForm = () => {
     }
 
     try {
-      // 1. Criar encomenda no backend Django para obter counter
-      const encomendaResult = await apiRequest('/encomendas/api/encomendas/', {
-        method: 'POST',
-        body: JSON.stringify({})
-      });
-
-      // 2. Usar o counter retornado do backend
       const currentDate = new Date();
       const formattedDate = currentDate.toLocaleDateString('pt-PT');
       
@@ -134,11 +126,10 @@ const OrderForm = () => {
         email,
         message,
         products: productsList,
-        counter: encomendaResult.counter || Math.floor(Math.random() * 10000), // ✅ SÓ COUNTER
         date: formattedDate
       };
 
-      // 3. Enviar email com o counter correto
+      // Enviar email
       await emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
       
       // Limpar formulário
@@ -153,7 +144,7 @@ const OrderForm = () => {
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        text: `Recebemos a sua encomenda #${encomendaResult.counter || 'N/A'}! Aguarde a nossa resposta.`,
+        text: "Recebemos a sua encomenda! Aguarde a nossa resposta.",
         confirmButtonText: "Continuar",
         timer: 4000,
         timerProgressBar: true
