@@ -69,6 +69,24 @@ const OrderForm = () => {
     setSelectedProducts(selectedProducts.filter(item => item.id !== id));
   };
 
+  // 🆕 NOVA FUNÇÃO: Chamar backend para incrementar counter (sem mostrar na mensagem)
+  const incrementOrderCounter = async () => {
+    try {
+      const response = await fetch('http://localhost:3025/api/encomenda', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      
+      const result = await response.json();
+      console.log('Encomenda registada:', result.orderNumber); // Só para logs
+      
+    } catch (error) {
+      console.error('Erro ao registar encomenda:', error);
+    }
+  };
+
   const sendEmail = async (e) => {
     e.preventDefault();
 
@@ -113,6 +131,9 @@ const OrderForm = () => {
     }
 
     try {
+      // 🆕 INCREMENTAR COUNTER NO BACKEND
+      await incrementOrderCounter();
+      
       const currentDate = new Date();
       const formattedDate = currentDate.toLocaleDateString('pt-PT');
       
