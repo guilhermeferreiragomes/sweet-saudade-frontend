@@ -69,10 +69,10 @@ const OrderForm = () => {
     setSelectedProducts(selectedProducts.filter(item => item.id !== id));
   };
 
-  // 🆕 MODIFICAR A FUNÇÃO: Retornar o counter também
+  // 🆕 NOVA FUNÇÃO: Chamar backend Railway
   const incrementOrderCounter = async () => {
     try {
-      const response = await fetch('http://localhost:3025/api/encomenda', {
+      const response = await fetch('https://sweet-saudade-backend-production.up.railway.app/api/encomenda', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -82,11 +82,11 @@ const OrderForm = () => {
       const result = await response.json();
       console.log('Encomenda registada:', result.orderNumber);
       
-      return result.counter; // 🆕 RETORNAR O COUNTER
+      return result.counter;
       
     } catch (error) {
       console.error('Erro ao registar encomenda:', error);
-      return null; // 🆕 RETORNAR NULL SE DER ERRO
+      return null;
     }
   };
 
