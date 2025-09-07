@@ -5,7 +5,6 @@ import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 import Swal from 'sweetalert2';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
-import ScrollToTop from '../../../Hooks/ScrollToTop';
 
 const OrderForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -16,6 +15,9 @@ const OrderForm = () => {
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState('');
   const [currentQuantity, setCurrentQuantity] = useState(1);
+  
+  // 🆕 ESTADO PARA CONTROLAR ENVIO
+  const [isSubmitting, setIsSubmitting] = useState(false);
   
   // Estado para o acordeão do formulário
   const [isFormExpanded, setIsFormExpanded] = useState(false);
@@ -94,6 +96,14 @@ const OrderForm = () => {
   const sendEmail = async (e) => {
     e.preventDefault();
 
+    // 🆕 SCROLL TO TOP IMEDIATAMENTE
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    // 🆕 PREVENIR MÚLTIPLOS ENVIOS
+    if (isSubmitting) {
+      return; // Se já está enviando, não faz nada
+    }
+
     // 🚫 BLOQUEIO REALISTA - Sem cookies = não funciona
     if (!cookiesAccepted) {
       Swal.fire({
@@ -134,6 +144,9 @@ const OrderForm = () => {
       return;
     }
 
+    // 🆕 BLOQUEAR BOTÃO DURANTE ENVIO
+    setIsSubmitting(true);
+
     try {
       // 🆕 OBTER O COUNTER DO BACKEND
       const orderCounter = await incrementOrderCounter();
@@ -152,7 +165,7 @@ const OrderForm = () => {
         message,
         products: productsList,
         date: formattedDate,
-        counter: orderCounter || 'N/A' // 🆕 ADICIONAR O COUNTER AQUI
+        counter: orderCounter || 'N/A'
       };
 
       // Enviar email
@@ -185,6 +198,9 @@ const OrderForm = () => {
         text: "Ups... Algo correu mal. Tente novamente!",
         confirmButtonText: "Tentar novamente"
       });
+    } finally {
+      // 🆕 DESBLOQUEAR BOTÃO APÓS ENVIO (sucesso ou erro)
+      setIsSubmitting(false);
     }
   };
 
@@ -345,16 +361,16 @@ const OrderForm = () => {
                 />
               )}
               
-              <button onSubmit={ScrollToTop}
-                disabled={!cookiesAccepted || !recaptchaToken} 
+              <button 
+                disabled={!cookiesAccepted || !recaptchaToken || isSubmitting} 
                 type='submit' 
                 className='submit-btn'
                 style={{ 
-                  opacity: (!cookiesAccepted || !recaptchaToken) ? 0.5 : 1,
-                  cursor: (!cookiesAccepted || !recaptchaToken) ? 'not-allowed' : 'pointer'
+                  opacity: (!cookiesAccepted || !recaptchaToken || isSubmitting) ? 0.5 : 1,
+                  cursor: (!cookiesAccepted || !recaptchaToken || isSubmitting) ? 'not-allowed' : 'pointer'
                 }}
               >
-                Enviar
+                {isSubmitting ? 'Enviando...' : 'Enviar'}
               </button>
             </div>
           </form>
