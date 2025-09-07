@@ -344,7 +344,7 @@ const OrderForm = () => {
                 />
               )}
               
-              <button 
+              <button onSubmit={disabled}
                 disabled={!cookiesAccepted || !recaptchaToken} 
                 type='submit' 
                 className='submit-btn'
