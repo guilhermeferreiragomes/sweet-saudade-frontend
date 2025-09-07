@@ -5,6 +5,7 @@ import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 import Swal from 'sweetalert2';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
+import ScrollToTop from '../../../Hooks/ScrollToTop';
 
 const OrderForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -344,7 +345,7 @@ const OrderForm = () => {
                 />
               )}
               
-              <button onSubmit={disabled}
+              <button onSubmit={ScrollToTop}
                 disabled={!cookiesAccepted || !recaptchaToken} 
                 type='submit' 
                 className='submit-btn'
