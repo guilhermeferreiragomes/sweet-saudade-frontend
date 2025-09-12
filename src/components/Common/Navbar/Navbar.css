@@ -8,6 +8,7 @@ nav {
     justify-content: space-between;
     position: relative;
     height: auto;
+    min-height: 70px;
 }
 
 .logo {
@@ -17,6 +18,7 @@ nav {
     margin-left: 100px;
     margin-top: 5px;
     margin-bottom: 5px;
+    flex-shrink: 0;
 }
 
 .logo:hover {
@@ -73,8 +75,14 @@ nav ul li a:hover {
     display: none;
     flex-direction: column;
     cursor: pointer;
-    padding: 5px;
+    padding: 8px;
     z-index: 1001;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.hamburger:hover {
+    background-color: rgba(235, 177, 4, 0.1);
 }
 
 .hamburger span {
@@ -82,7 +90,20 @@ nav ul li a:hover {
     height: 3px;
     background-color: #ebb104;
     margin: 3px 0;
-    transition: 0.3s;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(45deg) translate(-5px, -6px);
 }
 
 .language-switcher {
@@ -90,6 +111,7 @@ nav ul li a:hover {
     align-items: center;
     gap: 5px;
     margin-right: 20px;
+    flex-shrink: 0;
 }
 
 .lang-btn {
@@ -102,10 +124,12 @@ nav ul li a:hover {
     font-size: 13px;
     position: relative;
     transition: color 0.3s ease;
+    border-radius: 4px;
 }
 
 .lang-btn:hover {
     color: #ebb104;
+    background-color: rgba(235, 177, 4, 0.1);
 }
 
 .lang-btn.active {
@@ -128,82 +152,207 @@ nav ul li a:hover {
     font-weight: bold;
 }
 
-/* Responsividade Mobile */
+/* Responsividade Tablet */
+@media screen and (max-width: 1024px) {
+    nav ul {
+        gap: 100px;
+    }
+    
+    nav ul h3,
+    nav ul li {
+        font-size: 16px;
+    }
+}
+
+/* Responsividade Mobile Grande */
 @media screen and (max-width: 768px) {
     nav {
         padding: 10px 15px;
+        position: relative;
     }
     
     .logo {
-        width: 90px;
-        margin-left: 20px;
+        width: 80px;
+        margin-left: 15px;
     }
     
     .hamburger {
         display: flex;
-        margin-right: 20px;
+        margin-right: 15px;
+        position: relative;
+        z-index: 1002;
     }
     
     nav ul {
         position: fixed;
         top: 0;
         right: -100%;
-        width: 200px;
-        height: auto;
-        background-color: #262724;
+        width: 250px;
+        height: 100vh;
+        background-color: rgba(38, 39, 36, 0.98);
+        backdrop-filter: blur(10px);
         flex-direction: column;
-        align-items: flex-start;
-        padding: 60px 20px 20px;
-        border-radius: 8px;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: right 0.3s ease;
-        z-index: 1000;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1001;
         transform: none;
         left: auto;
-        gap: 0;
+        gap: 40px;
+        box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3);
     }
     
     nav ul.nav-active {
-        right: 10px;
+        right: 0;
     }
     
-    nav ul li {
-        margin: 5px 0;
-        font-size: 16px;
-    }
-    
+    nav ul li,
     nav ul h3 {
-        margin: 5px 0;
-        font-size: 16px;
+        margin: 15px 0;
+        font-size: 18px;
+        opacity: 0;
+        transform: translateX(30px);
+        animation: slideInMenu 0.3s ease forwards;
+    }
+    
+    nav ul li:nth-child(1) { animation-delay: 0.1s; }
+    nav ul li:nth-child(2) { animation-delay: 0.2s; }
+    nav ul li:nth-child(3) { animation-delay: 0.3s; }
+    nav ul h3 { animation-delay: 0.4s; }
+    
+    @keyframes slideInMenu {
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
     }
     
     .language-switcher {
-        gap: 0;
-        font-size: 14px;
+        right: 70px;
+        gap: 3px;
+    }
+    
+    .lang-btn {
+        font-size: 12px;
+        padding: 4px 6px;
     }
 }
 
-@media screen and (max-width: 480px) {
-    .logo {
-        width: 70px;
-        margin-left: 15px;
+/* Mobile Médio */
+@media screen and (max-width: 600px) {
+    nav {
+        min-height: 65px;
     }
     
-    .hamburger {
-        margin-right: 15px;
+    .logo {
+        width: 75px;
+        margin-left: 10px;
     }
     
     nav ul {
-        padding: 50px 20px 20px;
+        width: 220px;
     }
     
-    nav ul li {
-        margin: 23px 0;
-        font-size: 15px;
+    .language-switcher {
+        right: 60px;
+        gap: 2px;
     }
     
+    .lang-btn {
+        font-size: 11px;
+        padding: 3px 5px;
+    }
+}
+
+/* Mobile Pequeno */
+@media screen and (max-width: 480px) {
+    nav {
+        padding: 8px 10px;
+        min-height: 60px;
+    }
+    
+    .logo {
+        width: 70px;
+        margin-left: 8px;
+    }
+    
+    .hamburger {
+        margin-right: 10px;
+        padding: 6px;
+    }
+    
+    .hamburger span {
+        width: 22px;
+        height: 2.5px;
+    }
+    
+    nav ul {
+        width: 200px;
+        gap: 35px;
+    }
+    
+    nav ul li,
     nav ul h3 {
-        margin: 23px 0;
+        font-size: 16px;
+        margin: 12px 0;
+    }
+    
+    .language-switcher {
+        right: 50px;
+        gap: 1px;
+    }
+    
+    .lang-btn {
+        font-size: 10px;
+        padding: 2px 4px;
+    }
+}
+
+/* Mobile Extra Pequeno */
+@media screen and (max-width: 360px) {
+    nav {
+        padding: 5px 8px;
+        min-height: 55px;
+    }
+    
+    .logo {
+        width: 65px;
+        margin-left: 5px;
+    }
+    
+    nav ul {
+        width: 180px;
+        gap: 30px;
+    }
+    
+    nav ul li,
+    nav ul h3 {
         font-size: 15px;
+        margin: 10px 0;
+    }
+    
+    .language-switcher {
+        right: 45px;
+    }
+    
+    .lang-btn {
+        font-size: 9px;
+        padding: 2px 3px;
+    }
+}
+
+/* Overlay para mobile quando menu está aberto */
+@media screen and (max-width: 768px) {
+    nav ul.nav-active::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: -1;
+        backdrop-filter: blur(2px);
     }
 }

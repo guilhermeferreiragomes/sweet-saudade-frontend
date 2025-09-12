@@ -23,7 +23,7 @@ const ProductsMarquee = () => {
       <Marquee 
         className='marquee' 
         gradient={!isMobile}
-        gradientColor='#ebb104' 
+        gradientColor='#ebb104'
         speed={50}
         autoFill={true}
       >

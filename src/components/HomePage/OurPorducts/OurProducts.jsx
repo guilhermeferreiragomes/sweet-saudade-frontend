@@ -1,31 +1,64 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './OurProducts.css'
-import '../../Produtcs/ProductsList/ProductsList.css'
 import { Link } from 'react-router-dom'
 import productsData from '../../../data/productsData.json'
+import Marquee from "react-fast-marquee";
 
 const OurProducts = () => {
+  const [isMobile, setIsMobile] = useState(false)
   const firstThreeProducts = productsData.slice(0, 3);
+
+  useEffect(() => {
+    const checkScreenSize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkScreenSize();
+    window.addEventListener('resize', checkScreenSize);
+
+    return () => window.removeEventListener('resize', checkScreenSize);
+  }, []);
+
+  const ProductCard = ({ product }) => (
+    <Link to={`/produtos/${product.slug}`} key={product.id}>
+      <div className='home-product-card'>
+        <img 
+          src={product.image} 
+          alt={product.name} 
+          className='home-product-image'
+        />
+        <h3 className='home-product-name'>{product.name}</h3>
+        <p className='home-product-pack'>{product.pack}</p>
+        <p className='home-product-price'>{product.price}</p>
+      </div>
+    </Link>
+  );
 
   return (
     <div className='our-products'>
       <h2 className='our-products-title'>OS NOSSOS DESTAQUES</h2>
-      <div className='Product'>
-        {firstThreeProducts.map(product => (
-          <Link to={`/produtos/${product.slug}`} key={product.id}>
-            <div className='Product-card'>
-              <img 
-                src={product.image} 
-                alt={product.name} 
-                className='Product-image'
-            />
-            <h3 className='Product-name'>{product.name}</h3>
-            <p className='Product-pack'>{product.pack}</p>
-            <p className='Product-price'>{product.price}</p>
+      
+      {isMobile ? (
+        <Marquee 
+          speed={30}
+          gradient={true}
+          gradientColor={[26, 26, 26]}
+          gradientWidth={50}
+        >
+          <div className='home-marquee-products'>
+            {firstThreeProducts.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
           </div>
-        </Link>
-        ))}
-      </div>
+        </Marquee>
+      ) : (
+        <div className='home-products-container'>
+          {firstThreeProducts.map(product => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </div>
+      )}
+      
       <button className='mais-produtos'>
         <Link to="/produtos">MAIS PRODUTOS</Link>
       </button>
