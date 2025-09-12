@@ -8,6 +8,9 @@ import ScrollToTop from './components/Hooks/ScrollToTop'
 import ProductDetail from './components/Produtcs/ProductDetail/ProductDetail'
 import SobreNos from './pages/SobreNos'
 import Cookies from './components/Common/Cookies/Cookies'
+import Privacidade from './components/Politics/Privacidade/Privacidade'
+import Termos from './components/Politics/T&C/termos'
+
 
 const App = () => {
   return (
@@ -22,6 +25,8 @@ const App = () => {
           <Route path="/produtos" element={<Products />} />
           <Route path="/produtos/:slug" element={<ProductDetail />} />
           <Route path="/sobre-nos" element={<SobreNos />} />
+          <Route path='/politica-de-privacidade' element={<Privacidade />} />
+          <Route path='termos-e-condicoes' element={<Termos />} />
         </Routes>
         <Cookies />
       </Router>

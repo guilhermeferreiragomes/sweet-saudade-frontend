@@ -1,0 +1,142 @@
+/* Container principal */
+.politics-container {
+  min-height: 100vh;
+  padding-bottom: 0;
+}
+
+/* Título */
+.politics-title {
+  padding: 100px 20px 50px 20px;
+  text-align: center;
+}
+
+.politics-title h2 {
+  color: #EBB104;
+  font-size: 40px;
+  font-weight: 600;
+  margin: 0;
+}
+
+/* Conteúdo do texto */
+.politics-text {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 50px 30px;
+  color: white;
+}
+
+/* Parágrafos */
+.politics-text p {
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.8;
+  margin-bottom: 20px;
+  text-align: justify;
+}
+
+/* Primeira linha (data) */
+.politics-text p:first-child {
+  color: #EBB104;
+  font-weight: 600;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 40px;
+}
+
+/* Última linha (conformidade) */
+.politics-text p:last-child {
+  color: #9b9b9b;
+  font-style: italic;
+  text-align: center;
+  margin-top: 50px;
+  padding: 20px;
+  background-color: rgba(235, 177, 4, 0.1);
+  border-radius: 8px;
+  border-left: 4px solid #EBB104;
+}
+
+/* Títulos das seções (h3) */
+.politics-text h3 {
+  color: #EBB104;
+  font-size: 24px;
+  font-weight: 600;
+  margin: 40px 0 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #EBB104;
+}
+
+/* Listas */
+.politics-text ul {
+  margin: 20px 0;
+  padding-left: 25px;
+}
+
+.politics-text ul li {
+  color: #ffffff;
+  font-size: 16px;
+  line-height: 1.6;
+  margin-bottom: 10px;
+  list-style-type: disc;
+}
+
+.politics-text ul li::marker {
+  color: #EBB104;
+}
+
+/* Texto em negrito */
+.politics-text strong {
+  color: #EBB104;
+  font-weight: 600;
+}
+
+/* Texto em itálico */
+.politics-text em {
+  color: #9b9b9b;
+  font-style: italic;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .politics-title {
+    padding: 80px 15px 40px 15px;
+  }
+  
+  .politics-title h2 {
+    font-size: 32px;
+  }
+  
+  .politics-text {
+    padding: 30px 20px;
+  }
+  
+  .politics-text p {
+    font-size: 15px;
+    text-align: left;
+  }
+  
+  .politics-text h3 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .politics-title h2 {
+    font-size: 28px;
+  }
+  
+  .politics-text {
+    padding: 20px 15px;
+  }
+  
+  .politics-text p {
+    font-size: 14px;
+  }
+  
+  .politics-text h3 {
+    font-size: 18px;
+  }
+  
+  .politics-text ul {
+    padding-left: 20px;
+  }
+}

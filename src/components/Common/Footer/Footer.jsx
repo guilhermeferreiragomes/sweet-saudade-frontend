@@ -54,8 +54,15 @@ const Footer = () => {
         </div>
       </div>
      <hr className="footer-divider" />
-      <div className="footer-bottom">
+     <div className='footer-bottom'>
+      <div className="footer-bottom-left">
+        <p>Créditos: 
+          <a href='https://www.linkedin.com/in/guilhermeffgomes/' target='_blank'> Guilherme Gomes</a>
+        </p>
+      </div>
+      <div className="footer-bottom-right">
         <p>&copy; {new Date().getFullYear()} Sweet Saudade. Todos os direitos reservados.</p>
+      </div>
       </div>
     </div>
   );
