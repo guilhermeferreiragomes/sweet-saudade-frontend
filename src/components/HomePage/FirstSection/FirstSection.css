@@ -166,10 +166,11 @@
     }
 
     .scroll-container {
-        bottom: 190px; /* Alterado de 200px para 230px (+30px) */
+        bottom: 160px; /* Era 190px, reduzi para 160px */
     }
 
     .scroll-link {
+        margin-top: 100px;
         padding: 12px 25px;
         font-size: 16px;
         letter-spacing: 1.5px;
@@ -211,7 +212,7 @@
     }
 
     .scroll-container {
-        bottom: px; /* Alterado de 190px para 220px (+30px) */
+        bottom: 140px; /* Era 190px, reduzi para 140px */
     }
 
     .scroll-link {
@@ -248,7 +249,13 @@
     }
 
     .scroll-container {
-        bottom: 180px; /* Alterado de 180px para 210px (+30px) */
+        bottom: 120px; /* Era 180px, reduzi para 120px */
+    }
+
+    .scroll-link {
+        padding: 10px 20px;
+        font-size: 14px;
+        letter-spacing: 1px;
     }
 }
 
@@ -293,7 +300,7 @@
     }
 
     .scroll-container {
-        bottom: 170px; /* Alterado de 170px para 200px (+30px) */
+        bottom: 120px; /* Era 110px, aumentei para 120px */
     }
 
     .scroll-link {
@@ -343,7 +350,7 @@
     }
 
     .scroll-container {
-        bottom: 110px; /* Alterado de 160px para 190px (+30px) */
+        bottom: 110px; /* Era 100px, aumentei para 110px */
     }
 
     .scroll-link {
@@ -381,7 +388,7 @@
     }
 
     .scroll-container {
-        bottom: 180px; /* Alterado de 150px para 180px (+30px) */
+        bottom: 100px; /* Era 90px, aumentei para 100px */
     }
 
     .scroll-link {
