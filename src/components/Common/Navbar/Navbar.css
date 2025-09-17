@@ -35,8 +35,7 @@ nav ul {
     left: 50%;
     transform: translateX(-50%);
     list-style: none;
-    gap: 180px;
-}
+    gap: 125px;}
 
 nav ul h3,
 nav ul li {
