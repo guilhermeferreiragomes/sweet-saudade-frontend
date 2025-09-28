@@ -1,4 +1,3 @@
-import React from 'react';
 import './AboutUs.css';
 import andreines from '../../assets/imagens/andre_e_ines.webp';
 import cliente from '../../assets/imagens/rapaz_sorrir.webp';
@@ -12,27 +11,26 @@ const AboutUs = () => {
         <div className='section-content'>
           <div className='content-text'>
             <h1 className='section-title'>
-              A NOSSA{" "}
-              <span className="relative">
-                HISTÓRIA
-                <svg
-                  viewBox="0 0 286 73"
+              A NOSSA HISTÓRIA
+              <svg
+                viewBox="10 -15 120 90"
+                fill="none"
+                className="circle1"
+                z-index="2900"
+              >
+                <motion.path
+                  initial={{ pathLength: 0 }}
+                  whileInView={{ pathLength: 1 }}
+                  transition={{
+                    duration: 1.25,
+                    ease: "easeInOut",
+                  }}
+                  d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
+                  stroke="#EBB104"
+                  strokeWidth="3"
                   fill="none"
-                  className="circle1"
-                >
-                  <motion.path
-                    initial={{ pathLength: 0 }}
-                    whileInView={{ pathLength: 1 }}
-                    transition={{
-                      duration: 1.25,
-                      ease: "easeInOut",
-                    }}
-                    d="M142.293 1C106.854 16.8908 6.08202 7.17705 1.23654 43.3756C-2.10604 68.3466 29.5633 73.2652 122.688 71.7518C215.814 70.2384 316.298 70.689 275.761 38.0785C230.14 1.37835 97.0503 24.4575 52.9384 1"
-                    stroke="#EBB104"
-                    strokeWidth="3"
-                  />
-                </svg>
-              </span>
+                />
+              </svg>
             </h1>
             <p>Um sonho que nasceu do desejo de compartilhar a rica e diversa cultura gastronómica de Portugal com o mundo.</p>
             <p>A nossa história começou com uma paixão familiar por ingredientes autênticos e sabores tradicionais, passados de geração em geração.</p>
@@ -55,7 +53,7 @@ const AboutUs = () => {
               <span className="relative">
                 MISSÃO
                 <svg
-                  viewBox="0 0 400 100"
+                  viewBox="12 5 90 80"
                   fill="none"
                   className="circle2"
                 >
@@ -63,11 +61,15 @@ const AboutUs = () => {
                     initial={{ pathLength: 0 }}
                     whileInView={{ pathLength: 1 }}
                     transition={{
-                      duration: 1.25,
+                      duration: 2,
                       ease: "easeInOut",
-                      delay: 0.2,
+                      delay: 0.4,
                     }}
-                    d="M142.293 1C106.854 16.8908 6.08202 7.17705 1.23654 43.3756C-2.10604 68.3466 29.5633 73.2652 122.688 71.7518C215.814 70.2384 316.298 70.689 275.761 38.0785C230.14 1.37835 97.0503 24.4575 52.9384 1"
+                      d="M20 10
+                       C28 10, 28 30, 20 30
+                       C12 30, 12 10, 20 10
+                       M20 12
+                       C22 18, 18 22, 20 28"
                     stroke="#EBB104"
                     strokeWidth="3"
                   />

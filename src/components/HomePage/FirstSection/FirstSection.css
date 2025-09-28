@@ -53,11 +53,12 @@
 }
 
 .social-icons {
+    display: none;
     position: absolute;
     z-index: 999;
     bottom: 30px;
     right: 30px;
-    display: flex;
+    /*display: flex;*/
     gap: 15px;
 }
 

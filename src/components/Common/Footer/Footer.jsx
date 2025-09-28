@@ -3,13 +3,16 @@ import logo from '../../../assets/sweetsauade_logotipos/logo_transparente.png'
 import { FiInstagram } from "react-icons/fi";
 import { FaFacebookF, FaLinkedinIn, FaTiktok } from "react-icons/fa";
 import { MdOutlineEmail, MdLocalPhone } from "react-icons/md";
+import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
     <div className="footer">
       <div className="footer-content">
         <div className="footer-media">
-          <img src={logo} alt="Logo" className="footer-logo" />
+          <Link to={'/home'}>
+              <img src={logo} alt="Logo" className="footer-logo" />
+          </Link>
           <p>Encontra-nos aqui.</p>
           <div className="social-media">
             <a href='https://www.instagram.com/guilhermeffgomes/' target="_blank" rel="noopener noreferrer">
