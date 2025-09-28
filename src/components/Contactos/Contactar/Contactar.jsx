@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Contactar.css';
 import ContactInfo from './ContactInfo/ContactInfo';
-import OrderForm from './OrderForm/OrderForm'; // <- Adiciona este import
+import OrderForm from './OrderForm/OrderForm';
 
 const Contactar = () => {
   const [counter, setCounter] = useState(0);

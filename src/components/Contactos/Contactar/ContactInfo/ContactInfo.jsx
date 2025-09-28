@@ -15,7 +15,6 @@ const ContactInfo = () => {
   return (
     <div className='duvidas'>
       <div className="info-accordion-container">
-        {/* Mobile Accordion Header */}
         <button 
           type="button"
           className={`info-accordion-header ${isInfoExpanded ? 'active' : ''}`}
@@ -28,10 +27,8 @@ const ContactInfo = () => {
           {isInfoExpanded ? <FaChevronUp /> : <FaChevronDown />}
         </button>
 
-        {/* Desktop Title (always visible on desktop) */}
         <p className="duvidasP desktop-title">Para dúvidas e mais informações</p>
         
-        {/* Info Content */}
         <div className={`info-content ${isInfoExpanded ? 'expanded' : ''}`}>
           <p className="duvidasP mobile-title">Para dúvidas e mais informações</p>
           <p className='sweet-saudade'> Sweet Saudade </p>

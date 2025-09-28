@@ -1,6 +1,4 @@
-import React from 'react';
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
-import ProductSelector from '../ProductSelector/ProductSelector';
 import productsData from '../../../../data/productsData.json';
 
 // Importar componentes criados
