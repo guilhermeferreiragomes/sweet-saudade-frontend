@@ -35,7 +35,8 @@ nav ul {
     left: 50%;
     transform: translateX(-50%);
     list-style: none;
-    gap: 125px;}
+    gap: 115px;
+}
 
 nav ul h3,
 nav ul li {
@@ -45,7 +46,7 @@ nav ul li {
     white-space: nowrap;
     cursor: pointer;
     font-weight: bold;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 nav ul h3 a,
