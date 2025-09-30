@@ -8,7 +8,7 @@ import Slider from "react-slick";
 
 const OurProducts = () => {
   const [isMobile, setIsMobile] = useState(false)
-  const firstThreeProducts = productsData.slice(0, 3);
+  const firstThreeProducts = productsData.slice(0, 4);
 
   useEffect(() => {
     const checkScreenSize = () => {

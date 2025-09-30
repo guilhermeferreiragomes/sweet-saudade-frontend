@@ -134,6 +134,14 @@
   .our-products-title { margin-left: 30px; font-size: 1.7rem; }
 }
 
+@media (max-width: 1024px) {
+  .mais-produtos:hover,
+  .mais-produtos:active,
+  .mais-produtos:focus {
+    transform: none;
+  }
+}
+
 @media (max-width: 768px) {
   .our-products {
     padding: 0 10px;
