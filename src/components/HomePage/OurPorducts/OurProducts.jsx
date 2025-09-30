@@ -1,14 +1,12 @@
 import React, {useState, useEffect} from 'react'
 import './OurProducts.css'
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
 import { Link } from 'react-router-dom'
 import productsData from '../../../data/productsData.json'
-import Slider from "react-slick";
+import Marquee from "react-fast-marquee";
 
 const OurProducts = () => {
   const [isMobile, setIsMobile] = useState(false)
-  const firstThreeProducts = productsData.slice(0, 4);
+  const firstThreeProducts = productsData.slice(0, 3);
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -36,31 +34,20 @@ const OurProducts = () => {
     </Link>
   );
 
-  // Slider settings só para mobile
-  const mobileSettings = {
-    dots: false,
-    arrows: false,
-    infinite: true,
-    slidesToShow: 3,
-    slidesToScroll: 1,
-    autoplay: true,
-    speed: 3000,
-    autoplaySpeed: 0,
-    cssEase: "linear",
-    pauseOnHover: true,
-    pauseOnFocus: true,
-  };
-
   return (
     <div className='our-products'>
       <h2 className='our-products-title'>OS NOSSOS DESTAQUES</h2>
       
       {isMobile ? (
-        <Slider {...mobileSettings}>
-          {firstThreeProducts.map(product => (
-            <ProductCard key={product.id} product={product} />
-          ))}
-        </Slider>
+        <Marquee 
+          speed={30}
+        >
+          <div className='home-marquee-products'>
+            {firstThreeProducts.map(product => (
+              <ProductCard key={product.id} product={product} />
+            ))}
+          </div>
+        </Marquee>
       ) : (
         <div className='home-products-container'>
           {firstThreeProducts.map(product => (
