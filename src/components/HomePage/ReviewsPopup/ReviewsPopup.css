@@ -14,7 +14,7 @@
 }
 
 .popup-button p {
-    color:#ebb104;
+    color: #ebb104;
     text-decoration: underline;
     font-size: 14px;
     display: block;
@@ -22,9 +22,98 @@
     height: 100%;
     margin-bottom: 0;
     text-align: center;
-
 }
 
+/* Estilos para centralizar o modal */
 .ReactModal__Overlay {
-  z-index: 9999 !important;
+    z-index: 9999 !important;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.75) !important;
+}
+
+.ReactModal__Content {
+    position: relative !important;
+    inset: auto !important;
+    border: none !important;
+    background-color: #ebb104 !important;
+    overflow: visible !important;
+    border-radius: 15px !important;
+    outline: none !important;
+    padding: 30px !important;
+    margin: 0 auto !important;
+    max-width: 550px;
+    width: 90%;
+}
+
+.formulario {
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 550px;
+    width: 100%;
+    height: fit-content;
+    margin: 0 auto;
+}
+
+.reviews-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.reviews-form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 5px;
+}
+
+.reviews-label {
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.reviews-input {
+    background-color: #383934;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    height: 45px;
+}
+
+.reviews-textarea {
+    background-color: #383934;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    color: white;
+    font-size: 16px;
+    outline: none;
+    min-height: 120px;
+    resize: vertical;
+    font-family: inherit;
+}
+
+.reviews-submit-btn {
+    background-color: #6c6c6c;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    text-align: center;
+}
+
+.reviews-submit-btn:hover {
+    background-color: #555;
 }
