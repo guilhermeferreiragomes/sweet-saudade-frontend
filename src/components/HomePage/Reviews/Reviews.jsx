@@ -8,6 +8,8 @@ import './Reviews.css'
 import reviewsData from '../../../data/reviewsData.json';
 
 const Reviews = () => {
+
+
   return (
     <div className='reviews-section'>
       <Swiper

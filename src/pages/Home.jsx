@@ -3,10 +3,10 @@ import FirstSection from '../components/HomePage/FirstSection/FirstSection'
 import InfoBar from '../components/HomePage/InfoBar/InfoBar'
 import OurProducts from '../components/HomePage/OurPorducts/OurProducts'
 import Reviews from '../components/HomePage/Reviews/Reviews'
+import ReviewsPopup from '../components/HomePage/ReviewsPopup/ReviewsPopup'
 import WaveSeparator from '../components/HomePage/WaveSeparator/WaveSeparator'
 import OurMission from '../components/HomePage/OurMission/OurMission'
 import Footer from '../components/Common/Footer/Footer'
-import Trustpilot from '../components/HomePage/Trustpilot/Trustpilot'
 import ScrollToTopButton from '../components/Common/ScrollToTopButton/ScrollToTopButton'
 
 
@@ -18,7 +18,7 @@ const Home = () => {
       <InfoBar />
       <OurProducts />
       <Reviews />
-      <Trustpilot />
+      <ReviewsPopup />
       <WaveSeparator />
       <OurMission />
       <Footer />
