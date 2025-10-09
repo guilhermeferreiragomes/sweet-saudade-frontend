@@ -1,5 +1,6 @@
 import { React, useState } from 'react'
 import Modal from 'react-modal';
+import { Link } from 'react-router-dom';
 import './ReviewsPopup.css'
 
 // É importante definir o elemento raiz da aplicação para acessibilidade
@@ -7,13 +8,58 @@ Modal.setAppElement('#root'); // Ajuste para o ID do seu elemento raiz se for di
 
 const ReviewsPopup = () => {
   const [visible, setVisible] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [submitStatus, setSubmitStatus] = useState(null)
 
   const customStyles = {
     overlay: {
       backgroundColor: 'rgba(0, 0, 0, 0.75)', // Background escuro semi-transparente
       zIndex: 1000
     },
+    content: {
+      backgroundColor: '#f4c430',
+      padding: '30px',
+      borderRadius: '15px',
+      maxWidth: '550px',
+      width: '90%',
+      margin: '0 auto',
+      position: 'relative',
+      inset: 'auto',
+      border: 'none'
+    }
   };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    const url = "https://script.google.com/macros/s/AKfycbwsHt5MEJzgOvmRVoonN-jn3PCEuzDOr0KlVfrCLnHIFrGtJKXZsZhqPCJZ6U0yZ9AipQ/exec";
+    
+    fetch(url, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: `Name=${e.target.nome.value}&Email=${e.target.email.value}&Mensagem=${e.target.mensagem.value}`
+    })
+    .then(res => res.text())
+    .then(data => {
+      setSubmitStatus("success");
+      setIsSubmitting(false);
+      
+      // Limpar o formulário
+      e.target.reset();
+      
+      // Fechar o modal após 2 segundos
+      setTimeout(() => {
+        setVisible(false);
+        // Resetar o status após fechar o modal
+        setTimeout(() => setSubmitStatus(null), 300);
+      }, 2000);
+    })
+    .catch(error => {
+      console.log(error);
+      setSubmitStatus("error");
+      setIsSubmitting(false);
+    });
+  }
 
   return (
     <div>
@@ -21,30 +67,59 @@ const ReviewsPopup = () => {
         <button onClick={() => setVisible(true)} className='popup-button'>
           <p>Deixe-nos a sua opinião!</p>
         </button>
-        <Modal className="formulario"
+        <Modal 
+          className="formulario"
           isOpen={visible}
           onRequestClose={() => setVisible(false)}
           style={customStyles}
         >
-            <form className="reviews-form">
-              <div className="reviews-form-group">
-                <label className="reviews-label">Nome</label>
-                <input type='text' className="reviews-input" />
+          <button 
+            className="close-button" 
+            onClick={() => setVisible(false)}
+            aria-label="Fechar"
+          >
+            &times;
+          </button>
+          
+          {submitStatus === "success" ? (
+            <div className="reviews-success-message">
+              <p>Obrigado pela sua opinião!</p>
+            </div>
+          ) : (
+            <>
+              <form onSubmit={handleSubmit} className="reviews-form">
+                <div className="reviews-form-group">
+                  <label className="reviews-label">Nome</label>
+                  <input type='text' name="nome" className="reviews-input" required />
+                </div>
+                <div className="reviews-form-group">
+                  <label className="reviews-label">Email</label>
+                  <input type='email' name="email" className="reviews-input" required />
+                </div>
+                <div className="reviews-form-group">
+                  <label className="reviews-label">Mensagem</label>
+                  <textarea name="mensagem" className="reviews-textarea" required />
+                </div>
+                {submitStatus === "error" && (
+                  <div className="reviews-error-message">
+                    <p>Ocorreu um erro. Por favor, tente novamente mais tarde.</p>
+                  </div>
+                )}
+                <div className="reviews-form-group">
+                  <button 
+                    type="submit" 
+                    className="reviews-submit-btn"
+                    disabled={isSubmitting}
+                  >
+                    {isSubmitting ? "Enviando..." : "Enviar"}
+                  </button>
+                </div>
+              </form>
+              <div className="privacy-note">
+                Ao enviar, concorda com a nossa <Link to="/politica-de-privacidade" onClick={() => setVisible(false)}>Política de Privacidade</Link>
               </div>
-              <div className="reviews-form-group">
-                <label className="reviews-label">Email</label>
-                <input type='email' className="reviews-input" />
-              </div>
-              <div className="reviews-form-group">
-                <label className="reviews-label">Mensagem</label>
-                <textarea className="reviews-textarea" />
-              </div>
-              <div className="reviews-form-group">
-                <button type="submit" className="reviews-submit-btn">
-                  Enviar
-                </button>
-              </div>
-            </form>
+            </>
+          )}
         </Modal>
       </div>
     </div>
