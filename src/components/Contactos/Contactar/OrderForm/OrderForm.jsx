@@ -1,16 +1,13 @@
 import { FaChevronDown, FaChevronUp, FaFileInvoice } from 'react-icons/fa';
 import productsData from '../../../../data/productsData.json';
 
-// Importar componentes criados
 import CookieNotice from './components/CookieNotice.jsx';
 import FormFields from './components/FormFields.jsx';
 
-// Importar hooks
 import { useCookies } from './hooks/useCookies.jsx';
 import { useOrderForm } from './hooks/useOderForm.jsx';
 
 const OrderForm = () => {
-  // Usar hooks personalizados
   const { cookiesAccepted, acceptCookies } = useCookies();
   const {
     firstName, setFirstName,
