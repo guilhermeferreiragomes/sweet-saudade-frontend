@@ -7,6 +7,7 @@ const FormFields = ({
   firstName, setFirstName,
   lastName, setLastName, 
   email, setEmail,
+  phone, setPhone,
   message, setMessage,
   recaptchaToken, setRecaptchaToken,
   cookiesAccepted,
@@ -54,6 +55,18 @@ const FormFields = ({
           type='email'
           onChange={(e) => setEmail(e.target.value)}
           value={email}
+          required
+          disabled={!cookiesAccepted}
+        />
+      </div>
+      
+      <div className='form-group'>
+        <label className='label'>Telemóvel <span style={{color: 'red'}}>*</span></label>
+        <input
+          className='input'
+          type='tel'
+          onChange={(e) => setPhone(e.target.value)}
+          value={phone}
           required
           disabled={!cookiesAccepted}
         />

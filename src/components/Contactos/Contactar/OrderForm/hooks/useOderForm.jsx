@@ -7,13 +7,14 @@ export const useOrderForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState(''); // Make sure this is properly defined
   const [message, setMessage] = useState('');
-  const [recaptchaToken, setRecaptchaToken] = useState(null);
+  const [recaptchaToken, setRecaptchaToken] = useState('');
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState('');
   const [currentQuantity, setCurrentQuantity] = useState(1);
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [isFormExpanded, setIsFormExpanded] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const swalConfig = {
     customClass: {
@@ -88,6 +89,7 @@ export const useOrderForm = () => {
         firstName,
         lastName,
         email,
+        phone, // Use correct variable name
         message,
         products: productsList,
         date: formattedDate,
@@ -100,6 +102,7 @@ export const useOrderForm = () => {
       setFirstName('');
       setLastName('');
       setEmail('');
+      setPhone('')
       setMessage('');
       setSelectedProducts([]);
       setRecaptchaToken(null);
@@ -133,6 +136,7 @@ export const useOrderForm = () => {
     firstName, setFirstName,
     lastName, setLastName,
     email, setEmail,
+    phone, setPhone, // Make sure to include phone in your return object
     message, setMessage,
     recaptchaToken, setRecaptchaToken,
     selectedProducts, setSelectedProducts,

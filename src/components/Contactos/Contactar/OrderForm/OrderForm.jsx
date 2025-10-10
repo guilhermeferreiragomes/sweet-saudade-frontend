@@ -13,6 +13,7 @@ const OrderForm = () => {
     firstName, setFirstName,
     lastName, setLastName,
     email, setEmail,
+    phone, setPhone,
     message, setMessage,
     recaptchaToken, setRecaptchaToken,
     selectedProducts, setSelectedProducts,
@@ -83,6 +84,7 @@ const OrderForm = () => {
             firstName={firstName} setFirstName={setFirstName}
             lastName={lastName} setLastName={setLastName}
             email={email} setEmail={setEmail}
+            phone={phone} setPhone={setPhone}
             message={message} setMessage={setMessage}
             recaptchaToken={recaptchaToken} setRecaptchaToken={setRecaptchaToken}
             cookiesAccepted={cookiesAccepted}
