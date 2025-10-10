@@ -1,6 +1,6 @@
 export const incrementOrderCounter = async () => {
   try {
-    const response = await fetch('https://sweet-saudade-backend-production.up.railway.app/api/encomenda', {
+    const response = await fetch('https://sweet-saudade-backend.onrender.com/api/encomenda', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
