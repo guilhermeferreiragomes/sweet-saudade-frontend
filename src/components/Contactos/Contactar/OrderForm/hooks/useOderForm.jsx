@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 import { incrementOrderCounter } from '../services/orderService.jsx';
@@ -7,14 +7,36 @@ export const useOrderForm = () => {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [phone, setPhone] = useState(''); // Make sure this is properly defined
+  const [phone, setPhone] = useState(''); 
   const [message, setMessage] = useState('');
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [currentProduct, setCurrentProduct] = useState('');
   const [currentQuantity, setCurrentQuantity] = useState(1);
-  const [isFormExpanded, setIsFormExpanded] = useState(false);
+  const [isFormExpanded, setIsFormExpanded] = useState(() => {
+    // Check if we're on mobile by screen width
+    return window.innerWidth <= 768;
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  // Add effect to handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      // Only auto-expand on mobile
+      if (window.innerWidth <= 768) {
+        setIsFormExpanded(true);
+      }
+    };
+    
+    // Set initial state
+    handleResize();
+    
+    // Add event listener
+    window.addEventListener('resize', handleResize);
+    
+    // Clean up
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const swalConfig = {
     customClass: {
@@ -136,7 +158,7 @@ export const useOrderForm = () => {
     firstName, setFirstName,
     lastName, setLastName,
     email, setEmail,
-    phone, setPhone, // Make sure to include phone in your return object
+    phone, setPhone,
     message, setMessage,
     recaptchaToken, setRecaptchaToken,
     selectedProducts, setSelectedProducts,

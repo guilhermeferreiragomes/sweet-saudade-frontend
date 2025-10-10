@@ -3,9 +3,7 @@ import Modal from 'react-modal';
 import { Link } from 'react-router-dom';
 import './ReviewsPopup.css'
 
-// É importante definir o elemento raiz da aplicação para acessibilidade
-Modal.setAppElement('#root'); // Ajuste para o ID do seu elemento raiz se for diferente
-
+Modal.setAppElement('#root');
 const ReviewsPopup = () => {
   const [visible, setVisible] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -13,7 +11,7 @@ const ReviewsPopup = () => {
 
   const customStyles = {
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.75)', // Background escuro semi-transparente
+      backgroundColor: 'rgba(0, 0, 0, 0.75)',
       zIndex: 1000
     },
     content: {
@@ -44,13 +42,10 @@ const ReviewsPopup = () => {
       setSubmitStatus("success");
       setIsSubmitting(false);
       
-      // Limpar o formulário
       e.target.reset();
       
-      // Fechar o modal após 2 segundos
       setTimeout(() => {
         setVisible(false);
-        // Resetar o status após fechar o modal
         setTimeout(() => setSubmitStatus(null), 300);
       }, 2000);
     })
