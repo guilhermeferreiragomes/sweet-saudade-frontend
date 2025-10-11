@@ -164,13 +164,18 @@
 
 @media screen and (max-width: 768px) {
     .our-products {
+        margin-top: 50px;
+        margin-bottom: 20px;
         padding: 0 15px;
     }
     
     .our-products-title {
-        margin-left: 20px;
-        font-size: 26px;
+        margin-left: 0;
+        margin-right: 0;
+        margin-top: 40px;
         margin-bottom: 30px;
+        font-size: 26px;
+        text-align: left;
     }
     
     .home-products-container {
@@ -193,7 +198,7 @@
     }
     
     .mais-produtos {
-        margin-top: 40px;
+        margin-top: 55px;
     }
     
     .mais-produtos:hover {
@@ -212,7 +217,7 @@
     }
     
     .mais-produtos {
-        margin-top: 45px;
+        margin-top: 60px;
     }
     
     .mais-produtos:hover {
@@ -221,9 +226,13 @@
 }
 
 @media screen and (max-width: 480px) {
+    .our-products {
+        margin-bottom: 15px;
+    }
+    
     .our-products-title {
-        margin-left: 15px;
-        font-size: 22px;
+        margin-left: 0; /* Removido completamente a margem */
+        text-align: left;
     }
     
     .home-products-container {
@@ -251,6 +260,7 @@
         height: 35px;
         font-size: 15px;
         margin-top: 50px;
+        margin-bottom: 15px;
     }
     
     .mais-produtos a {
@@ -273,7 +283,8 @@
     }
     
     .mais-produtos {
-        margin-top: 55px;
+        margin-top: 45px;
+        margin-bottom: 10px;
     }
     
     .mais-produtos:hover {

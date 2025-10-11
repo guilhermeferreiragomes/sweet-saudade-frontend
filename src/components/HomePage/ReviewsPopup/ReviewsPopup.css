@@ -41,16 +41,16 @@
     overflow: visible !important;
     border-radius: 15px !important;
     outline: none !important;
-    padding: 30px !important;
+    padding: 25px !important;
     margin: 0 auto !important;
-    max-width: 550px;
-    width: 90%;
+    max-width: 450px;  /* Reduzido de 550px para 450px */
+    width: 85%;  /* Reduzido de 90% para 85% */
 }
 
 .formulario {
-    padding: 30px;
+    padding: 20px;  /* Reduzido de 30px para 20px */
     border-radius: 15px;
-    max-width: 550px;
+    max-width: 450px;  /* Reduzido de 550px para 450px */
     width: 100%;
     height: fit-content;
     margin: 0 auto;
@@ -170,7 +170,6 @@
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.5);
 }
 
-/* Adicione estes estilos para a nota de privacidade */
 .privacy-note {
   margin-top: 10px;
   color: white;
@@ -187,4 +186,61 @@
 
 .privacy-note a:hover {
   opacity: 0.9;
+}
+
+/* Media queries para responsividade */
+@media (max-width: 768px) {
+    .ReactModal__Content {
+        padding: 20px !important;
+        max-width: 400px;
+        width: 85%;
+    }
+    
+    .formulario {
+        padding: 15px;
+    }
+    
+    .popup-button {
+        margin: 5px auto;
+        margin-top: 5px;
+        margin-bottom: 8px;  /* Aumentado de 0 para 8px */
+    }
+    
+    /* Mantendo o tamanho da fonte */
+    .popup-button p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .ReactModal__Content {
+        padding: 15px !important;
+        max-width: 350px;
+        width: 90%;
+        max-height: 90vh;
+        overflow-y: auto !important;
+    }
+    
+    .formulario {
+        padding: 10px;
+    }
+    
+    .popup-button {
+        margin: 2px auto;
+        margin-top: 2px;
+        margin-bottom: 10px;  /* Aumentado de 0 para 10px */
+    }
+    
+    /* Mantendo o tamanho da fonte */
+    .popup-button p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 360px) {
+    .popup-button {
+        margin: 0 auto;
+        margin-top: 0;
+        margin-bottom: 12px;  /* Aumentado de 0 para 12px */
+    }
 }
