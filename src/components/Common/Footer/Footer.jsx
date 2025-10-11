@@ -59,9 +59,14 @@ const Footer = () => {
      <hr className="footer-divider" />
      <div className='footer-bottom'>
       <div className="footer-bottom-left">
-        <p>Créditos: 
-          <a href='https://www.linkedin.com/in/guilhermeffgomes/' target='_blank'> Guilherme Gomes</a>
-        </p>
+        <a href='https://www.linkedin.com/in/guilhermeffgomes/' target='_blank' rel="noopener noreferrer" className="card-credit-minimal">
+          <div className="card-credit-shine"></div>
+          <span className="card-credit-author">
+            <span>Créditos:</span>
+            <span>Guilherme Gomes</span>
+            <FaLinkedinIn className="card-credit-icon" />
+          </span>
+        </a>
       </div>
       <div className="footer-bottom-right">
         <p>&copy; {new Date().getFullYear()} Sweet Saudade. Todos os direitos reservados.</p>
