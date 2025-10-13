@@ -1,3 +1,7 @@
+.ProductsList {
+    margin-bottom: 50px;
+}
+
 .Product-card {
     border: 2px solid #ebb104;
     display: flex;

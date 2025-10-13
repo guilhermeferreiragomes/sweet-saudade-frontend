@@ -1,6 +1,6 @@
 .our-products {
     margin-top: 70px;
-    margin-bottom: 40px;
+    margin-bottom: 0;
     padding: 0 20px;
 }
 
@@ -125,7 +125,7 @@
     margin: 25px auto;
     display: block;
     transition: transform 0.3s ease;
-    margin-top: 40px;
+    margin-top: 70px;
 }
 
 .mais-produtos a {

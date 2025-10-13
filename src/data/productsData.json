@@ -2,55 +2,109 @@
     {
         "id": 1,
         "name": "Pastel de Nata",
-        "pack": "Pack 6 unid",
-        "description": "O rei de Portugal, o clássico em todas as ocasiões.",
-        "price": "6.99€",
+        "packOptions": [
+            {
+                "pack": "Unitário",
+                "price": "1.25€"
+            },
+            {
+                "pack": "Caixa 6 unidades",
+                "price": "6.25€"
+            }
+        ],
+        "description": "O pastel de nata do Sr. António é um clássico aperfeiçoado pela experiência. A massa folhada, leve e crocante, é cuidadosamente laminada à mão, garantindo camadas finíssimas que estalam a cada dentada. O recheio, feito com creme suave e aromático, atinge o equilíbrio perfeito entre doçura e textura. Levemente queimado no topo, com aquele dourado irresistível que só o forno de um verdadeiro pasteleiro sabe dar, o pastel de nata do Sr. António é uma celebração da tradição — simples, autêntico e absolutamente viciante. Ideal com um café ou como doce de fim de tarde, é o tipo de sabor que nos faz voltar sempre..",
+        "defaultPrice": "1.25€",
         "image": "/products/pastel_de_nata.png",
         "slug": "pastel-de-nata"
     },
     {
         "id": 2,
         "name": "Bola de Berlim",
-        "pack": "Pack 2 unid",
-        "description": "O segredo está na massa... Ou no recheio?",
-        "price": "4.50€",
+        "packOptions": [
+            {
+                "pack": "Unitário",
+                "price": "1.70€"
+            },
+            {
+                "pack": "Caixa de 4 unidades",
+                "price": "6.00€"
+            }
+        ],
+        "description": "A bola de Berlim do Sr. António é um símbolo de indulgência no seu estado mais puro. Feita com uma massa leve, frita no ponto certo e recheada com o irresistível creme de pasteleiro aveludado. O Sr. António domina a arte do equilíbrio — a massa ligeiramente estaladiça por fora, o interior macio e o creme rico com um toque subtil de baunilha. Polvilhada com açúcar fino e feita sempre no dia, esta bola de Berlim é daquelas que fazem sorrir quem a prova. Um clássico das praias, das pastelarias e da vida portuguesa, preparado com o cuidado e o saber de quem faz isto há mais de meio século.",
+        "defaultPrice": "1.70€",
         "image": "/products/bola_berlim.png",
         "slug": "bola-de-berlim"
     },
     {
         "id": 3,
-        "name": "Croquetes de Carne",
-        "pack": "Pack 4 unid",
-        "description": "Vai um rally croquetes? Nem precisas de sair de casa.",
-        "price": "5.00€",
-        "image": "/products/3_croquetes.png",
-        "slug": "croquete"
+        "name": "Rissóis de Carne",
+        "packOptions": [
+            {
+                "pack": "Unitário",
+                "price": "Em breve"
+            },
+            {
+                "pack": "Caixa 6 unidades",
+                "price": "Em breve"
+            }
+        ],
+        "description": "Os rissóis de carne da Mãe Odete são uma verdadeira tentação. Feitos com uma massa fina e estaladiça, recheados com carne tenra e molho caseiro cuidadosamente preparado, estes rissóis são sinónimo de conforto e qualidade. O sabor artesanal e a textura perfeita são ainda mais valorizados quando acompanhados por um molho de maionese com mostarda e alho, que enriquece cada dentada e transforma este clássico num prazer irresistível. Uma autêntica obra de arte da cozinha tradicional portuguesa.",
+        "defaultPrice": "Em breve",
+        "image": "/products/rissois_de_carne.webp",
+        "slug": "rissois-de-carne"
     },
     {
         "id": 4,
         "name": "Bolinhas de Alheira",
-        "pack": "Pack 6 unidades",
-        "description": "Tradição portuguesa em formato de bolinhas crocantes.",
-        "price": "9.99€",
-        "image": "/products/bolinhas_alheira.png",
+        "packOptions": [
+            {
+                "pack": "Pack 3 unidades",
+                "price": "Em breve"
+            },
+            {
+                "pack": "Pack 12 unidades",
+                "price": "Em breve"
+            }
+        ],
+        "description": "Com um sabor intenso e reconfortante, as bolinhas de alheira da Mãe Odete elevam este enchido tradicional a outro nível. Preparadas com alheira artesanal e especiarias no ponto certo, cada bolinha é uma explosão de sabor que combinam o pão e a carne num equilíbrio perfeito. Servidas com um toque de mostarda cremosa, que contrasta na medida certa com a riqueza da alheira, estas bolinhas transformam-se numa experiência gastronómica completa.",
+        "defaultPrice": "Em breve",
+        "image": "/products/bolinhas_alheira.webp",
         "slug": "bolinhas-de-alheira"
     },
     {
         "id": 5,
-        "name": "Bolo da Mãe",
-        "pack": "Pack 1 unidade",
-        "description": "O carinho da mãe em cada fatia, sabor caseiro único.",
-        "price": "12.00€",
-        "image": "/products/bolo_mae.png",
-        "slug": "bolo-da-mae"
+        "name": "Bolo de Laranja",
+        "packOptions": [
+            {
+                "pack": "1 fatia generosa",
+                "price": "1.50€"
+            },
+            {
+                "pack": "1 Bolo (≈ 1.0Kg)",
+                "price": "15.00€"
+            }
+        ],
+        "description": "Com o mesmo carinho e dedicação que coloca em cada salgado, a Mãe Odete traz-nos uma doçura irresistível: o bolo de laranja. Feito segundo uma receita que atravessa gerações, este bolo é a perfeita combinação entre tradição, simplicidade e sabor genuíno. Cada fatia revela uma textura macia e suculenta, embebida no aroma natural das melhores laranjas portuguesas. O seu sabor fresco e ligeiramente cítrico desperta memórias de tardes calmas, em que o cheiro a bolo acabado de sair do forno enchia a cozinha da Mãe Odete. O bolo de laranja da Mãe Odete é um abraço em forma de sobremesa, perfeito para acompanhar um café, um chá ou simplesmente um momento de pausa bem merecido.",
+        "defaultPrice": "1.50€",
+        "image": "/products/bolo_laranja.webp",
+        "slug": "bolo-de-laranja"
     },
     {
         "id": 6,
-        "name": "Pastel de Bacalhau",
-        "pack": "Pack 6 unidades",
-        "description": "O sabor do mar português em cada mordida.",
-        "price": "7.99€",
-        "image": "/products/pastel_bacalhau.png",
-        "slug": "pastel-de-bacalhau"
+        "name": "Bolinhas de Bacalhau",
+        "packOptions": [
+            {
+                "pack": "Caixa de 3 unidades",
+                "price": "Em breve"
+            },
+            {
+                "pack": "Caixa de 12 unidades",
+                "price": "Em breve"
+            }
+        ],
+        "description": "Clássicas e irresistíveis, as bolinhas de bacalhau da Mãe Odete trazem o melhor da tradição portuguesa. Feitas com bacalhau de qualidade, batata cuidadosamente escolhida e temperos equilibrados, têm uma textura leve e um sabor rico que faz lembrar os almoços de domingo em família. Crocantes por fora e macias por dentro, ganham uma nova dimensão quando mergulhadas no molho caseiro de maionese com alho, limão e ervas, uma combinação fresca e aromática que realça cada nuance do bacalhau. Um verdadeiro clássico reinventado com o toque especial da Mãe Odete.",
+        "defaultPrice": "Em breve",
+        "image": "/products/bolinhas_de_bacalhau.webp",
+        "slug": "bolinhas-de-bacalhau"
     }
 ]

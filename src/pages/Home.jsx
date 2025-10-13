@@ -17,8 +17,8 @@ const Home = () => {
       <FirstSection />
       <InfoBar />
       <OurProducts />
-      <Reviews />
-      <ReviewsPopup />
+      {/* <Reviews />
+      <ReviewsPopup /> */}
       <WaveSeparator />
       <OurMission />
       <Footer />

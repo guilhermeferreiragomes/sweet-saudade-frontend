@@ -15,10 +15,11 @@ const ProductsPage = () => {
         <h2>OS NOSSOS PRODUTOS</h2>
       </div>
       <div className='products-advice'>
-        <p>Todos os produtos disponíveis através de encomenda. Pode fazê-lo a partir do formulário na página Contactos.</p>
+        <p>Todos os produtos disponíveis através de encomenda.<br />
+        Pode fazê-lo a partir do formulário na página Contactos.</p>
       </div>
       <ProductsList />
-      <ProductsMarquee />
+      { /*<ProductsMarquee /> */}
     </div>
   )
 }
