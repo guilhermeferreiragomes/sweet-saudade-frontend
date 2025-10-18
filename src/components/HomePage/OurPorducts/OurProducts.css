@@ -1,5 +1,5 @@
 .our-products {
-    margin-top: 70px;
+    margin-top: 55px;
     margin-bottom: 0;
     padding: 0 20px;
 }
@@ -20,7 +20,7 @@
     justify-content: center;
     align-items: flex-start;
     max-width: 1400px;
-    margin: 0 auto 30px auto;
+    margin: 0 auto 10px auto;
     flex-wrap: nowrap;
     overflow-x: auto;
     padding: 10px 20px;
@@ -33,7 +33,7 @@
     align-items: center;
     justify-content: space-between;
     width: 230px;
-    height: 280px;
+    height: 270px; 
     cursor: pointer;
     margin: 0 auto;
     border-radius: 12px;
@@ -66,9 +66,9 @@
     color: white;
     font-size: 20px;
     text-align: center;
-    margin: 0;
+    margin: 8px 0 0; /* Reduzido para 0 de margem inferior */
     line-height: 1.1;
-    height: 25px;
+    height: 22px; /* Reduzido de 25px para 22px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,9 +77,9 @@
 .home-product-pack {
     color: #bbbbbb;
     font-size: 12px;
-    margin: 0;
+    margin: 0 0 0; /* Sem margem inferior */
     text-align: center;
-    height: 15px;
+    height: 14px; /* Reduzido de 15px para 14px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -91,8 +91,8 @@
     font-weight: 600;
     padding-top: 0;
     text-align: center;
-    margin: 0;
-    height: 25px;
+    margin-top: 0;
+    height: 24px;
     display: flex;
     align-items: center;
     justify-content: center;

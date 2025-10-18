@@ -3,7 +3,8 @@ import ProductsList from './ProductsList/ProductsList'
 import ProductsMarquee from './ProductsMarquee/ProductsMarquee'
 import './ProductsPage.css'
 import ProductsImage from '../../assets/imagens/products.webp'
-
+import { Link } from 'react-router-dom'
+import { FaRegEnvelope } from "react-icons/fa";
 
 const ProductsPage = () => {
   return (
@@ -19,10 +20,19 @@ const ProductsPage = () => {
         Pode fazê-lo a partir do formulário na página Contactos.</p>
       </div>
       <ProductsList />
+      
+
+      <div className="contact-cta-container">
+        <h3 className="contact-cta-title">Pronto para fazer sua encomenda?</h3>
+        <Link to="/contactos" className="contact-cta-button">
+          <FaRegEnvelope className="contact-cta-icon" />
+          ENCOMENDAR AGORA
+        </Link>
+      </div>
+      
       { /*<ProductsMarquee /> */}
     </div>
   )
 }
 
 export default ProductsPage
-

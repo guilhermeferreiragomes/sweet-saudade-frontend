@@ -27,8 +27,8 @@ const ProductsList = () => {
                                 <p className='Product-pack'>{packText}</p>
                                 <h4 className='Product-price'>{priceText}</h4>
                             </Link>
-                            <Link to={`/contactos`}>
-                                <button className='Add-to-cart-button'>ENCOMENDAR</button>
+                            <Link to={`/produtos/${product.slug}`}>
+                                <button className='Add-to-cart-button'>SABER MAIS</button>
                             </Link>
                         </div>
                     );

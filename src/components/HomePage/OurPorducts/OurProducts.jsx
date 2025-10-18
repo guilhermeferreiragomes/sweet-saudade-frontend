@@ -19,20 +19,32 @@ const OurProducts = () => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  const ProductCard = ({ product }) => (
-    <Link to={`/produtos/${product.slug}`} key={product.id}>
-      <div className='home-product-card'>
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className='home-product-image'
-        />
-        <h3 className='home-product-name'>{product.name}</h3>
-        <p className='home-product-pack'>{product.pack}</p>
-        <p className='home-product-price'>{product.price}</p>
-      </div>
-    </Link>
-  );
+  const ProductCard = ({ product }) => {
+    // Obter o segundo pack (índice 1) se existir, senão usar o primeiro
+    const packOption = product.packOptions && product.packOptions.length > 1 
+      ? product.packOptions[1]
+      : product.packOptions && product.packOptions.length > 0
+        ? product.packOptions[0]
+        : null;
+    
+    const packText = packOption ? packOption.pack : product.pack || '';
+    const priceText = packOption ? packOption.price : product.defaultPrice || product.price || '';
+    
+    return (
+      <Link to={`/produtos/${product.slug}`} key={product.id}>
+        <div className='home-product-card'>
+          <img 
+            src={product.image} 
+            alt={product.name} 
+            className='home-product-image'
+          />
+          <h3 className='home-product-name'>{product.name}</h3>
+          <p className='home-product-pack'>{packText}</p>
+          <p className='home-product-price'>{priceText}</p>
+        </div>
+      </Link>
+    );
+  };
 
   return (
     <div className='our-products'>

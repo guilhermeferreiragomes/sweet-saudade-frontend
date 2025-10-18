@@ -30,7 +30,6 @@
     opacity: 0.76;
 }
 
-
 /* Responsive Styles - Desktop styling unchanged above */
 @media screen and (max-width: 768px) {
     .products-title h2 {
@@ -83,4 +82,66 @@
         width: calc(100% - 20px);
         margin-bottom: 20px;
     }
+}
+
+/* Estilos para o botão CTA de contato */
+.contact-cta-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 50px auto 70px;
+  text-align: center;
+  max-width: 600px;
+  padding: 0 20px;
+}
+
+.contact-cta-title {
+  font-size: 22px;
+  color: #e0e0e0;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.contact-cta-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background-color: #ebb104;
+  color: white;
+  font-weight: 600;
+  padding: 14px 30px;
+  border-radius: 30px;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: 2px solid #ebb104;
+}
+
+.contact-cta-icon {
+  font-size: 24px;
+}
+
+.contact-cta-button:hover {
+  background-color: transparent;
+  color: #ebb104;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 12px rgba(235, 177, 4, 0.2);
+}
+
+@media (max-width: 768px) {
+  .contact-cta-container {
+    margin: 40px auto 60px;
+  }
+  
+  .contact-cta-title {
+    font-size: 20px;
+  }
+  
+  .contact-cta-button {
+    padding: 12px 25px;
+    font-size: 15px;
+  }
 }
