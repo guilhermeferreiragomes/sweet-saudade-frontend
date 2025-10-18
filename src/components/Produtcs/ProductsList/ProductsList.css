@@ -37,7 +37,7 @@
 }
 
 .Product-name {
-    padding-top: 10px;
+    padding-top: 15px;
     color: white;
     font-size: 20px;
     text-align: center;
@@ -46,7 +46,7 @@
 
 .Product-pack {
     color: #bbbbbb;
-    font-size: 12px;
+    font-size: 11px;
     margin: 5px 0;
     text-align: center;
 }
@@ -82,7 +82,7 @@
     color: #ebb104;
     font-size: 22px;
     font-weight: 600;
-    padding-top: 20px;
+    padding-top: 10px;
     text-align: center;
     margin: 0;
 }

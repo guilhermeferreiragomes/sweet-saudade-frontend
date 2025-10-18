@@ -4,7 +4,7 @@
     justify-content: center;
     align-items: flex-start;
     gap: 60px;
-    margin: 60px auto 80px auto;
+    margin: 60px auto 40px auto;
     max-width: 1100px;
     padding: 0 20px;
 }
@@ -21,9 +21,8 @@
 .product-information {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     max-width: 450px;
-    padding-top: 10px;
 }
 
 .product-name {
@@ -32,6 +31,8 @@
     font-weight: 700;
     margin: 0;
     line-height: 1.2;
+    white-space: nowrap;
+    flex: 1;
 }
 
 .product-price {
@@ -43,11 +44,24 @@
     padding-left: 15px;
 }
 
+.product-description-wrapper {
+  width: 100%;
+  margin: 0 auto 60px;
+}
+
+.product-description-container {
+  margin-left: 80px;
+  margin-right: 80px;
+  max-width: 100%;
+  padding: 0 30px;
+}
+
 .product-description {
-    color: #e0e0e0;
-    font-size: 18px;
-    line-height: 1.6;
-    margin: 0;
+  font-size: 18px;
+  line-height: 1.7;
+  color: #ffffff;
+  text-align: justify;
+  margin: 0;
 }
 
 .product-pack {
@@ -56,6 +70,59 @@
     margin: 0;
     font-style: italic;
     line-height: 0;
+}
+
+.product-pack-options {
+    margin: 0 0 15px 0; /
+}
+
+.pack-options-title {
+    margin-top: 0;
+    font-size: 15px; 
+    margin-bottom: 8px; 
+    color: #e0e0e0;
+    font-weight: 400; 
+}
+
+.pack-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; 
+}
+
+.pack-option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(235, 177, 4, 0.2);
+}
+
+.pack-name {
+    font-weight: 400;
+    font-size: 16px;
+    color: #e0e0e0;
+    flex: 1; 
+    white-space: nowrap; 
+    text-align: left; 
+}
+
+.pack-price {
+    font-weight: 600;
+    font-size: 18px;
+    color: #ebb104;
+    border-left: 4px solid #ebb104;
+    padding-left: 12px;
+    margin-left: 10px;
+    text-align: right; 
+    min-width: 70px; 
+}
+
+.selected-pack {
+    font-style: italic;
+    font-weight: 500;
+    color: #555;
+    margin-top: 10px;
 }
 
 .add-to-cart {
@@ -120,6 +187,24 @@
     transform: translateX(-1px);
 }
 
+/* Estilo simples para o título da descrição */
+.description-title {
+  color: #ebb104;
+  font-size: 28px;
+  font-weight: 500;
+  margin: 0 0 20px 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(235, 177, 4, 0.3);
+}
+
+@media (max-width: 768px) {
+  .description-title {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 15px;
+  }
+}
+
 /* Mobile */
 
 @media (max-width: 768px) {
@@ -151,5 +236,95 @@
         border-bottom: 2px solid #ebb104;
         padding-left: 0;
         padding-bottom: 5px;
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .pack-options-container {
+    gap: 8px;
+    justify-content: center;
+  }
+  
+  .pack-option {
+    min-width: 100px;
+    padding: 10px;
+  }
+  
+  .pack-option-name {
+    font-size: 14px;
+  }
+  
+  .pack-option-price {
+    font-size: 16px;
+  }
+}
+
+/* Atualize os estilos para as opções de pacote */
+.product-pack-options {
+    margin: 0 0 15px 0; /* Reduzido de 2px para 0px no topo e de 20px para 15px embaixo */
+}
+
+.pack-options-title {
+    margin-top: 0;
+    font-size: 15px; /* Reduzido de 16px para 15px */
+    margin-bottom: 8px; /* Reduzido de 10px para 8px */
+    color: #e0e0e0;
+    font-weight: 400; /* Mudei de 500 para 400 (normal) */
+}
+
+.pack-options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Reduzido de 12px para 8px */
+}
+
+.pack-option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(235, 177, 4, 0.2);
+}
+
+.pack-name {
+    font-weight: 400;
+    font-size: 16px;
+    color: #e0e0e0;
+    flex: 1; /* Adicionado para garantir que ocupe espaço disponível */
+    white-space: nowrap; /* Evita quebra de linha no texto */
+    text-align: left; /* Garante alinhamento consistente à esquerda */
+}
+
+.pack-price {
+    font-weight: 600;
+    font-size: 18px;
+    color: #ebb104;
+    border-left: 4px solid #ebb104;
+    padding-left: 12px;
+    margin-left: 10px;
+    text-align: right; /* Garante alinhamento consistente à direita */
+    min-width: 70px; /* Garante largura mínima para o preço */
+}
+
+/* Ajustes para mobile */
+@media (max-width: 768px) {
+    .pack-options-title {
+        text-align: center;
+    }
+    
+    .pack-option-item {
+        padding: 6px 0;
+    }
+    
+    .pack-price {
+        border-left: 3px solid #ebb104;
+        padding-left: 10px;
+        font-size: 16px;
+    }
+    
+    /* Remover a barra de preço padrão em mobile, já que as opções terão suas próprias barras */
+    .product-price {
+        display: none;
     }
 }

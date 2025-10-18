@@ -12,7 +12,7 @@
                 "price": "6.25€"
             }
         ],
-        "description": "O pastel de nata do Sr. António é um clássico aperfeiçoado pela experiência. A massa folhada, leve e crocante, é cuidadosamente laminada à mão, garantindo camadas finíssimas que estalam a cada dentada. O recheio, feito com creme suave e aromático, atinge o equilíbrio perfeito entre doçura e textura. Levemente queimado no topo, com aquele dourado irresistível que só o forno de um verdadeiro pasteleiro sabe dar, o pastel de nata do Sr. António é uma celebração da tradição — simples, autêntico e absolutamente viciante. Ideal com um café ou como doce de fim de tarde, é o tipo de sabor que nos faz voltar sempre..",
+        "description": "O pastel de nata do Sr. António é um clássico aperfeiçoado pela experiência. A massa folhada, leve e crocante, é cuidadosamente laminada à mão, garantindo camadas finíssimas que estalam a cada dentada. O recheio, feito com creme suave e aromático, atinge o equilíbrio perfeito entre doçura e textura. Levemente queimado no topo, com aquele dourado irresistível que só o forno de um verdadeiro pasteleiro sabe dar, o pastel de nata do Sr. António é uma celebração da tradição — simples, autêntico e absolutamente viciante. Ideal com um café ou como doce de fim de tarde, é o tipo de sabor que nos faz voltar sempre.",
         "defaultPrice": "1.25€",
         "image": "/products/pastel_de_nata.png",
         "slug": "pastel-de-nata"
@@ -35,24 +35,25 @@
         "image": "/products/bola_berlim.png",
         "slug": "bola-de-berlim"
     },
-    {
+        {
         "id": 3,
-        "name": "Rissóis de Carne",
+        "name": "Bolo de Laranja",
         "packOptions": [
             {
-                "pack": "Unitário",
-                "price": "Em breve"
+                "pack": "1 Fatia Generosa",
+                "price": "1.50€"
             },
             {
-                "pack": "Caixa 6 unidades",
-                "price": "Em breve"
+                "pack": "1 Bolo (≈ 1.0Kg)",
+                "price": "15.00€"
             }
         ],
-        "description": "Os rissóis de carne da Mãe Odete são uma verdadeira tentação. Feitos com uma massa fina e estaladiça, recheados com carne tenra e molho caseiro cuidadosamente preparado, estes rissóis são sinónimo de conforto e qualidade. O sabor artesanal e a textura perfeita são ainda mais valorizados quando acompanhados por um molho de maionese com mostarda e alho, que enriquece cada dentada e transforma este clássico num prazer irresistível. Uma autêntica obra de arte da cozinha tradicional portuguesa.",
-        "defaultPrice": "Em breve",
-        "image": "/products/rissois_de_carne.webp",
-        "slug": "rissois-de-carne"
+        "description": "Com o mesmo carinho e dedicação que coloca em cada salgado, a Mãe Odete traz-nos uma doçura irresistível: o bolo de laranja. Feito segundo uma receita que atravessa gerações, este bolo é a perfeita combinação entre tradição, simplicidade e sabor genuíno. Cada fatia revela uma textura macia e suculenta, embebida no aroma natural das melhores laranjas portuguesas. O seu sabor fresco e ligeiramente cítrico desperta memórias de tardes calmas, em que o cheiro a bolo acabado de sair do forno enchia a cozinha da Mãe Odete. O bolo de laranja da Mãe Odete é um abraço em forma de sobremesa, perfeito para acompanhar um café, um chá ou simplesmente um momento de pausa bem merecido.",
+        "defaultPrice": "1.50€",
+        "image": "/products/bolo_laranja.webp",
+        "slug": "bolo-de-laranja"
     },
+    
     {
         "id": 4,
         "name": "Bolinhas de Alheira",
@@ -71,23 +72,23 @@
         "image": "/products/bolinhas_alheira.webp",
         "slug": "bolinhas-de-alheira"
     },
-    {
+{
         "id": 5,
-        "name": "Bolo de Laranja",
+        "name": "Rissóis de Carne",
         "packOptions": [
             {
-                "pack": "1 fatia generosa",
-                "price": "1.50€"
+                "pack": "Unitário",
+                "price": "Em breve"
             },
             {
-                "pack": "1 Bolo (≈ 1.0Kg)",
-                "price": "15.00€"
+                "pack": "Caixa 6 unidades",
+                "price": "Em breve"
             }
         ],
-        "description": "Com o mesmo carinho e dedicação que coloca em cada salgado, a Mãe Odete traz-nos uma doçura irresistível: o bolo de laranja. Feito segundo uma receita que atravessa gerações, este bolo é a perfeita combinação entre tradição, simplicidade e sabor genuíno. Cada fatia revela uma textura macia e suculenta, embebida no aroma natural das melhores laranjas portuguesas. O seu sabor fresco e ligeiramente cítrico desperta memórias de tardes calmas, em que o cheiro a bolo acabado de sair do forno enchia a cozinha da Mãe Odete. O bolo de laranja da Mãe Odete é um abraço em forma de sobremesa, perfeito para acompanhar um café, um chá ou simplesmente um momento de pausa bem merecido.",
-        "defaultPrice": "1.50€",
-        "image": "/products/bolo_laranja.webp",
-        "slug": "bolo-de-laranja"
+        "description": "Os rissóis de carne da Mãe Odete são uma verdadeira tentação. Feitos com uma massa fina e estaladiça, recheados com carne tenra e molho caseiro cuidadosamente preparado, estes rissóis são sinónimo de conforto e qualidade. O sabor artesanal e a textura perfeita são ainda mais valorizados quando acompanhados por um molho de maionese com mostarda e alho, que enriquece cada dentada e transforma este clássico num prazer irresistível. Uma autêntica obra de arte da cozinha tradicional portuguesa.",
+        "defaultPrice": "Em breve",
+        "image": "/products/rissois_de_carne.webp",
+        "slug": "rissois-de-carne"
     },
     {
         "id": 6,
