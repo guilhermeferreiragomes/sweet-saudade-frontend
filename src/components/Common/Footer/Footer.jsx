@@ -50,8 +50,8 @@ const Footer = () => {
             <h3>Contactos</h3>
             <ul>
               <li><a href='/contactos'>Encomendas</a></li>
-              <li><a href='mailto:sweetsaudade@gmail.com'><MdOutlineEmail size={22} /> sweetsaudade@gmail.com</a></li>
-              <li><a href='tel:+351912345678'><MdLocalPhone size={20} /> +351 912 345 678</a></li>
+              <li><a href='mailto:info.sweetsaudade@gmail.com'><MdOutlineEmail size={22} /> info.sweetsaudade@gmail.com</a></li>
+              <li><a href='tel:+351919710329'><MdLocalPhone size={20} /> +351 919 710 329</a></li>
             </ul>
           </div>
         </div>

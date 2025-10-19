@@ -34,8 +34,8 @@ const ContactInfo = () => {
           <p className='sweet-saudade'> Sweet Saudade </p>
           <ul>
             <li>
-              <a href='mailto:sweetsaudade@gmail.com'>
-                <MdOutlineEmail size={22} color='#f4c430' /> sweetsaudade@gmail.com
+              <a href='mailto:info.sweetsaudade@gmail.com'>
+                <MdOutlineEmail size={22} color='#f4c430' /> info.sweetsaudade@gmail.com
               </a>
             </li>
             <li>
