@@ -33,7 +33,7 @@
 }
 
 .duvidas p {
-    color: #f5f5f5;
+    color: #e0e0e0;
     font-size: 18px;
     margin-bottom: 20px;
 }
@@ -41,14 +41,14 @@
 .duvidasP {
     font-size: 22px !important;
     font-weight: bold;
-    color: white;
+    color: #e0e0e0;
     margin-top: 25px;
 }
 
 .duvidasPi {
     font-size: 22px !important;
     font-weight: bold;
-    color: white;
+    color: #e0e0e0;
 }
 
 .sweet-saudade {
@@ -68,7 +68,7 @@
 }
 
 .duvidas ul li a {
-    color: #f5f5f5;
+    color: #e0e0e0;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -118,7 +118,7 @@
 
 .formulario {
     flex: 1;
-    background-color: #f4c430;
+    background-color: #ebb104;
     padding: 30px;
     border-radius: 15px;
     max-width: 550px;
