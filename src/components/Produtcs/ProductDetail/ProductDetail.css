@@ -73,7 +73,7 @@
 }
 
 .product-pack-options {
-    margin: 0 0 15px 0; /
+    margin: 0 0 15px 0;
 }
 
 .pack-options-title {
@@ -262,7 +262,7 @@
 
 /* Atualize os estilos para as opções de pacote */
 .product-pack-options {
-    margin: 0 0 15px 0; /* Reduzido de 2px para 0px no topo e de 20px para 15px embaixo */
+    margin: 0 0 15px 0;
 }
 
 .pack-options-title {
