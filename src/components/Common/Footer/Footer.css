@@ -165,18 +165,64 @@
         flex-direction: column;
         align-items: center;
         padding: 20px;
-        text-align: left;
     }
     
     .footer-media {
         padding-left: 0;
         margin-bottom: 30px;
+        align-self: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
     }
     
+    /* Novo layout em grid para as seções */
     .text {
-        flex-direction: column;
-        gap: 30px;
-        text-align: center;
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Duas colunas */
+        grid-template-areas: 
+            "ligacoes politicas"
+            "contactos contactos";
+        gap: 20px; /* Espaço entre colunas e linhas */
+        width: 100%;
+        padding: 0 20px;
+        align-items: start;
+        text-align: left;
+    }
+    
+    /* Atribui áreas específicas a cada seção */
+    .ligacoes {
+        grid-area: ligacoes;
+    }
+    
+    .politicas {
+        grid-area: politicas;
+    }
+    
+    .contactos {
+        grid-area: contactos;
+    }
+    
+    /* Remove a grande diferença de gap entre as seções */
+    .text {
+        gap: 30px; /* Ajustado de 220px para 30px */
+    }
+    
+    /* Seção de contactos ocupa toda a largura */
+    .contactos {
+        grid-column: 1 / -1; /* Ocupa de ponta a ponta */
+    }
+    
+    /* Alinhamento para os títulos e listas */
+    .text h3 {
+        align-self: flex-start;
+        margin-top: 0;
+    }
+    
+    .text ul {
+        align-self: flex-start;
+        margin-top: 0;
     }
     
     .footer-logo {
@@ -184,19 +230,26 @@
     }
     
     .footer-bottom {
+        margin-top: 15px;
+        padding-bottom: 15px;
         flex-direction: column;
         gap: 10px;
+        align-items: center; /* Alterado de flex-start para center */
     }
     
     .footer-bottom-left,
     .footer-bottom-right {
-        justify-content: center;
-        text-align: center;
+        justify-content: center; /* Alterado de flex-start para center */
+        text-align: center; /* Alterado de left para center */
+        width: 100%;
+        padding-left: 0; /* Removido o padding-left */
     }
 }
 
+/* Para telas muito pequenas */
 @media (max-width: 480px) {
     .text {
+        grid-template-columns: 1fr; /* Uma coluna só */
         gap: 20px;
     }
     
@@ -204,12 +257,12 @@
         width: 80px;
     }
     
-    .footer-media p {
-        font-size: 14px;
-    }
-    
-    .text ul {
-        font-size: 14px;
+    /* Garantir que as regras de alinhamento central permaneçam */
+    .footer-bottom-left,
+    .footer-bottom-right {
+        justify-content: center;
+        text-align: center;
+        padding: 0 10px;
     }
 }
 

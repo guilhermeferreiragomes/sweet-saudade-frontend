@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MdOutlineEmail, MdLocalPhone } from "react-icons/md";
+import { MdOutlineEmail, MdWhatsapp } from "react-icons/md";
 import { FiInstagram } from "react-icons/fi";
 import { FaFacebookF, FaLinkedinIn, FaTiktok, FaChevronDown, FaChevronUp, FaInfoCircle } from "react-icons/fa";
 import logo from '../../../../assets/sweetsauade_logotipos/logo_transparente.png';
@@ -39,8 +39,8 @@ const ContactInfo = () => {
               </a>
             </li>
             <li>
-              <a href='tel:+351912345678'>
-                <MdLocalPhone size={20} color='#f4c430' /> +351 912 345 678
+              <a href='https://wa.me/351928460237' target="_blank" rel="noopener noreferrer">
+                <MdWhatsapp size={22} color='#f4c430' /> +351 912 345 678
               </a>
             </li>
           </ul>

@@ -2,7 +2,7 @@ import './Footer.css'
 import logo from '../../../assets/sweetsauade_logotipos/logo_transparente.png'
 import { FiInstagram } from "react-icons/fi";
 import { FaFacebookF, FaLinkedinIn, FaTiktok } from "react-icons/fa";
-import { MdOutlineEmail, MdLocalPhone } from "react-icons/md";
+import { MdOutlineEmail, MdWhatsapp } from "react-icons/md";
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -31,28 +31,28 @@ const Footer = () => {
         </div>
         <div className='text'>
           <div className='ligacoes'>
-            <h3>Ligações</h3>
-            <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/produtos">Produtos</a></li>
-              <li><a href="/sobre-nos">Sobre Nós</a></li>
-            </ul>
+              <h3>Ligações</h3>
+              <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="/produtos">Produtos</a></li>
+                  <li><a href="/sobre-nos">Sobre Nós</a></li>
+              </ul>
           </div>
           <div className='politicas'>
-            <h3>Políticas</h3>
-            <ul>
-              <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
-              <li><a href="/termos-e-condicoes">Termos e Condições</a></li>
-              <br />
-            </ul>
+              <h3>Políticas</h3>
+              <ul>
+                  <li><a href="/politica-de-privacidade">Política de Privacidade</a></li>
+                  <li><a href="/termos-e-condicoes">Termos e Condições</a></li>
+                  <br />
+              </ul>
           </div>
           <div className='contactos'>
-            <h3>Contactos</h3>
-            <ul>
-              <li><a href='/contactos'>Encomendas</a></li>
-              <li><a href='mailto:info.sweetsaudade@gmail.com'><MdOutlineEmail size={22} /> info.sweetsaudade@gmail.com</a></li>
-              <li><a href='tel:+351919710329'><MdLocalPhone size={20} /> +351 919 710 329</a></li>
-            </ul>
+              <h3>Contactos</h3>
+              <ul>
+                  <li><a href='/contactos'>Encomendas</a></li>
+                  <li><a href='mailto:info.sweetsaudade@gmail.com'><MdOutlineEmail size={22} /> info.sweetsaudade@gmail.com</a></li>
+                  <li><a href='https://wa.me/351928460237' target="_blank" rel="noopener noreferrer"><MdWhatsapp size={22} /> +351 928 460 237</a></li>
+              </ul>
           </div>
         </div>
       </div>
