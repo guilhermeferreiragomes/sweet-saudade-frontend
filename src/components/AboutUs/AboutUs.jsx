@@ -1,4 +1,5 @@
 import React from 'react'
+import './aboutus.css'
 import  andreines from '../../assets/imagens/andre_e_ines.webp'
 
 const AboutUs = () => {
