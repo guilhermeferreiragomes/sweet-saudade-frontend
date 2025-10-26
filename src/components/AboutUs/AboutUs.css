@@ -32,12 +32,33 @@ grid-row-gap: 0px;
   font-weight: 600;
   color: #ebb104;
   font-size: 40px;
+  margin-top: 20px;
 }
 
 .historia-texto {
   color: #E0E0E0;
   line-height: 1.8;
   text-align: justify;
-  margin-top: 20px;
 }
 
+.historia-header{
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.coracao-tiny{
+  width: 19px;
+  height: 19px;
+  display: inline-block;
+  vertical-align: middle;
+  transform: translate(-12px, -16px) rotate(15deg); /* desloca e inclina para a direita */
+  transform-origin: center center;
+}
+
+/* pequena adaptação para ecrãs muito pequenos */
+@media (max-width: 480px){
+  .historia-header{ gap:4px; }
+  .coracao-tiny{ width:16px; height:16px; }
+  .historia-titulo{ font-size: 20px; } /* ajusta se necessário */
+}
