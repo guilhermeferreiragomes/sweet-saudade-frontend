@@ -58,6 +58,7 @@ const AboutUs = () => {
             </p>
           </div>
         </div>
+        
 
         <div className="div3">
           <div className="missao-header">

@@ -1,3 +1,8 @@
+.aboutus-container {
+  width: 100%;
+  padding: 60px 0;
+}
+
 .parent {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -26,19 +31,21 @@
   margin-left: 110px;
   margin-top: 100px;
   margin-right: 90px;
-  margin-bottom: 100px;
- }
+  margin-bottom: 40px;
+}
 
 .div4 { 
   grid-area: 6 / 4 / 10 / 6; 
   margin-top: 100px;
-  margin-bottom: 100px;
-
+  margin-bottom: 40px;
+  margin-right: 110px;
+  display: flex;
+  align-items: flex-start;
 }
 
 .andreines-img {
   width: 400px;
-  height: auto;        
+  height: auto; 
   max-height: 420px;
   object-fit: cover;
   border-radius: 20px;
@@ -81,7 +88,6 @@
   color: #E0E0E0;
   line-height: 1.8;
   text-align: justify;
-
 }
 
 .missao-header {
@@ -101,22 +107,164 @@
 
 .cliente-img {
   width: 400px;
-  height: auto;        
+  height: auto; 
   max-height: 480px;
   object-fit: cover;
   border-radius: 20px;
 }
 
+/* --- REGRAS RESPONSIVAS --- */
+
+/* Laptops (1200px) - Reduzir margens */
+@media (max-width: 1200px) {
+  .div1 {
+    margin-left: 60px;
+  }
+  .div2 {
+    margin-left: 50px;
+    margin-right: 60px;
+  }
+  .div3 {
+    margin-left: 60px;
+    margin-right: 50px;
+  }
+  .div4 {
+    margin-right: 60px;
+  }
+  
+  .andreines-img, .cliente-img {
+    width: 100%;
+    max-width: 400px;
+    height: auto;
+    max-height: none;
+  }
+}
+
+/* Tablets (992px) - Empilhar colunas */
+@media (max-width: 992px) {
+  .aboutus-container {
+    padding: 40px 0;
+  }
+  
+  .parent {
+    display: grid;
+    grid-template-columns: 1fr; /* Coluna única */
+    grid-template-rows: auto;
+    grid-column-gap: 0;
+    grid-row-gap: 0; /* Remover o gap global */
+  }
+  
+  /* Resetar áreas e margens genéricas */
+  .div1, .div2, .div3, .div4 {
+    grid-area: auto;
+    margin: 0 40px; /* Margens horizontais */
+    display: block;
+    text-align: center;
+  }
+
+  /* Reordenar e adicionar margens verticais específicas */
+  .div1 { 
+    order: 1; 
+    margin-top: 20px;
+    margin-bottom: 15px; /* Espaço pequeno entre imagem e texto */
+  }
+  .div2 { 
+    order: 2; 
+    margin-top: 15px;
+    margin-bottom: 50px; /* Espaço grande para a próxima secção */
+  }
+  .div4 { 
+    order: 3; 
+    margin-top: 20px;
+    margin-bottom: 15px; /* Espaço pequeno entre imagem e texto */
+  }
+  .div3 { 
+    order: 4; 
+    margin-top: 15px;
+    margin-bottom: 20px;
+  } 
+
+  .historia-header, .missao-header {
+    justify-content: center;
+  }
+
+  .historia-texto, .missao-texto {
+    text-align: justify;
+  }
+  
+  .andreines-img, .cliente-img {
+    width: 100%;
+    max-width: 400px;
+    height: 400px;
+    margin: 0 auto;
+    object-fit: cover;
+  }
+
+  .historia-titulo, .missao-titulo {
+    font-size: 32px;
+  }
+}
+
+/* Telemóveis (480px) - Refinar espaçamento */
 @media (max-width: 480px) {
+  .aboutus-container {
+    padding: 20px 0;
+  }
+  
+  /* Margens mais pequenas em telemóvel */
+  .div1, .div2, .div3, .div4 {
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+
+  /* --- AJUSTE DE ESPAÇO (AQUI) --- */
+  .div1 { 
+    margin-top: 20px;
+    margin-bottom: 10px; /* Espaço entre Img 1 e Título 1 */
+  }
+  .div2 { 
+    margin-top: 10px;
+    margin-bottom: 40px; /* Espaço entre Secção 1 e Secção 2 */
+  }
+  .div4 { 
+    margin-top: 20px;
+    margin-bottom: 10px; /* Espaço entre Img 2 e Título 2 */
+  }
+  .div3 { 
+    margin-top: 10px;
+    margin-bottom: 20px;
+  } 
+
+  .andreines-img, .cliente-img {
+    max-width: 320px;
+    height: 320px;
+  }
+  
   .historia-header { 
-    gap:4px; 
+    gap: 4px; 
   }
 
   .coracao-tiny { 
-    width:16px; 
-    height:16px; 
+    width: 16px; 
+    height: 16px; 
   }
+  
   .historia-titulo { 
-    font-size: 20px;
-  } 
+    font-size: 24px;
+  }
+  
+  .missao-titulo {
+    font-size: 24px;
+  }
+
+  .missao-header .coracao-alt {
+     width: 28px;
+     height: 28px;
+     transform: translate(-10px, -15px) rotate(17deg);
+  }
+  
+  .historia-texto, .missao-texto {
+      font-size: 15px;
+      line-height: 1.7;
+  }
 }
