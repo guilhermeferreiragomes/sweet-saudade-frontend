@@ -13,8 +13,13 @@ const FormFields = ({
   cookiesAccepted,
   isSubmitting,
   onSubmit,
-  // Props do ProductSelector
-  currentProduct, setCurrentProduct,
+  
+  // --- ALTERAÇÃO AQUI ---
+  // Props do ProductSelector atualizados
+  selectedProductId, setSelectedProductId,
+  selectedPack, setSelectedPack,
+  // --- FIM DA ALTERAÇÃO ---
+  
   currentQuantity, setCurrentQuantity,
   onAddProduct,
   // Props dos produtos selecionados
@@ -75,8 +80,14 @@ const FormFields = ({
       {/* ProductSelector */}
       <div style={{ opacity: cookiesAccepted ? 1 : 0.5 }}>
         <ProductSelector
-          currentProduct={currentProduct}
-          setCurrentProduct={setCurrentProduct}
+          // --- ALTERAÇÃO AQUI ---
+          // Passar os novos props para o ProductSelector
+          selectedProductId={selectedProductId}
+          setSelectedProductId={setSelectedProductId}
+          selectedPack={selectedPack}
+          setSelectedPack={setSelectedPack}
+          // --- FIM DA ALTERAÇÃO ---
+
           currentQuantity={currentQuantity}
           setCurrentQuantity={setCurrentQuantity}
           onAddProduct={onAddProduct}

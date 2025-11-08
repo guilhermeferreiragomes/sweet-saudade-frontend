@@ -17,7 +17,13 @@ const OrderForm = () => {
     message, setMessage,
     recaptchaToken, setRecaptchaToken,
     selectedProducts, setSelectedProducts,
-    currentProduct, setCurrentProduct,
+    
+    // --- ALTERAÇÃO AQUI ---
+    // Buscar os novos estados
+    selectedProductId, setSelectedProductId,
+    selectedPack, setSelectedPack,
+    // --- FIM DA ALTERAÇÃO ---
+
     currentQuantity, setCurrentQuantity,
     isSubmitting,
     isFormExpanded, setIsFormExpanded,
@@ -28,17 +34,24 @@ const OrderForm = () => {
     setIsFormExpanded(!isFormExpanded);
   };
 
+  // --- FUNÇÃO addProduct ATUALIZADA ---
   const addProduct = () => {
-    if (currentProduct) {
-      const product = productsData.find(p => p.id === parseInt(currentProduct));
-      const numericPrice = parseFloat(product.price.replace('€', '').replace(',', '.'));
+    // Agora verifica os dois estados separados
+    if (selectedProductId && selectedPack) {
+      
+      const product = productsData.find(p => p.id === parseInt(selectedProductId));
+      const option = product.packOptions.find(opt => opt.pack === selectedPack);
+      
+      if (!product || !option) return; 
+
+      const numericPrice = parseFloat(option.price.replace('€', '').replace(',', '.'));
       
       const newProduct = {
         id: Date.now(),
         productId: product.id,
         name: product.name,
-        pack: product.pack,
-        price: product.price,
+        pack: option.pack,
+        price: option.price,
         numericPrice: numericPrice, 
         image: product.image,
         quantity: currentQuantity,
@@ -46,10 +59,14 @@ const OrderForm = () => {
       };
       
       setSelectedProducts([...selectedProducts, newProduct]);
-      setCurrentProduct('');
+      
+      // Limpar os seletores e a quantidade
+      setSelectedProductId('');
+      setSelectedPack('');
       setCurrentQuantity(1);
     }
   };
+  // --- FIM DA ATUALIZAÇÃO ---
 
   const removeProduct = (id) => {
     setSelectedProducts(selectedProducts.filter(item => item.id !== id));
@@ -90,8 +107,15 @@ const OrderForm = () => {
             cookiesAccepted={cookiesAccepted}
             isSubmitting={isSubmitting}
             onSubmit={handleSubmit}
-            currentProduct={currentProduct}
-            setCurrentProduct={setCurrentProduct}
+            
+            // --- ALTERAÇÃO AQUI ---
+            // Passar os novos props para o FormFields
+            selectedProductId={selectedProductId}
+            setSelectedProductId={setSelectedProductId}
+            selectedPack={selectedPack}
+            setSelectedPack={setSelectedPack}
+            // --- FIM DA ALTERAÇÃO ---
+
             currentQuantity={currentQuantity}
             setCurrentQuantity={setCurrentQuantity}
             onAddProduct={addProduct}

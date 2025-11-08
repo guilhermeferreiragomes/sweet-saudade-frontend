@@ -10,18 +10,21 @@ export const useOrderForm = () => {
   const [message, setMessage] = useState('');
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [selectedProducts, setSelectedProducts] = useState([]);
-  const [currentProduct, setCurrentProduct] = useState('');
+  
+  // --- ALTERAÇÃO AQUI ---
+  // Trocámos 'currentProduct' por dois estados separados
+  const [selectedProductId, setSelectedProductId] = useState(''); // Ex: "1"
+  const [selectedPack, setSelectedPack] = useState('');         // Ex: "Unitário"
+  // --- FIM DA ALTERAÇÃO ---
+
   const [currentQuantity, setCurrentQuantity] = useState(1);
   const [isFormExpanded, setIsFormExpanded] = useState(() => {
-    // Check if we're on mobile by screen width
     return window.innerWidth <= 768;
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
-  // Add effect to handle window resize
   useEffect(() => {
     const handleResize = () => {
-      // Only auto-expand on mobile
       if (window.innerWidth <= 768) {
         setIsFormExpanded(true);
       }
@@ -106,11 +109,9 @@ export const useOrderForm = () => {
         date: formattedDate,
       };
 
-      // --- URL ATUALIZADO ---
-      // URL do Google Apps Script (fornecido por ti)
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfVqcw2ohSw4joEcluaWjmBYh77DBtRjx2QT0pjSwhPoXVsef-9EcliExPPu0zjgr6lA/exec';
+      // URL do Google Apps Script
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMN_RcMR120TAeF1Vo7RiH2gCJB-iTLJiTn7rxQqwDRWL_zJxPPfoB1jCOztOd_So5Vw/exec';
 
-      // 3. Criar a promessa para o Google Sheets
       const googleSheetPromise = fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
         headers: {
@@ -119,16 +120,13 @@ export const useOrderForm = () => {
         body: JSON.stringify(templateParams),
       });
 
-      // 4. Criar a promessa para o EmailJS
       const emailJsPromise = emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
 
-      // 5. Executar ambas as promessas. 
       const [sheetResponse, emailResponse] = await Promise.all([
         googleSheetPromise, 
         emailJsPromise
       ]);
 
-      // 6. Ler a resposta do Google Sheets
       if (!sheetResponse.ok) {
         throw new Error('Falha ao contactar o Google Sheets');
       }
@@ -139,9 +137,8 @@ export const useOrderForm = () => {
          throw new Error(sheetResult.message || 'Erro desconhecido do Google Sheets');
       }
       
-      const newOrderNumber = sheetResult.orderNumber; // Captura o nº da encomenda
+      const newOrderNumber = sheetResult.orderNumber;
       
-      // 7. Limpar o formulário
       setFirstName('');
       setLastName('');
       setEmail('');
@@ -149,13 +146,14 @@ export const useOrderForm = () => {
       setMessage('');
       setSelectedProducts([]);
       setRecaptchaToken(null);
+      // Limpar também os seletores de produto (NOVO)
+      setSelectedProductId('');
+      setSelectedPack('');
 
-      // 8. Mensagem de Sucesso Atualizada
       Swal.fire({
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        // Mostra o número da encomenda ao utilizador
         text: `Recebemos a sua encomenda (Nº ${newOrderNumber})! Aguarde a nossa resposta.`,
         confirmButtonText: "Continuar",
         timer: 4000,
@@ -185,7 +183,13 @@ export const useOrderForm = () => {
     message, setMessage,
     recaptchaToken, setRecaptchaToken,
     selectedProducts, setSelectedProducts,
-    currentProduct, setCurrentProduct,
+    
+    // --- ALTERAÇÃO AQUI ---
+    // Exportar os novos estados
+    selectedProductId, setSelectedProductId,
+    selectedPack, setSelectedPack,
+    // --- FIM DA ALTERAÇÃO ---
+
     currentQuantity, setCurrentQuantity,
     isSubmitting,
     isFormExpanded, setIsFormExpanded,

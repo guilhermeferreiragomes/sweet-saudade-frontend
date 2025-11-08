@@ -9,15 +9,21 @@ const ProductsList = () => {
         <div className='ProductsList'>
             <div className='Product'>
                 {productsData.map((product) => {
-                    // Obter o segundo pack (índice 1) se existir, senão usar o primeiro
+                    
+                    // --- LÓGICA DE EXIBIÇÃO ATUALIZADA ---
+                    // Tenta obter o segundo pack (índice 1, ex: Caixa)
                     const packOption = product.packOptions && product.packOptions.length > 1 
                         ? product.packOptions[1]
+                        // Se não existir, usa o primeiro (índice 0, ex: Unitário)
                         : product.packOptions && product.packOptions.length > 0
                             ? product.packOptions[0]
+                            // Como fallback, se não houver packOptions
                             : null;
                     
-                    const packText = packOption ? packOption.pack : product.pack || '';
-                    const priceText = packOption ? packOption.price : product.defaultPrice || product.price || '';
+                    // Define o texto com base no que foi encontrado
+                    const packText = packOption ? packOption.pack : (product.pack || ''); // Fallback final
+                    const priceText = packOption ? packOption.price : (product.defaultPrice || product.price || 'Em breve'); // Fallback final
+                    // --- FIM DA ATUALIZAÇÃO ---
                     
                     return (
                         <div key={product.id} className='Product-card'>
