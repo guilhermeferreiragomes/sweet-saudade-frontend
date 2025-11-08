@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
-import { incrementOrderCounter } from '../services/orderService.jsx';
 
 export const useOrderForm = () => {
   const [firstName, setFirstName] = useState('');
@@ -27,14 +26,8 @@ export const useOrderForm = () => {
         setIsFormExpanded(true);
       }
     };
-    
-    // Set initial state
     handleResize();
-    
-    // Add event listener
     window.addEventListener('resize', handleResize);
-    
-    // Clean up
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
@@ -55,7 +48,7 @@ export const useOrderForm = () => {
 
     if (isSubmitting) return;
 
-    // Validações...
+    // Validações (Cookies, reCAPTCHA, Produtos)
     if (!cookiesAccepted) {
       Swal.fire({
         ...swalConfig,
@@ -68,7 +61,6 @@ export const useOrderForm = () => {
       });
       return;
     }
-
     if (!recaptchaToken) {
       Swal.fire({
         ...swalConfig,
@@ -81,7 +73,6 @@ export const useOrderForm = () => {
       });
       return;
     }
-
     if (selectedProducts.length === 0) {
       Swal.fire({
         ...swalConfig,
@@ -98,8 +89,6 @@ export const useOrderForm = () => {
     setIsSubmitting(true);
 
     try {
-      const orderCounter = await incrementOrderCounter();
-      
       const currentDate = new Date();
       const formattedDate = currentDate.toLocaleDateString('pt-PT');
       
@@ -111,16 +100,48 @@ export const useOrderForm = () => {
         firstName,
         lastName,
         email,
-        phone, // Use correct variable name
+        phone,
         message,
         products: productsList,
         date: formattedDate,
-        counter: orderCounter || 'N/A'
       };
 
-      await emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
+      // --- URL ATUALIZADO ---
+      // URL do Google Apps Script (fornecido por ti)
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwfVqcw2ohSw4joEcluaWjmBYh77DBtRjx2QT0pjSwhPoXVsef-9EcliExPPu0zjgr6lA/exec';
+
+      // 3. Criar a promessa para o Google Sheets
+      const googleSheetPromise = fetch(GOOGLE_SCRIPT_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(templateParams),
+      });
+
+      // 4. Criar a promessa para o EmailJS
+      const emailJsPromise = emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
+
+      // 5. Executar ambas as promessas. 
+      const [sheetResponse, emailResponse] = await Promise.all([
+        googleSheetPromise, 
+        emailJsPromise
+      ]);
+
+      // 6. Ler a resposta do Google Sheets
+      if (!sheetResponse.ok) {
+        throw new Error('Falha ao contactar o Google Sheets');
+      }
       
-      // Limpar formulário
+      const sheetResult = await sheetResponse.json();
+      
+      if (sheetResult.result !== 'success') {
+         throw new Error(sheetResult.message || 'Erro desconhecido do Google Sheets');
+      }
+      
+      const newOrderNumber = sheetResult.orderNumber; // Captura o nº da encomenda
+      
+      // 7. Limpar o formulário
       setFirstName('');
       setLastName('');
       setEmail('');
@@ -129,18 +150,20 @@ export const useOrderForm = () => {
       setSelectedProducts([]);
       setRecaptchaToken(null);
 
+      // 8. Mensagem de Sucesso Atualizada
       Swal.fire({
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        text: "Recebemos a sua encomenda! Aguarde a nossa resposta.",
+        // Mostra o número da encomenda ao utilizador
+        text: `Recebemos a sua encomenda (Nº ${newOrderNumber})! Aguarde a nossa resposta.`,
         confirmButtonText: "Continuar",
         timer: 4000,
         timerProgressBar: true
       });
 
     } catch (error) {
-      console.error('Erro:', error);
+      console.error('Erro num dos envios (EmailJS ou Google Sheets):', error);
       Swal.fire({
         ...swalConfig,
         icon: "error",
