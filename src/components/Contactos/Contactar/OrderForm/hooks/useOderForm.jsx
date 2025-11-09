@@ -11,11 +11,8 @@ export const useOrderForm = () => {
   const [recaptchaToken, setRecaptchaToken] = useState('');
   const [selectedProducts, setSelectedProducts] = useState([]);
   
-  // --- ALTERAÇÃO AQUI ---
-  // Trocámos 'currentProduct' por dois estados separados
-  const [selectedProductId, setSelectedProductId] = useState(''); // Ex: "1"
-  const [selectedPack, setSelectedPack] = useState('');         // Ex: "Unitário"
-  // --- FIM DA ALTERAÇÃO ---
+  const [selectedProductId, setSelectedProductId] = useState('');
+  const [selectedPack, setSelectedPack] = useState('');
 
   const [currentQuantity, setCurrentQuantity] = useState(1);
   const [isFormExpanded, setIsFormExpanded] = useState(() => {
@@ -51,41 +48,17 @@ export const useOrderForm = () => {
 
     if (isSubmitting) return;
 
-    // Validações (Cookies, reCAPTCHA, Produtos)
+    // Validações (sem alteração)
     if (!cookiesAccepted) {
-      Swal.fire({
-        ...swalConfig,
-        position: "center",
-        icon: "error",
-        title: "Cookies necessários",
-        text: "Para sua segurança, é necessário aceitar cookies para usar este formulário.",
-        confirmButtonText: "Entendi",
-        showConfirmButton: true
-      });
+      Swal.fire({ ...swalConfig, position: "center", icon: "error", title: "Cookies necessários", text: "Para sua segurança, é necessário aceitar cookies para usar este formulário.", confirmButtonText: "Entendi", showConfirmButton: true });
       return;
     }
     if (!recaptchaToken) {
-      Swal.fire({
-        ...swalConfig,
-        position: "center",
-        icon: "warning",
-        title: "Verificação necessária",
-        text: "Por favor, complete a verificação reCAPTCHA",
-        confirmButtonText: "OK",
-        showConfirmButton: true
-      });
+      Swal.fire({ ...swalConfig, position: "center", icon: "warning", title: "Verificação necessária", text: "Por favor, complete a verificação reCAPTCHA", confirmButtonText: "OK", showConfirmButton: true });
       return;
     }
     if (selectedProducts.length === 0) {
-      Swal.fire({
-        ...swalConfig,
-        position: "center",
-        icon: "warning",
-        title: "Produtos em falta",
-        text: "Por favor, selecione pelo menos um produto antes de enviar o pedido.",
-        showConfirmButton: true,
-        confirmButtonText: "OK"
-      });
+      Swal.fire({ ...swalConfig, position: "center", icon: "warning", title: "Produtos em falta", text: "Por favor, selecione pelo menos um produto antes de enviar o pedido.", showConfirmButton: true, confirmButtonText: "OK" });
       return;
     }
 
@@ -109,18 +82,33 @@ export const useOrderForm = () => {
         date: formattedDate,
       };
 
-      // URL do Google Apps Script
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxMN_RcMR120TAeF1Vo7RiH2gCJB-iTLJiTn7rxQqwDRWL_zJxPPfoB1jCOztOd_So5Vw/exec';
+      // --- ALTERAÇÃO PRINCIPAL AQUI ---
 
+      // 1. O URL continua a ser o teu mais recente
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJvwvgVxKJojw_b8begfTSbqZidoldsrBif4o_e8U0DMwg3f_72Y7HvPQowFkIcdSq1Q/exec';
+
+      // 2. Criar FormData
+      // Isto envia os dados como 'multipart/form-data', o que EVITA o preflight de CORS
+      const formData = new FormData();
+      formData.append('firstName', templateParams.firstName);
+      formData.append('lastName', templateParams.lastName);
+      formData.append('email', templateParams.email);
+      formData.append('phone', templateParams.phone);
+      formData.append('message', templateParams.message);
+      formData.append('products', templateParams.products);
+      formData.append('date', templateParams.date);
+
+      // 3. O 'fetch' para o Google Sheets foi alterado
       const googleSheetPromise = fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(templateParams),
+        body: formData, // Envia FormData em vez de JSON
+        // NÃO definimos 'Content-Type', o browser faz isso automaticamente
       });
-
+      
+      // 4. O envio para o EmailJS não muda
       const emailJsPromise = emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
+
+      // --- FIM DA ALTERAÇÃO ---
 
       const [sheetResponse, emailResponse] = await Promise.all([
         googleSheetPromise, 
@@ -146,7 +134,6 @@ export const useOrderForm = () => {
       setMessage('');
       setSelectedProducts([]);
       setRecaptchaToken(null);
-      // Limpar também os seletores de produto (NOVO)
       setSelectedProductId('');
       setSelectedPack('');
 
@@ -175,7 +162,6 @@ export const useOrderForm = () => {
   };
 
   return {
-    // States
     firstName, setFirstName,
     lastName, setLastName,
     email, setEmail,
@@ -183,18 +169,11 @@ export const useOrderForm = () => {
     message, setMessage,
     recaptchaToken, setRecaptchaToken,
     selectedProducts, setSelectedProducts,
-    
-    // --- ALTERAÇÃO AQUI ---
-    // Exportar os novos estados
     selectedProductId, setSelectedProductId,
     selectedPack, setSelectedPack,
-    // --- FIM DA ALTERAÇÃO ---
-
     currentQuantity, setCurrentQuantity,
     isSubmitting,
     isFormExpanded, setIsFormExpanded,
-    
-    // Functions
     sendEmail
   };
 };
