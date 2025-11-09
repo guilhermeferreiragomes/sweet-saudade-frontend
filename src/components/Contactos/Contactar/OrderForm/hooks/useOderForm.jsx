@@ -82,33 +82,21 @@ export const useOrderForm = () => {
         date: formattedDate,
       };
 
-      // --- ALTERAÇÃO PRINCIPAL AQUI ---
+      // --- ATUALIZA O TEU NOVO URL AQUI ---
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwg3xRxUIsHPPtWOrEvCUPQYFd7zR5oFxwvMeTM--SF4ecccmL92y6oXCgSgn5OwdH5/exec';
 
-      // 1. O URL continua a ser o teu mais recente
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwJvwvgVxKJojw_b8begfTSbqZidoldsrBif4o_e8U0DMwg3f_72Y7HvPQowFkIcdSq1Q/exec';
-
-      // 2. Criar FormData
-      // Isto envia os dados como 'multipart/form-data', o que EVITA o preflight de CORS
-      const formData = new FormData();
-      formData.append('firstName', templateParams.firstName);
-      formData.append('lastName', templateParams.lastName);
-      formData.append('email', templateParams.email);
-      formData.append('phone', templateParams.phone);
-      formData.append('message', templateParams.message);
-      formData.append('products', templateParams.products);
-      formData.append('date', templateParams.date);
-
-      // 3. O 'fetch' para o Google Sheets foi alterado
+      // --- VOLTAMOS A USAR JSON.stringify ---
       const googleSheetPromise = fetch(GOOGLE_SCRIPT_URL, {
         method: 'POST',
-        body: formData, // Envia FormData em vez de JSON
-        // NÃO definimos 'Content-Type', o browser faz isso automaticamente
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(templateParams),
+        mode: 'cors', // Necessário para o CORS
       });
-      
-      // 4. O envio para o EmailJS não muda
-      const emailJsPromise = emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
-
       // --- FIM DA ALTERAÇÃO ---
+
+      const emailJsPromise = emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
 
       const [sheetResponse, emailResponse] = await Promise.all([
         googleSheetPromise, 
