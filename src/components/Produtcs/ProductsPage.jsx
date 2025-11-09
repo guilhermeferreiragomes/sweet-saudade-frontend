@@ -5,8 +5,18 @@ import './ProductsPage.css'
 import ProductsImage from '../../assets/imagens/products.webp'
 import { Link } from 'react-router-dom'
 import { FaRegEnvelope } from "react-icons/fa";
+import ReactGA from 'react-ga4';
 
 const ProductsPage = () => {
+
+  const handleOrderClick = () => {
+    ReactGA.event({
+      category: "Navegação",
+      action: "Clique",
+      label: "Botão Encomendar (Página Produtos)"
+    });
+  };
+
   return (
     <div>
       <div className='products-image-container'>
@@ -24,7 +34,11 @@ const ProductsPage = () => {
 
       <div className="contact-cta-container">
         <h3 className="contact-cta-title">Pronto para fazer sua encomenda?</h3>
-        <Link to="/contactos" className="contact-cta-button">
+        <Link 
+          to="/contactos" 
+          className="contact-cta-button"
+          onClick={handleOrderClick}
+        >
           <FaRegEnvelope className="contact-cta-icon" />
           ENCOMENDAR AGORA
         </Link>

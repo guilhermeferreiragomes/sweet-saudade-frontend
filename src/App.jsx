@@ -10,13 +10,14 @@ import SobreNos from './pages/SobreNos'
 import Cookies from './components/Common/Cookies/Cookies'
 import Privacidade from './components/Politics/Privacidade/Privacidade'
 import Termos from './components/Politics/T&C/termos'
-
+import RouteChangeTracker from './components/Analytics/RouteChangeTracker'
 
 const App = () => {
   return (
     <div>
       <Router>
         <ScrollToTop />
+        <RouteChangeTracker />
         <Routes>
           <Route index element={<Home />} />
           <Route path="/" element={<Home />} />
