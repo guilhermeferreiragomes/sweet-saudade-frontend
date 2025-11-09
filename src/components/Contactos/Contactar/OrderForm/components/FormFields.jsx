@@ -114,7 +114,7 @@ const FormFields = ({
       <div className='recaptcha'>
         {cookiesAccepted && (
           <ReCAPTCHA
-            sitekey="6LdOUbIrAAAAAHKGJivU10flGcPhFVMpPDgDu_Hs"
+            sitekey="6LdgXwcsAAAAAI5tZbBFqIVlbHrjYBATkRrCcwZC"
             onChange={(token) => setRecaptchaToken(token)}
           />
         )}
