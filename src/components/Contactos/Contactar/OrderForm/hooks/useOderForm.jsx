@@ -3,7 +3,6 @@ import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 
 export const useOrderForm = () => {
-  // ... (todos os teus 'useState', 'useEffect', 'swalConfig' - sem alterações) ...
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -87,16 +86,8 @@ export const useOrderForm = () => {
       const googleBody = new URLSearchParams();
       Object.entries(templateParams).forEach(([k,v]) => googleBody.append(k, v));
 
-      // 1) Envia o email (se falhar aborta)
-      let emailResponse;
-      try {
-        emailResponse = await emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
-      } catch (err) {
-        throw new Error('Falha no envio do Email: ' + (err && err.text ? err.text : err.message || err));
-      }
-
-      // 2) Tenta enviar para o Google Sheets com timeout
-      let sheetResult = null;
+      // Primeiro: tenta gravar na sheet e ler orderNumber (se possível)
+      let orderNumber = 'N/D';
       try {
         const controller = new AbortController();
         const timeoutMs = 15000;
@@ -113,25 +104,27 @@ export const useOrderForm = () => {
         clearTimeout(timeoutId);
 
         const text = await sheetResp.text();
-        try { sheetResult = JSON.parse(text); } catch (e) {
-          console.warn('Resposta do Apps Script não é JSON válido:', text);
-        }
-
-        if (!sheetResp.ok) {
-          throw new Error('Google Sheets respondeu com status ' + sheetResp.status + ' — ' + (sheetResult && sheetResult.message ? sheetResult.message : '(ver console)'));
-        }
-        if (!sheetResult || sheetResult.result !== 'success') {
-          throw new Error((sheetResult && sheetResult.message) ? sheetResult.message : 'Resposta inesperada do Google Sheets');
+        try {
+          const parsed = JSON.parse(text);
+          if (parsed && parsed.result === 'success' && parsed.orderNumber) {
+            orderNumber = parsed.orderNumber;
+          }
+        } catch (e) {
+          // resposta não JSON ou bloqueada por CORS -> fallback orderNumber fica 'N/D'
         }
       } catch (err) {
-        // Se falhar aqui, regista para debug mas CONTINUA (porque já confirmaste que a folha está a ser atualizada)
-        console.warn('Não foi possível confirmar resposta do Google Sheets (CORS/timeout/parse):', err);
-        // Opcional: podes enviar um log para o teu servidor aqui
+        // não bloquear envio de email se o POST ao Apps Script falhar
       }
 
-      const newOrderNumber = (sheetResult && sheetResult.orderNumber) ? sheetResult.orderNumber : 'N/D';
+      // Em seguida: envia email com o orderNumber (mesmo que seja 'N/D')
+      const emailParams = {
+        ...templateParams,
+        orderNumber
+      };
 
-      // Limpa formulário
+      await emailjs.send('service_091pqna', 'template_k1o2pq3', emailParams, '8lF7gEp6qdH4ZCx7B');
+
+      // limpa formulário
       setFirstName('');
       setLastName('');
       setEmail('');
@@ -146,14 +139,13 @@ export const useOrderForm = () => {
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        text: `Recebemos a sua encomenda (Nº ${newOrderNumber}). Se não aparecer no histórico, contacte-nos.`,
+        text: `Recebemos a sua encomenda (Nº ${orderNumber}). Entraremos em contacto consigo em breve.`,
         confirmButtonText: "Continuar",
-        timer: 4000,
+        timer: 6000,
         timerProgressBar: true
       });
 
     } catch (error) {
-      console.error('Erro num dos envios (EmailJS ou Google Sheets):', error);
       Swal.fire({
         ...swalConfig,
         icon: "error",
@@ -166,7 +158,6 @@ export const useOrderForm = () => {
     }
   };
 
-  // ... (o teu 'return' - sem alterações) ...
   return {
     // States
     firstName, setFirstName,
