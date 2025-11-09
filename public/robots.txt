@@ -1,0 +1,6 @@
+# Permite que todos os robôs rastreiem todo o site
+User-agent: *
+Allow: /
+
+# Indica a localização do sitemap (opcional, mas recomendado)
+# Sitemap: https://sweetsaudade.pt/sitemap.xml
