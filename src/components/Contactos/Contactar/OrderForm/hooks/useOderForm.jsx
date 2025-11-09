@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
+import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 
 export const useOrderForm = () => {
-  // ... (todos os teus 'useState', 'useEffect', 'swalConfig' - sem alterações) ...
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -86,14 +86,13 @@ export const useOrderForm = () => {
       const googleBody = new URLSearchParams();
       Object.entries(templateParams).forEach(([k,v]) => googleBody.append(k, v));
 
-      // Envia apenas para o Google Sheets (sem EmailJS)
-      let sheetResult = null;
+      // tenta gravar na sheet (se falhar continua)
       try {
         const controller = new AbortController();
         const timeoutMs = 15000;
         const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
-        const sheetResp = await fetch(GOOGLE_SCRIPT_URL, {
+        await fetch(GOOGLE_SCRIPT_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: googleBody.toString(),
@@ -102,23 +101,14 @@ export const useOrderForm = () => {
         });
 
         clearTimeout(timeoutId);
-
-        const text = await sheetResp.text();
-        try { sheetResult = JSON.parse(text); } catch (e) { /* ignore parse error */ }
-
-        if (!sheetResp.ok) {
-          throw new Error('Google Sheets respondeu com status ' + sheetResp.status + ' — ' + (sheetResult && sheetResult.message ? sheetResult.message : '(ver console)'));
-        }
-        if (!sheetResult || sheetResult.result !== 'success') {
-          throw new Error((sheetResult && sheetResult.message) ? sheetResult.message : 'Resposta inesperada do Google Sheets');
-        }
       } catch (err) {
-        // Continua mesmo que a confirmação da resposta falhe, se a escrita já acontecer server-side
+        // ignore sheet errors (mantém fluxo do email)
       }
 
-      const newOrderNumber = (sheetResult && sheetResult.orderNumber) ? sheetResult.orderNumber : 'N/D';
+      // envia email SEM o counter/orderNumber
+      await emailjs.send('service_j32ls0o', 'template_ihkog08', templateParams, 'BwozG5CqJEFEVnpE7');
 
-      // Limpa formulário
+      // limpa formulário
       setFirstName('');
       setLastName('');
       setEmail('');
@@ -152,9 +142,7 @@ export const useOrderForm = () => {
     }
   };
 
-  // ... (o teu 'return' - sem alterações) ...
   return {
-    // States
     firstName, setFirstName,
     lastName, setLastName,
     email, setEmail,
@@ -170,7 +158,6 @@ export const useOrderForm = () => {
     isSubmitting,
     isFormExpanded, setIsFormExpanded,
     
-    // Functions
     sendEmail
   };
 };
