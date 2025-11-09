@@ -106,7 +106,7 @@ export const useOrderForm = () => {
       }
 
       // envia email SEM o counter/orderNumber
-      await emailjs.send('service_j32ls0o', 'template_ihkog08', templateParams, 'BwozG5CqJEFEVnpE7');
+      await emailjs.send('service_j32ls0o', 'template_rf3epwe', templateParams, 'BwozG5CqJEFEVnpE7');
 
       // limpa formulário
       setFirstName('');
