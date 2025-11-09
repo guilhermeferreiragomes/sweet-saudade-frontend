@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 
 export const useOrderForm = () => {
+  // ... (todos os teus 'useState', 'useEffect', 'swalConfig' - sem alterações) ...
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -86,8 +86,8 @@ export const useOrderForm = () => {
       const googleBody = new URLSearchParams();
       Object.entries(templateParams).forEach(([k,v]) => googleBody.append(k, v));
 
-      // Primeiro: tenta gravar na sheet e ler orderNumber (se possível)
-      let orderNumber = 'N/D';
+      // Envia apenas para o Google Sheets (sem EmailJS)
+      let sheetResult = null;
       try {
         const controller = new AbortController();
         const timeoutMs = 15000;
@@ -104,27 +104,21 @@ export const useOrderForm = () => {
         clearTimeout(timeoutId);
 
         const text = await sheetResp.text();
-        try {
-          const parsed = JSON.parse(text);
-          if (parsed && parsed.result === 'success' && parsed.orderNumber) {
-            orderNumber = parsed.orderNumber;
-          }
-        } catch (e) {
-          // resposta não JSON ou bloqueada por CORS -> fallback orderNumber fica 'N/D'
+        try { sheetResult = JSON.parse(text); } catch (e) { /* ignore parse error */ }
+
+        if (!sheetResp.ok) {
+          throw new Error('Google Sheets respondeu com status ' + sheetResp.status + ' — ' + (sheetResult && sheetResult.message ? sheetResult.message : '(ver console)'));
+        }
+        if (!sheetResult || sheetResult.result !== 'success') {
+          throw new Error((sheetResult && sheetResult.message) ? sheetResult.message : 'Resposta inesperada do Google Sheets');
         }
       } catch (err) {
-        // não bloquear envio de email se o POST ao Apps Script falhar
+        // Continua mesmo que a confirmação da resposta falhe, se a escrita já acontecer server-side
       }
 
-      // Em seguida: envia email com o orderNumber (mesmo que seja 'N/D')
-      const emailParams = {
-        ...templateParams,
-        orderNumber
-      };
+      const newOrderNumber = (sheetResult && sheetResult.orderNumber) ? sheetResult.orderNumber : 'N/D';
 
-      await emailjs.send('service_091pqna', 'template_k1o2pq3', emailParams, '8lF7gEp6qdH4ZCx7B');
-
-      // limpa formulário
+      // Limpa formulário
       setFirstName('');
       setLastName('');
       setEmail('');
@@ -139,7 +133,7 @@ export const useOrderForm = () => {
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        text: `Recebemos a sua encomenda (Nº ${orderNumber}). Entraremos em contacto consigo em breve.`,
+        text: `Recebemos a sua encomenda. Entraremos em contacto consigo em breve.`,
         confirmButtonText: "Continuar",
         timer: 6000,
         timerProgressBar: true
@@ -158,6 +152,7 @@ export const useOrderForm = () => {
     }
   };
 
+  // ... (o teu 'return' - sem alterações) ...
   return {
     // States
     firstName, setFirstName,
