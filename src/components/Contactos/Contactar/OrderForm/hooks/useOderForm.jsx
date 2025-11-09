@@ -82,7 +82,7 @@ export const useOrderForm = () => {
         date: formattedDate,
       };
 
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbysah9veX78LSFVCZdzxiYniLiYC3n7A8sKDbhJ-bfh8VLtTQRkgycUeVE5Tvf3x2ZUUA/exec';
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxKBEZ45o0f8DURS0cKBjuID2csLhCJdT13TMT7gh5l2KeVzS7eBrR4MQNea5-7PIYz/exec';
 
       const googleBody = new URLSearchParams();
       Object.entries(templateParams).forEach(([k,v]) => googleBody.append(k, v));
