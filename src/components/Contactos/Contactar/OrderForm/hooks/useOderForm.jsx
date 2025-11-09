@@ -3,6 +3,7 @@ import emailjs from '@emailjs/browser';
 import Swal from 'sweetalert2';
 
 export const useOrderForm = () => {
+  // ... (todos os teus 'useState', 'useEffect', 'swalConfig' - sem alterações) ...
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -48,7 +49,6 @@ export const useOrderForm = () => {
 
     if (isSubmitting) return;
 
-    // Validações (sem alteração)
     if (!cookiesAccepted) {
       Swal.fire({ ...swalConfig, position: "center", icon: "error", title: "Cookies necessários", text: "Para sua segurança, é necessário aceitar cookies para usar este formulário.", confirmButtonText: "Entendi", showConfirmButton: true });
       return;
@@ -82,43 +82,60 @@ export const useOrderForm = () => {
         date: formattedDate,
       };
 
-      // --- ATUALIZA O TEU NOVO URL AQUI ---
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwg3xRxUIsHPPtWOrEvCUPQYFd7zR5oFxwvMeTM--SF4ecccmL92y6oXCgSgn5OwdH5/exec';
+      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbysah9veX78LSFVCZdzxiYniLiYC3n7A8sKDbhJ-bfh8VLtTQRkgycUeVE5Tvf3x2ZUUA/exec';
 
-      // --- VOLTAMOS A USAR JSON.stringify ---
-      const googleSheetPromise = fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(templateParams),
-        mode: 'cors', // Necessário para o CORS
-      });
-      // --- FIM DA ALTERAÇÃO ---
+      const googleBody = new URLSearchParams();
+      Object.entries(templateParams).forEach(([k,v]) => googleBody.append(k, v));
 
-      const emailJsPromise = emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
-
-      const [sheetResponse, emailResponse] = await Promise.all([
-        googleSheetPromise, 
-        emailJsPromise
-      ]);
-
-      if (!sheetResponse.ok) {
-        throw new Error('Falha ao contactar o Google Sheets');
+      // 1) Envia o email (se falhar aborta)
+      let emailResponse;
+      try {
+        emailResponse = await emailjs.send('service_091pqna', 'template_k1o2pq3', templateParams, '8lF7gEp6qdH4ZCx7B');
+      } catch (err) {
+        throw new Error('Falha no envio do Email: ' + (err && err.text ? err.text : err.message || err));
       }
-      
-      const sheetResult = await sheetResponse.json();
-      
-      if (sheetResult.result !== 'success') {
-         throw new Error(sheetResult.message || 'Erro desconhecido do Google Sheets');
+
+      // 2) Tenta enviar para o Google Sheets com timeout
+      let sheetResult = null;
+      try {
+        const controller = new AbortController();
+        const timeoutMs = 15000;
+        const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
+
+        const sheetResp = await fetch(GOOGLE_SCRIPT_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: googleBody.toString(),
+          mode: 'cors',
+          signal: controller.signal
+        });
+
+        clearTimeout(timeoutId);
+
+        const text = await sheetResp.text();
+        try { sheetResult = JSON.parse(text); } catch (e) {
+          console.warn('Resposta do Apps Script não é JSON válido:', text);
+        }
+
+        if (!sheetResp.ok) {
+          throw new Error('Google Sheets respondeu com status ' + sheetResp.status + ' — ' + (sheetResult && sheetResult.message ? sheetResult.message : '(ver console)'));
+        }
+        if (!sheetResult || sheetResult.result !== 'success') {
+          throw new Error((sheetResult && sheetResult.message) ? sheetResult.message : 'Resposta inesperada do Google Sheets');
+        }
+      } catch (err) {
+        // Se falhar aqui, regista para debug mas CONTINUA (porque já confirmaste que a folha está a ser atualizada)
+        console.warn('Não foi possível confirmar resposta do Google Sheets (CORS/timeout/parse):', err);
+        // Opcional: podes enviar um log para o teu servidor aqui
       }
-      
-      const newOrderNumber = sheetResult.orderNumber;
-      
+
+      const newOrderNumber = (sheetResult && sheetResult.orderNumber) ? sheetResult.orderNumber : 'N/D';
+
+      // Limpa formulário
       setFirstName('');
       setLastName('');
       setEmail('');
-      setPhone('')
+      setPhone('');
       setMessage('');
       setSelectedProducts([]);
       setRecaptchaToken(null);
@@ -129,7 +146,7 @@ export const useOrderForm = () => {
         ...swalConfig,
         icon: "success",
         title: "Pedido enviado!",
-        text: `Recebemos a sua encomenda (Nº ${newOrderNumber})! Aguarde a nossa resposta.`,
+        text: `Recebemos a sua encomenda (Nº ${newOrderNumber}). Se não aparecer no histórico, contacte-nos.`,
         confirmButtonText: "Continuar",
         timer: 4000,
         timerProgressBar: true
@@ -141,7 +158,7 @@ export const useOrderForm = () => {
         ...swalConfig,
         icon: "error",
         title: "Erro no envio",
-        text: "Ups... Algo correu mal. Tente novamente!",
+        text: `Ups... Algo correu mal. (${error.message})`,
         confirmButtonText: "Tentar novamente"
       });
     } finally {
@@ -149,7 +166,9 @@ export const useOrderForm = () => {
     }
   };
 
+  // ... (o teu 'return' - sem alterações) ...
   return {
+    // States
     firstName, setFirstName,
     lastName, setLastName,
     email, setEmail,
@@ -157,11 +176,15 @@ export const useOrderForm = () => {
     message, setMessage,
     recaptchaToken, setRecaptchaToken,
     selectedProducts, setSelectedProducts,
+    
     selectedProductId, setSelectedProductId,
     selectedPack, setSelectedPack,
+
     currentQuantity, setCurrentQuantity,
     isSubmitting,
     isFormExpanded, setIsFormExpanded,
+    
+    // Functions
     sendEmail
   };
 };
