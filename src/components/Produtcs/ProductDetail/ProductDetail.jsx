@@ -32,7 +32,7 @@ const ProductDetail = () => {
         <div className='product-information'>
           <h2 className='product-name'>{product.name}</h2>
           
-          {/* Lista de opções de pacote disponíveis */}
+          {/* Lista de opções de pacote disponíveis 
           {hasPackOptions && (
             <div className="product-pack-options">
               <h3 className="pack-options-title">Opções disponíveis:</h3>
@@ -44,8 +44,10 @@ const ProductDetail = () => {
                   </div>
                 ))}
               </div>
+              
             </div>
           )}
+            */}
           
           <Link to="/contactos">
             <button className='add-to-cart'>ENCOMENDAR</button>

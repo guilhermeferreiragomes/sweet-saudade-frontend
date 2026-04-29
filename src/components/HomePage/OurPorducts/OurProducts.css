@@ -12,7 +12,6 @@
     font-weight: 600;    
 }
 
-/* Container dos produtos - UMA FILA HORIZONTAL */
 .home-products-container {
     display: flex;
     flex-direction: row;
@@ -31,7 +30,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-between;
+    /* MUDANÇA AQUI: Center em vez de space-between para juntar os itens */
+    justify-content: center; 
+    /* ADICIONADO: Gap controla a distância entre imagem, nome e pack */
+    gap: 12px;
     width: 230px;
     height: 270px; 
     cursor: pointer;
@@ -66,9 +68,8 @@
     color: #e0e0e0;
     font-size: 20px;
     text-align: center;
-    margin: 8px 0 0; /* Reduzido para 0 de margem inferior */
+    margin: 0; /* Zerado para o gap do card controlar a distância */
     line-height: 1.1;
-    height: 22px; /* Reduzido de 25px para 22px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -77,9 +78,8 @@
 .home-product-pack {
     color: #bbbbbb;
     font-size: 12px;
-    margin: 0 0 0; /* Sem margem inferior */
+    margin: 0; /* Zerado para o gap do card controlar a distância */
     text-align: center;
-    height: 14px; /* Reduzido de 15px para 14px */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -231,7 +231,7 @@
     }
     
     .our-products-title {
-        margin-left: 0; /* Removido completamente a margem */
+        margin-left: 0;
         text-align: left;
     }
     

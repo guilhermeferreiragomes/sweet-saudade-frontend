@@ -20,7 +20,6 @@ const OurProducts = () => {
   }, []);
 
   const ProductCard = ({ product }) => {
-    // Obter o segundo pack (índice 1) se existir, senão usar o primeiro
     const packOption = product.packOptions && product.packOptions.length > 1 
       ? product.packOptions[1]
       : product.packOptions && product.packOptions.length > 0
@@ -40,7 +39,7 @@ const OurProducts = () => {
           />
           <h3 className='home-product-name'>{product.name}</h3>
           <p className='home-product-pack'>{packText}</p>
-          <p className='home-product-price'>{priceText}</p>
+          {/* <p className='home-product-price'>{priceText}</p> */}
         </div>
       </Link>
     );

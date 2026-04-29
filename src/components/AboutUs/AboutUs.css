@@ -44,11 +44,11 @@
 }
 
 .andreines-img {
-  width: 400px;
-  height: auto; 
-  max-height: 420px;
+  width: 450px;
+  height: 370px; 
   object-fit: cover;
   border-radius: 20px;
+  margin-top: 20px;
 }
 
 .historia-titulo {

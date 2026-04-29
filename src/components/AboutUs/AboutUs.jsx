@@ -1,6 +1,6 @@
 import React from 'react'
 import './aboutus.css'
-import andreines from '../../assets/imagens/andre_e_ines.webp'
+import andreines from '../../assets/imagens/bolo_coracao.webp'
 import cliente from '../../assets/imagens/rapaz_sorrir.webp'
 import { motion } from 'framer-motion'
 
